@@ -13,18 +13,18 @@ class DatabaseSeeder extends Seeder
     {
         // USERS (aman di-run berulang)
         User::updateOrCreate(
-            ['email' => 'superadmin@simkp.test'],
+            ['email' => 'superadmin@simkp.test'], //buk endina
             ['name' => 'Super Admin', 'password' => Hash::make('password'), 'role' => 'SUPERADMIN']
         );
 
         User::updateOrCreate(
             ['email' => 'admin@simkp.test'],
-            ['name' => 'Admin Prodi', 'password' => Hash::make('password'), 'role' => 'ADMIN_PRODI']
+            ['name' => 'Admin Prodi', 'password' => Hash::make('password'), 'role' => 'ADMIN_PRODI'] //buk nis
         );
 
         User::updateOrCreate(
             ['email' => 'dosen@simkp.test'],
-            ['name' => 'Dosen Supervisor', 'password' => Hash::make('password'), 'role' => 'DOSEN_SUPERVISOR']
+            ['name' => 'Dosen Supervisor', 'password' => Hash::make('password'), 'role' => 'DOSEN_SUPERVISOR'] //dospem
         );
 
         User::updateOrCreate(

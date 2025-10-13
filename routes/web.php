@@ -13,65 +13,136 @@ use App\Http\Controllers\AdminProdi\VerificationController;
 use App\Http\Controllers\AdminProdi\AssignmentController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
-// Landing (public)
-Route::get('/', [LandingController::class,'index'])->name('landing');
+/*
+|--------------------------------------------------------------------------
+| Public / Landing
+|--------------------------------------------------------------------------
+*/
+Route::get('/', [LandingController::class, 'index'])->name('landing');
 
-// Auth (Breeze sudah setup routes)
+/*
+|--------------------------------------------------------------------------
+| Auth (Breeze already registers /login, /register, etc.)
+|--------------------------------------------------------------------------
+*/
 require __DIR__.'/auth.php';
 
-// Dashboard umum (redirect sesuai role)
-Route::middleware(['auth'])->group(function() {
-    Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
+/*
+|--------------------------------------------------------------------------
+| Dashboard (after login)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 
+/*
+|--------------------------------------------------------------------------
+| Logout (POST for CSRF protection)
+|--------------------------------------------------------------------------
+*/
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->middleware('auth')
     ->name('logout');
 
+/*
+|--------------------------------------------------------------------------
+| Umum (authenticated): Download KRS
+|--------------------------------------------------------------------------
+*/
 Route::middleware(['auth'])->group(function () {
     Route::get('/kp-applications/{kp}/krs', [KpApplicationController::class, 'downloadKrs'])
         ->name('kp.krs.download');
 });
 
-// Mahasiswa
-Route::middleware(['auth','role:MAHASISWA'])->group(function() {
+/*
+|--------------------------------------------------------------------------
+| Mahasiswa
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'role:MAHASISWA'])->group(function () {
     Route::resource('kp-applications', KpApplicationController::class)
-    ->parameters(['kp-applications' => 'kp_application'])
-    ->only(['index','create','store','show','edit','update', 'destroy']);
-    Route::post('kp-applications/{kp}/submit', [KpApplicationController::class,'submit'])->name('kp.submit');
+        ->parameters(['kp-applications' => 'kp_application'])
+        ->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
 
-    Route::resource('mentoring-logs', MentoringLogController::class)->only(['index','create','store']);
-    Route::resource('activity-logs', ActivityLogController::class)->only(['index','create','store']);
+    Route::post('kp-applications/{kp}/submit', [KpApplicationController::class, 'submit'])
+        ->name('kp.submit');
 
-    Route::get('reports/create/{kp}', [ReportController::class,'create'])->name('reports.create');
-    Route::post('reports/{kp}', [ReportController::class,'store'])->name('reports.store');
+    Route::resource('mentoring-logs', MentoringLogController::class)
+        ->only(['index', 'create', 'store']);
 
-    Route::get('questionnaire/{kp}', [QuestionnaireController::class,'create'])->name('questionnaire.create');
-    Route::post('questionnaire/{kp}', [QuestionnaireController::class,'store'])->name('questionnaire.store');
+    Route::resource('activity-logs', ActivityLogController::class)
+        ->only(['index', 'create', 'store']);
+
+    Route::get('reports/create/{kp}', [ReportController::class, 'create'])->name('reports.create');
+    Route::post('reports/{kp}', [ReportController::class, 'store'])->name('reports.store');
+
+    Route::get('questionnaire/{kp}', [QuestionnaireController::class, 'create'])->name('questionnaire.create');
+    Route::post('questionnaire/{kp}', [QuestionnaireController::class, 'store'])->name('questionnaire.store');
 });
 
-// Admin Prodi
-Route::prefix('admin-prodi')->middleware(['auth','role:ADMIN_PRODI,SUPERADMIN'])->group(function() {
-    Route::resource('companies', AdminCompanyController::class);
-    Route::get('verifications', [VerificationController::class,'index'])->name('admin.verifications');
-    Route::post('verifications/{kp}/approve', [VerificationController::class,'approve'])->name('admin.verifications.approve');
-    Route::post('verifications/{kp}/reject', [VerificationController::class,'reject'])->name('admin.verifications.reject');
+/*
+|--------------------------------------------------------------------------
+| Admin Prodi (+ Superadmin)
+|--------------------------------------------------------------------------
+| - Verifications: pakai parameter {application} agar match ke:
+|   function approve(Request $r, KpApplication $application)
+|--------------------------------------------------------------------------
+*/
+Route::prefix('admin-prodi')
+    ->middleware(['auth', 'role:ADMIN_PRODI,SUPERADMIN'])
+    ->name('admin-prodi.')
+    ->group(function () {
 
-    Route::get('assignments', [AssignmentController::class,'index'])->name('admin.assignments');
-    Route::post('assignments/{kp}/supervisor', [AssignmentController::class,'assignSupervisor'])->name('admin.assign.supervisor');
-    Route::post('assignments/{kp}/field', [AssignmentController::class,'assignFieldSupervisor'])->name('admin.assign.field');
-});
+        // Companies CRUD
+        Route::resource('companies', AdminCompanyController::class);
 
-// Dosen Supervisor
-Route::prefix('supervisor')->middleware(['auth','role:DOSEN_SUPERVISOR,SUPERADMIN'])->group(function() {
-    Route::get('mentoring', [MentoringLogController::class,'reviewList'])->name('supervisor.mentoring.index');
-    Route::post('mentoring/{log}/approve', [MentoringLogController::class,'approve'])->name('supervisor.mentoring.approve');
-    Route::post('mentoring/{log}/revise', [MentoringLogController::class,'revise'])->name('supervisor.mentoring.revise');
-});
+        // Verifications (index, show, approve, reject)
+        Route::get('verifications', [VerificationController::class, 'index'])
+            ->name('verifications.index');
 
-// Pengawas Lapangan
-Route::prefix('lapangan')->middleware(['auth','role:PENGAWAS_LAPANGAN,SUPERADMIN'])->group(function() {
-    Route::get('activities', [ActivityLogController::class,'reviewList'])->name('field.activities.index');
-    Route::post('activities/{log}/approve', [ActivityLogController::class,'approve'])->name('field.activities.approve');
-    Route::post('activities/{log}/revise', [ActivityLogController::class,'revise'])->name('field.activities.revise');
-});
+        Route::get('verifications/{application}', [VerificationController::class, 'show'])
+            ->name('verifications.show');
+
+        Route::post('verifications/{application}/approve', [VerificationController::class, 'approve'])
+            ->name('verifications.approve');
+
+        Route::post('verifications/{application}/reject', [VerificationController::class, 'reject'])
+            ->name('verifications.reject');
+
+        // Assignments
+        Route::get('assignments', [AssignmentController::class, 'index'])
+            ->name('assignments');
+
+        Route::post('assignments/{kp}/supervisor', [AssignmentController::class, 'assignSupervisor'])
+            ->name('assign.supervisor');
+
+        Route::post('assignments/{kp}/field', [AssignmentController::class, 'assignFieldSupervisor'])
+            ->name('assign.field');
+    });
+
+/*
+|--------------------------------------------------------------------------
+| Dosen Supervisor
+|--------------------------------------------------------------------------
+*/
+Route::prefix('supervisor')
+    ->middleware(['auth', 'role:DOSEN_SUPERVISOR,SUPERADMIN'])
+    ->group(function () {
+        Route::get('mentoring', [MentoringLogController::class, 'reviewList'])->name('supervisor.mentoring.index');
+        Route::post('mentoring/{log}/approve', [MentoringLogController::class, 'approve'])->name('supervisor.mentoring.approve');
+        Route::post('mentoring/{log}/revise', [MentoringLogController::class, 'revise'])->name('supervisor.mentoring.revise');
+    });
+
+/*
+|--------------------------------------------------------------------------
+| Pengawas Lapangan
+|--------------------------------------------------------------------------
+*/
+Route::prefix('lapangan')
+    ->middleware(['auth', 'role:PENGAWAS_LAPANGAN,SUPERADMIN'])
+    ->group(function () {
+        Route::get('activities', [ActivityLogController::class, 'reviewList'])->name('field.activities.index');
+        Route::post('activities/{log}/approve', [ActivityLogController::class, 'approve'])->name('field.activities.approve');
+        Route::post('activities/{log}/revise', [ActivityLogController::class, 'revise'])->name('field.activities.revise');
+    });

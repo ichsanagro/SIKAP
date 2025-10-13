@@ -4,29 +4,67 @@ namespace App\Http\Controllers\AdminProdi;
 
 use App\Http\Controllers\Controller;
 use App\Models\KpApplication;
+use Illuminate\Http\Request;
 
 class VerificationController extends Controller
 {
-    public function index() {
-        $list = KpApplication::where('status','SUBMITTED')->latest()->paginate(15);
-        return view('admin.verifications.index', compact('list'));
+
+
+    // Daftar pengajuan + filter status
+    public function index(Request $request)
+    {
+        $status = $request->get('status');
+
+        $apps = KpApplication::with(['student','company','verifier'])
+            ->when($status, fn($q) => $q->where('verification_status', $status))
+            ->latest()
+            ->paginate(12);
+
+        return view('admin_prodi.verification.index', compact('apps','status'));
     }
 
-    public function approve(KpApplication $kp) {
-        $this->guard();
-        if ($kp->status !== 'SUBMITTED') abort(403);
-        $kp->update(['status'=>'VERIFIED_PRODI']);
-        return back()->with('success','Pengajuan disetujui. Lanjut penugasan supervisor.');
+    // Detail 1 pengajuan
+    public function show(KpApplication $application)
+    {
+        $application->load(['student','company','verifier']);
+        return view('admin_prodi.verification.show', ['app' => $application]);
     }
 
-    public function reject(KpApplication $kp) {
-        $this->guard();
-        if ($kp->status !== 'SUBMITTED') abort(403);
-        $kp->update(['status'=>'REJECTED']);
-        return back()->with('success','Pengajuan ditolak.');
+    // ACC
+    public function approve(Request $request, KpApplication $application)
+    {
+        $request->validate([
+            'notes' => 'nullable|string|max:2000',
+        ]);
+
+        $application->update([
+            'verification_status' => 'APPROVED',
+            'verification_notes'  => $request->notes,
+            'verified_by'         => auth()->id(),
+            'verified_at'         => now(),
+        ]);
+
+        return redirect()
+            ->route('admin-prodi.verifications.show', $application)
+            ->with('success', 'Pengajuan telah di-ACC.');
     }
 
-    private function guard() {
-        if (!in_array(auth()->user()->role, ['ADMIN_PRODI','SUPERADMIN'])) abort(403);
+    // Tolak
+    public function reject(Request $request, KpApplication $application)
+    {
+        $request->validate([
+            'notes' => 'required|string|max:2000',
+        ]);
+
+        $application->update([
+            'verification_status' => 'REJECTED',
+            'verification_notes'  => $request->notes,
+            'verified_by'         => auth()->id(),
+            'verified_at'         => now(),
+        ]);
+
+        return redirect()
+            ->route('admin-prodi.verifications.show', $application)
+            ->with('success', 'Pengajuan telah ditolak.');
     }
 }

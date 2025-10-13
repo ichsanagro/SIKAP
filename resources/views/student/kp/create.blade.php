@@ -46,9 +46,9 @@
       <input name="custom_company_name" value="{{ old('custom_company_name') }}" class="mt-1 w-full border rounded-xl p-3">
       <label class="block font-semibold">Alamat Perusahaan</label>
       <input name="custom_company_address" value="{{ old('custom_company_address') }}" class="mt-1 w-full border rounded-xl p-3">
-      <label class="block font-semibold">Tanggal Mulai KP</label>
+      {{-- <label class="block font-semibold">Tanggal Mulai KP</label>
       <input type="date" name="start_date" value="{{ old('start_date') }}" class="mt-1 w-full border rounded-xl p-3">
-      @error('start_date') <p class="text-red-600 text-sm">{{ $message }}</p> @enderror
+      @error('start_date') <p class="text-red-600 text-sm">{{ $message }}</p> @enderror --}}
     </div>
 
     {{-- KRS wajib sebelum submit (boleh unggah saat draft) --}}

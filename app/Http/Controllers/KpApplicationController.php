@@ -36,7 +36,7 @@ class KpApplicationController extends Controller
             'company_id'            => 'nullable|exists:companies,id',
             'custom_company_name'   => 'nullable|required_if:placement_option,3|max:255',
             'custom_company_address'=> 'nullable|required_if:placement_option,3|max:255',
-            'start_date'            => 'nullable|required_if:placement_option,3|date|after:today',
+            // 'start_date'            => 'nullable|required_if:placement_option,3|date|after:today',
             // KRS: opsional saat draft, tapi akan diwajibkan saat submit
             'krs'                   => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:5120',
         ]);
@@ -89,7 +89,7 @@ class KpApplicationController extends Controller
             'company_id'            => 'nullable|exists:companies,id',
             'custom_company_name'   => 'nullable|required_if:placement_option,3|max:255',
             'custom_company_address'=> 'nullable|required_if:placement_option,3|max:255',
-            'start_date'            => 'nullable|required_if:placement_option,3|date|after:today',
+            // 'start_date'            => 'nullable|required_if:placement_option,3|date|after:today',
             'krs'                   => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:5120',
         ]);
 
@@ -126,15 +126,15 @@ class KpApplicationController extends Controller
         }
 
         // Validasi pilihan tempat
-        if ($kp->placement_option === '3') {
-            if (!$kp->custom_company_name || !$kp->start_date) {
-                return back()->with('error', 'Lengkapi data perusahaan sendiri & tanggal mulai.');
-            }
-        } else {
-            if (!$kp->company_id) {
-                return back()->with('error', 'Pilih perusahaan dari prodi.');
-            }
-        }
+if ($kp->placement_option === '3') {
+    if (!$kp->custom_company_name) {
+        return back()->with('error', 'Lengkapi data perusahaan sendiri.');
+    }
+} else {
+    if (!$kp->company_id) {
+        return back()->with('error', 'Pilih perusahaan dari prodi.');
+    }
+}
 
         $kp->update(['status' => 'SUBMITTED']);
 
