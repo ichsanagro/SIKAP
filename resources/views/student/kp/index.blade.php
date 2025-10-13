@@ -53,7 +53,7 @@
               @class([
                 'bg-gray-100 text-gray-700' => $kp->status === 'DRAFT',
                 'bg-yellow-100 text-yellow-800' => $kp->status === 'SUBMITTED',
-                'bg-blue-100 text-blue-800' => in_array($kp->status,['VERIFIED_PRODI','ASSIGNED_SUPERVISOR']),
+                'bg-blue-100 text-blue-800' => $kp->status === 'VERIFIED_PRODI',
                 'bg-green-100 text-green-800' => in_array($kp->status,['APPROVED','COMPLETED']),
                 'bg-red-100 text-red-800' => $kp->status === 'REJECTED',
               ])

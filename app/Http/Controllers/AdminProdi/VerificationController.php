@@ -37,11 +37,16 @@ class VerificationController extends Controller
             'notes' => 'nullable|string|max:2000',
         ]);
 
+        // Get the student's assigned supervisor from users table
+        $studentSupervisorId = $application->student->supervisor_id;
+
         $application->update([
             'verification_status' => 'APPROVED',
             'verification_notes'  => $request->notes,
             'verified_by'         => auth()->id(),
             'verified_at'         => now(),
+            'assigned_supervisor_id' => $studentSupervisorId,
+            'status'              => 'APPROVED',
         ]);
 
         return redirect()

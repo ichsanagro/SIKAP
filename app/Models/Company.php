@@ -12,4 +12,7 @@ class Company extends Model
     public function kpApplications(): HasMany {
         return $this->hasMany(KpApplication::class);
     }
+    public function quotas() { 
+        return $this->hasMany(CompanyQuota::class); 
+    }
 }
