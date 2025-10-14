@@ -40,12 +40,20 @@ class VerificationController extends Controller
         // Get the student's assigned supervisor from users table
         $studentSupervisorId = $application->student->supervisor_id;
 
+        // Auto-assign field supervisor based on company if the company has assigned field supervisors
+        $fieldSupervisorId = null;
+        if ($application->company_id) {
+            $fieldSupervisorId = \App\Models\CompanyFieldSupervisor::where('company_id', $application->company_id)
+                ->value('field_supervisor_id');
+        }
+
         $application->update([
             'verification_status' => 'APPROVED',
             'verification_notes'  => $request->notes,
             'verified_by'         => auth()->id(),
             'verified_at'         => now(),
             'assigned_supervisor_id' => $studentSupervisorId,
+            'field_supervisor_id' => $fieldSupervisorId,
             'status'              => 'APPROVED',
         ]);
 

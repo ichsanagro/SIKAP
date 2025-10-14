@@ -205,6 +205,9 @@ Route::middleware(['auth','role:PENGAWAS_LAPANGAN,SUPERADMIN']) // <— PERBAIKA
     ->name('field.')
     ->group(function () {
 
+        // Dashboard
+        Route::get('/', [FieldStudentController::class, 'dashboard'])->name('dashboard');
+
         // Alias untuk mencegah error "Route [field.activities.index] not defined"
         Route::get('activities', [FieldStudentController::class, 'index'])
             ->name('activities.index');

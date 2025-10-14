@@ -12,6 +12,7 @@ use App\Models\Report;
 use App\Models\KpScore;
 use App\Models\FieldEvaluation;
 use App\Models\CompanyQuota;
+use App\Models\CompanyFieldSupervisor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -134,6 +135,8 @@ class SuperAdminController extends Controller
             'nim' => 'nullable|string|max:255',
             'prodi' => 'nullable|string|max:255',
             'supervisor_id' => 'nullable|exists:users,id',
+            'supervised_companies' => 'nullable|array',
+            'supervised_companies.*' => 'exists:companies,id',
         ]);
 
         $updateData = [
@@ -155,6 +158,23 @@ class SuperAdminController extends Controller
         if ($user->role === 'MAHASISWA' && $request->has('supervisor_id')) {
             KpApplication::where('student_id', $user->id)
                 ->update(['assigned_supervisor_id' => $request->supervisor_id]);
+        }
+
+        // If role is PENGAWAS_LAPANGAN, update supervised companies
+        if ($request->role === 'PENGAWAS_LAPANGAN') {
+            $supervisedCompanyIds = $request->supervised_companies ?? [];
+
+            // Sync company field supervisor assignments
+            $user->supervisedCompanies()->sync($supervisedCompanyIds);
+
+            // Update all KP applications for the selected companies to assign this field supervisor
+            KpApplication::whereIn('company_id', $supervisedCompanyIds)
+                ->update(['field_supervisor_id' => $user->id]);
+
+            // Remove field supervisor assignment from companies not selected
+            KpApplication::whereNotIn('company_id', $supervisedCompanyIds)
+                ->where('field_supervisor_id', $user->id)
+                ->update(['field_supervisor_id' => null]);
         }
 
         return redirect()->route('super-admin.users.index')->with('success', 'User updated successfully.');

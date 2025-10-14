@@ -110,11 +110,9 @@ class SupervisorController extends Controller
     {
         $user = Auth::user();
 
-        // Get students assigned via supervisor_id relationship
-        $supervisedStudentIds = User::where('supervisor_id', $user->id)->pluck('id');
-
+        // Get KP applications assigned to this supervisor
         $applications = KpApplication::with('student')
-            ->whereIn('student_id', $supervisedStudentIds)
+            ->where('assigned_supervisor_id', $user->id)
             ->where('verification_status', 'APPROVED')
             ->whereIn('status', ['ASSIGNED_SUPERVISOR', 'APPROVED', 'COMPLETED'])
             ->get();
@@ -128,9 +126,11 @@ class SupervisorController extends Controller
     public function storeMentoringLog(Request $request)
     {
         $request->validate([
+            'student_id' => 'required|exists:users,id',
             'kp_application_id' => 'required|exists:kp_applications,id',
             'date' => 'required|date|before_or_equal:today',
             'topic' => 'required|string|max:1000',
+            'student_notes' => 'nullable|string|max:2000',
             'notes' => 'nullable|string|max:5000',
             'attachment' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:5120',
         ]);
@@ -141,6 +141,11 @@ class SupervisorController extends Controller
         // Pastikan KP milik supervisor ini
         if ($kpApplication->assigned_supervisor_id !== $user->id) {
             abort(403, 'Anda bukan pembimbing untuk KP ini.');
+        }
+
+        // Pastikan student_id sesuai dengan KP
+        if ($kpApplication->student_id !== (int)$request->student_id) {
+            abort(403, 'Student ID tidak sesuai dengan KP yang dipilih.');
         }
 
         $path = null;
@@ -154,6 +159,7 @@ class SupervisorController extends Controller
             'supervisor_id' => $user->id,
             'date' => $request->date,
             'topic' => $request->topic,
+            'student_notes' => $request->student_notes,
             'notes' => $request->notes,
             'attachment_path' => $path,
             'status' => 'APPROVED', // Supervisor langsung approve log yang dibuatnya
@@ -183,6 +189,7 @@ class SupervisorController extends Controller
         $request->validate([
             'date' => 'required|date|before_or_equal:today',
             'topic' => 'required|string|max:1000',
+            'student_notes' => 'nullable|string|max:2000',
             'notes' => 'nullable|string|max:5000',
             'attachment' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:5120',
         ]);
@@ -190,6 +197,7 @@ class SupervisorController extends Controller
         $updateData = [
             'date' => $request->date,
             'topic' => $request->topic,
+            'student_notes' => $request->student_notes,
             'notes' => $request->notes,
         ];
 

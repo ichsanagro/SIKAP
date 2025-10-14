@@ -14,6 +14,7 @@ class MentoringLog extends Model
         'date',
         'topic',
         'notes',
+        'student_notes',
         'attachment_path',
         'status',
     ];
