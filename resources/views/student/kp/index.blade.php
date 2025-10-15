@@ -15,8 +15,6 @@
         <th class="py-2 pr-4">Judul</th>
         <th class="py-2 pr-4">Pilihan</th>
         <th class="py-2 pr-4">Perusahaan</th>
-        <th class="py-2 pr-4">Mulai</th>
-        <th class="py-2 pr-4">KRS</th>
         <th class="py-2 pr-4">Status</th>
         <th class="py-2">Aksi</th>
       </tr>
@@ -38,14 +36,6 @@
               {{ $kp->custom_company_name ?? '-' }}
             @else
               -
-            @endif
-          </td>
-          <td class="py-2 pr-4">{{ $kp->start_date?->format('d M Y') ?? '-' }}</td>
-          <td class="py-2 pr-4">
-            @if($kp->krs_path)
-              <a class="text-unibBlue underline" href="{{ route('kp.krs.download', $kp) }}">KRS</a>
-            @else
-              <span class="text-red-600">Belum</span>
             @endif
           </td>
           <td class="py-2 pr-4">
@@ -80,7 +70,7 @@
           </td>
         </tr>
       @empty
-        <tr><td colspan="7" class="py-6 text-center text-gray-500">Belum ada pengajuan. Klik “Ajukan KP”.</td></tr>
+        <tr><td colspan="5" class="py-6 text-center text-gray-500">Belum ada pengajuan. Klik “Ajukan KP”.</td></tr>
       @endforelse
     </tbody>
   </table>

@@ -28,6 +28,10 @@ class KpApplication extends Model
         'verification_notes',
         'verified_by',
         'verified_at',
+
+        // new fields for files
+        'proposal_path',
+        'approval_path',
     ];
 
     protected $casts = [

@@ -22,10 +22,17 @@ class KpApplicationController extends Controller
 
     public function create()
     {
-        $companiesBatch1 = Company::where('batch', 1)->get();
-        $companiesBatch2 = Company::where('batch', 2)->get();
+        $query = Company::query();
 
-        return view('student.kp.create', compact('companiesBatch1', 'companiesBatch2'));
+        if (request('search')) {
+            $search = request('search');
+            $query->where('name', 'like', "%{$search}%")
+                  ->orWhere('address', 'like', "%{$search}%");
+        }
+
+        $companies = $query->paginate(12);
+
+        return view('student.kp.create', compact('companies'));
     }
 
     public function store(Request $request)
@@ -158,6 +165,75 @@ if ($kp->placement_option === '3') {
         }
 
         return Storage::disk('public')->download($kp->krs_path);
+    }
+
+    // Company detail
+    public function companyDetail(Company $company)
+    {
+        return view('student.kp.company_detail', compact('company'));
+    }
+
+    // Apply form for specific company
+    public function applyForm(Company $company)
+    {
+        return view('student.kp.apply', compact('company'));
+    }
+
+    // Store apply for specific company
+    public function storeApply(Request $request, Company $company)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'krs' => 'required|file|mimes:pdf,jpg,jpeg,png|max:5120',
+            'proposal' => 'required|file|mimes:pdf|max:5120',
+        ]);
+
+        $data = [
+            'student_id' => Auth::id(),
+            'title' => $request->title,
+            'placement_option' => '1', // Assuming batch 1, but can adjust
+            'company_id' => $company->id,
+            'status' => 'SUBMITTED', // Pending for supervisor
+            'krs_path' => $request->file('krs')->store('krs', 'public'),
+            'proposal_path' => $request->file('proposal')->store('proposals', 'public'),
+        ];
+
+        KpApplication::create($data);
+
+        return redirect()->route('kp-applications.index')->with('success', 'Pengajuan KP dikirim.');
+    }
+
+    // Apply other form
+    public function applyOtherForm()
+    {
+        return view('student.kp.apply_other');
+    }
+
+    // Store apply other
+    public function storeApplyOther(Request $request)
+    {
+        $request->validate([
+            'custom_company_name' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
+            'approval' => 'required|file|mimes:pdf|max:5120',
+            'proposal' => 'required|file|mimes:pdf|max:5120',
+            'krs' => 'required|file|mimes:pdf,jpg,jpeg,png|max:5120',
+        ]);
+
+        $data = [
+            'student_id' => Auth::id(),
+            'title' => $request->title,
+            'placement_option' => '3', // Other
+            'custom_company_name' => $request->custom_company_name,
+            'status' => 'SUBMITTED', // Pending for supervisor
+            'krs_path' => $request->file('krs')->store('krs', 'public'),
+            'proposal_path' => $request->file('proposal')->store('proposals', 'public'),
+            'approval_path' => $request->file('approval')->store('approvals', 'public'),
+        ];
+
+        KpApplication::create($data);
+
+        return redirect()->route('kp-applications.index')->with('success', 'Pengajuan KP dikirim.');
     }
 
     private function authorizeOwner(KpApplication $kp): void

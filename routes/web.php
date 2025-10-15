@@ -74,6 +74,22 @@ Route::middleware(['auth', 'role:MAHASISWA'])->group(function () {
     Route::post('kp-applications/{kp}/submit', [KpApplicationController::class, 'submit'])
         ->name('kp.submit');
 
+    // New routes for company selection and application
+    Route::get('companies/{company}', [KpApplicationController::class, 'companyDetail'])
+        ->name('kp.company.detail');
+
+    Route::get('companies/{company}/apply', [KpApplicationController::class, 'applyForm'])
+        ->name('kp.apply.form');
+
+    Route::post('companies/{company}/apply', [KpApplicationController::class, 'storeApply'])
+        ->name('kp.apply.store');
+
+    Route::get('apply-other', [KpApplicationController::class, 'applyOtherForm'])
+        ->name('kp.apply.other.form');
+
+    Route::post('apply-other', [KpApplicationController::class, 'storeApplyOther'])
+        ->name('kp.apply.other.store');
+
     Route::resource('mentoring-logs', MentoringLogController::class)
         ->only(['index', 'create', 'store']);
 
