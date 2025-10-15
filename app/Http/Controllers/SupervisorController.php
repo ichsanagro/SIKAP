@@ -30,6 +30,9 @@ class SupervisorController extends Controller
             'approved_mentoring' => MentoringLog::where('supervisor_id', $user->id)
                 ->where('status', 'APPROVED')->count(),
             'total_scores' => KpScore::where('supervisor_id', $user->id)->count(),
+            'pending_verifications' => KpApplication::whereIn('student_id', $supervisedStudents)
+                ->where('status', 'SUBMITTED')
+                ->count(),
         ];
 
         // Get recent supervised students for display

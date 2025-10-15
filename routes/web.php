@@ -9,7 +9,7 @@ use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\QuestionnaireController;
 use App\Http\Controllers\AdminProdi\CompanyController as AdminCompanyController;
-use App\Http\Controllers\AdminProdi\VerificationController;
+use App\Http\Controllers\AdminProdi\VerificationController as AdminProdiVerificationController;
 use App\Http\Controllers\AdminProdi\AssignmentController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
@@ -115,16 +115,16 @@ Route::prefix('admin-prodi')
 
         Route::resource('companies', AdminCompanyController::class);
 
-        Route::get('verifications', [VerificationController::class, 'index'])
+        Route::get('verifications', [AdminProdiVerificationController::class, 'index'])
             ->name('verifications.index');
 
-        Route::get('verifications/{application}', [VerificationController::class, 'show'])
+        Route::get('verifications/{application}', [AdminProdiVerificationController::class, 'show'])
             ->name('verifications.show');
 
-        Route::post('verifications/{application}/approve', [VerificationController::class, 'approve'])
+        Route::post('verifications/{application}/approve', [AdminProdiVerificationController::class, 'approve'])
             ->name('verifications.approve');
 
-        Route::post('verifications/{application}/reject', [VerificationController::class, 'reject'])
+        Route::post('verifications/{application}/reject', [AdminProdiVerificationController::class, 'reject'])
             ->name('verifications.reject');
 
         Route::get('assignments', [AssignmentController::class, 'index'])
@@ -169,6 +169,7 @@ Route::prefix('super-admin')
 |--------------------------------------------------------------------------
 */
 use App\Http\Controllers\SupervisorController;
+use App\Http\Controllers\Supervisor\VerificationController as SupervisorVerificationController;
 
 Route::prefix('supervisor')
     ->middleware(['auth', 'role:DOSEN_SUPERVISOR,SUPERADMIN'])
@@ -176,6 +177,12 @@ Route::prefix('supervisor')
     ->group(function () {
         // Dashboard
         Route::get('/', [SupervisorController::class, 'dashboard'])->name('dashboard');
+
+        // Verifications
+        Route::get('verifications', [SupervisorVerificationController::class, 'index'])->name('verifications.index');
+        Route::get('verifications/{kpApplication}', [SupervisorVerificationController::class, 'show'])->name('verifications.show');
+        Route::post('verifications/{kpApplication}/approve', [SupervisorVerificationController::class, 'approve'])->name('verifications.approve');
+        Route::post('verifications/{kpApplication}/reject', [SupervisorVerificationController::class, 'reject'])->name('verifications.reject');
 
         // Daftar mahasiswa bimbingan - hanya lihat
         Route::get('students', [SupervisorController::class, 'students'])->name('students.index');
