@@ -18,3 +18,18 @@
 - File uploads: KRS (PDF/JPG/PNG), proposal, approval document.
 - Status after submit: 'SUBMITTED', waiting for dosen_supervisor approval.
 - Ensure search functionality works (AJAX or simple form submit).
+
+# TODO: Add company management feature for ADMIN_PRODI
+
+## Tasks
+- [x] Implement app/Http/Controllers/AdminProdi/CompanyController.php: Full CRUD (index, create, store, show, edit, update, destroy).
+- [x] Create resources/views/admin_prodi/companies/index.blade.php: List companies with actions (edit, delete).
+- [x] Create resources/views/admin_prodi/companies/create.blade.php: Form to add new company.
+- [x] Create resources/views/admin_prodi/companies/edit.blade.php: Form to edit company.
+- [x] Add validation in store and update methods.
+- [x] Test CRUD functionality and ensure companies are visible to MAHASISWA on ajukan kerja praktek page.
+
+## Notes
+- Use Tailwind CSS for consistency.
+- Fields: name, address, contact_person, contact_phone, batch (1 or 2), quota.
+- Batch: 1 for opsi 1, 2 for opsi 2.
