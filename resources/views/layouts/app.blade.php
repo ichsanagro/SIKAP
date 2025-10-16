@@ -18,7 +18,7 @@
           <a href="{{ route('dashboard') }}" class="hover:underline">Dashboard</a>
 
           {{-- Dropdown akun + Logout (tanpa JS, pakai <details>) --}}
-          <details class="relative">
+           <details class="relative z-50">
             <summary class="list-none cursor-pointer flex items-center gap-2">
               <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
                 {{ strtoupper(mb_substr(auth()->user()->name, 0, 1)) }}

@@ -108,10 +108,14 @@ Route::middleware(['auth', 'role:MAHASISWA'])->group(function () {
 | Admin Prodi (+ Superadmin)
 |--------------------------------------------------------------------------
 */
+use App\Http\Controllers\AdminProdi\AdminProdiController;
+
 Route::prefix('admin-prodi')
     ->middleware(['auth', 'role:ADMIN_PRODI,SUPERADMIN'])
     ->name('admin-prodi.')
     ->group(function () {
+
+        Route::get('/', [AdminProdiController::class, 'dashboard'])->name('index');
 
         Route::resource('companies', AdminCompanyController::class);
 
