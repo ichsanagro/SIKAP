@@ -139,6 +139,15 @@ Route::prefix('admin-prodi')
 
         Route::post('assignments/{kp}/field', [AssignmentController::class, 'assignFieldSupervisor'])
             ->name('assign.field');
+
+        // Student Management Routes
+        Route::get('students', [AdminProdiController::class, 'students'])->name('students.index');
+        Route::get('students/create', [AdminProdiController::class, 'createStudent'])->name('students.create');
+        Route::post('students', [AdminProdiController::class, 'storeStudent'])->name('students.store');
+        Route::get('students/{student}/edit', [AdminProdiController::class, 'editStudent'])->name('students.edit');
+        Route::put('students/{student}', [AdminProdiController::class, 'updateStudent'])->name('students.update');
+        Route::delete('students/{student}', [AdminProdiController::class, 'destroyStudent'])->name('students.destroy');
+        Route::post('students/{student}/toggle-active', [AdminProdiController::class, 'toggleStudentActive'])->name('students.toggle-active');
     });
 
 /*
