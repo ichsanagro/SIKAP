@@ -13,7 +13,7 @@ class KpApplicationController extends Controller
     public function index()
     {
         $apps = KpApplication::where('student_id', Auth::id())
-            ->with(['company'])
+            ->with(['company', 'student.supervisor'])
             ->latest()
             ->paginate(10);
 

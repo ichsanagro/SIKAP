@@ -9,7 +9,7 @@ use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\QuestionnaireController;
 use App\Http\Controllers\AdminProdi\CompanyController as AdminCompanyController;
-use App\Http\Controllers\AdminProdi\VerificationController as AdminProdiVerificationController;
+
 use App\Http\Controllers\AdminProdi\AssignmentController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
@@ -119,17 +119,7 @@ Route::prefix('admin-prodi')
 
         Route::resource('companies', AdminCompanyController::class);
 
-        Route::get('verifications', [AdminProdiVerificationController::class, 'index'])
-            ->name('verifications.index');
 
-        Route::get('verifications/{application}', [AdminProdiVerificationController::class, 'show'])
-            ->name('verifications.show');
-
-        Route::post('verifications/{application}/approve', [AdminProdiVerificationController::class, 'approve'])
-            ->name('verifications.approve');
-
-        Route::post('verifications/{application}/reject', [AdminProdiVerificationController::class, 'reject'])
-            ->name('verifications.reject');
 
         Route::get('assignments', [AssignmentController::class, 'index'])
             ->name('assignments');

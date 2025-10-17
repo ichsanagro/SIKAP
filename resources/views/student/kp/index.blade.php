@@ -15,6 +15,7 @@
         <th class="py-2 pr-4">Judul</th>
         <th class="py-2 pr-4">Pilihan</th>
         <th class="py-2 pr-4">Perusahaan</th>
+        <th class="py-2 pr-4">Dosen Pembimbing</th>
         <th class="py-2 pr-4">Status</th>
         <th class="py-2">Aksi</th>
       </tr>
@@ -37,6 +38,9 @@
             @else
               -
             @endif
+          </td>
+          <td class="py-2 pr-4">
+            {{ $kp->student->supervisor?->name ?? '-' }}
           </td>
           <td class="py-2 pr-4">
             <span class="px-2 py-1 rounded-xl text-xs
@@ -70,7 +74,7 @@
           </td>
         </tr>
       @empty
-        <tr><td colspan="5" class="py-6 text-center text-gray-500">Belum ada pengajuan. Klik “Ajukan KP”.</td></tr>
+        <tr><td colspan="6" class="py-6 text-center text-gray-500">Belum ada pengajuan. Klik “Ajukan KP”.</td></tr>
       @endforelse
     </tbody>
   </table>
