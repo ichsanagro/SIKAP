@@ -54,17 +54,15 @@ class SupervisorController extends Controller
     {
         $user = Auth::user();
 
-        // Get students assigned via supervisor_id relationship
-        $supervisedStudentIds = User::where('supervisor_id', $user->id)->pluck('id');
-
-        // Get KP applications for these students
-        $students = KpApplication::with(['student', 'company'])
-            ->whereIn('student_id', $supervisedStudentIds)
-            ->where('verification_status', 'APPROVED')
+        // Get students assigned via supervisor_id relationship (same as dashboard)
+        $students = User::where('supervisor_id', $user->id)
+            ->with(['kpApplications.company', 'kpApplications.mentoringLogs' => function($query) {
+                $query->latest('date')->take(3); // Get latest 3 mentoring logs for each KP
+            }])
             ->paginate(20);
 
         // Check if there are any students assigned to this supervisor
-        $hasStudents = $supervisedStudentIds->isNotEmpty();
+        $hasStudents = $students->isNotEmpty();
 
         return view('supervisor.students.index', compact('students', 'hasStudents'));
     }

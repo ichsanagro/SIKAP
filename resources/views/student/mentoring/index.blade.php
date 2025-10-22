@@ -15,6 +15,7 @@
         <th class="py-2 pr-4">KP</th>
         <th class="py-2 pr-4">Topik</th>
         <th class="py-2 pr-4">Status</th>
+        <th class="py-2 pr-4">Aksi</th>
       </tr>
     </thead>
     <tbody>
@@ -26,9 +27,12 @@
           <td class="py-2 pr-4">
             <span class="px-2 py-1 rounded-xl bg-gray-100">{{ $log->status }}</span>
           </td>
+          <td class="py-2 pr-4">
+            <a href="{{ route('mentoring-logs.show', $log) }}" class="text-blue-600 hover:text-blue-800">Lihat</a>
+          </td>
         </tr>
       @empty
-        <tr><td colspan="4" class="py-6 text-center text-gray-500">Belum ada catatan.</td></tr>
+        <tr><td colspan="5" class="py-6 text-center text-gray-500">Belum ada catatan.</td></tr>
       @endforelse
     </tbody>
   </table>

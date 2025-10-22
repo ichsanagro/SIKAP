@@ -41,4 +41,17 @@ class User extends Authenticatable
     public function scopeActive($query) {
         return $query->where('is_active', true);
     }
+
+    // Auto-update assigned_supervisor_id di KP applications ketika supervisor_id diubah
+    protected static function booted() {
+        static::updated(function ($user) {
+            // Jika user adalah MAHASISWA dan supervisor_id diubah
+            if ($user->role === 'MAHASISWA' && $user->wasChanged('supervisor_id')) {
+                // Update assigned_supervisor_id untuk KP yang eligible mentoring
+                $user->kpApplications()
+                    ->whereIn('status', ['ASSIGNED_SUPERVISOR', 'APPROVED', 'COMPLETED'])
+                    ->update(['assigned_supervisor_id' => $user->supervisor_id]);
+            }
+        });
+    }
 }

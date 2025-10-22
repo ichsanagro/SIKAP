@@ -57,10 +57,17 @@ class VerificationController extends Controller
             'notes' => 'nullable|string|max:2000',
         ]);
 
-        $kpApplication->update([
-            'status' => 'VERIFIED_PRODI', // Move to next status
+        // Set assigned_supervisor_id jika belum ada (berdasarkan supervisor_id mahasiswa)
+        $updateData = [
+            'status' => 'APPROVED', // Move to next status
             'notes' => $request->notes,
-        ]);
+        ];
+
+        if (!$kpApplication->assigned_supervisor_id && $kpApplication->student->supervisor_id) {
+            $updateData['assigned_supervisor_id'] = $kpApplication->student->supervisor_id;
+        }
+
+        $kpApplication->update($updateData);
 
         return redirect()
             ->route('supervisor.verifications.show', $kpApplication)

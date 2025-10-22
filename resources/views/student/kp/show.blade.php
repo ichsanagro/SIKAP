@@ -83,7 +83,7 @@
         @endif
       @endif
 
-      @if(in_array($kp->status,['ASSIGNED_SUPERVISOR','APPROVED','COMPLETED']))
+      @if(in_array($kp->status,['ASSIGNED_SUPERVISOR','APPROVED','COMPLETED','VERIFIED_PRODI']))
         <a href="{{ route('mentoring-logs.index') }}" class="btn-primary">Mulai Bimbingan</a>
         <a href="{{ route('activity-logs.index') }}" class="btn-orange">Catat Aktivitas</a>
       @endif

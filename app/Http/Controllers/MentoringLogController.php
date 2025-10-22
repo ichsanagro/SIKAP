@@ -30,13 +30,35 @@ class MentoringLogController extends Controller
      */
     public function create()
     {
-        // Hanya KP yang sudah punya pembimbing & aktif
+        // Hanya KP yang sudah approved oleh supervisor dan memiliki dosen pembimbing
         $myKps = Auth::user()->kpApplications()
-            ->whereIn('status', ['ASSIGNED_SUPERVISOR','APPROVED','COMPLETED'])
+            ->where('status', 'APPROVED')
             ->whereNotNull('assigned_supervisor_id')
-            ->get(['id','title','assigned_supervisor_id']);
+            ->get(['id','title','assigned_supervisor_id','status']);
 
         return view('student.mentoring.create', compact('myKps'));
+    }
+
+    /**
+     * Lihat detail bimbingan (MAHASISWA).
+     * Route: GET /mentoring-logs/{log}
+     */
+    public function show(MentoringLog $log)
+    {
+        // Pastikan mentoring log milik mahasiswa login
+        if ($log->student_id !== Auth::id()) {
+            abort(403, 'Anda tidak memiliki akses ke catatan bimbingan ini.');
+        }
+
+        // Pastikan status sudah APPROVED (mahasiswa hanya bisa lihat setelah disetujui)
+        if ($log->status !== 'APPROVED') {
+            abort(403, 'Catatan bimbingan ini belum dapat dilihat. Tunggu persetujuan dari dosen pembimbing.');
+        }
+
+        // Load relationships untuk tampilan
+        $log->load(['kpApplication.company', 'supervisor']);
+
+        return view('student.mentoring.show', compact('log'));
     }
 
     /**
@@ -62,9 +84,18 @@ class MentoringLogController extends Controller
             abort(403, 'KP ini bukan milik Anda.');
         }
 
-        // Pastikan sudah ada dosen pembimbing
+        // Pastikan KP sudah approved oleh supervisor dan memiliki dosen pembimbing
+        if ($kp->status !== 'APPROVED') {
+            return back()->with('error', 'Judul KP belum di-approve oleh dosen pembimbing.')->withInput();
+        }
+
         if (!$kp->assigned_supervisor_id) {
             return back()->with('error', 'Dosen pembimbing belum ditetapkan.')->withInput();
+        }
+
+        // Additional validation: ensure supervisor_id is not null (double check)
+        if (!$kp->supervisor) {
+            return back()->with('error', 'Data dosen pembimbing tidak valid. Silakan hubungi admin.')->withInput();
         }
 
         // Simpan berkas (opsional)

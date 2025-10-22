@@ -5,7 +5,16 @@
 
 <div class="flex items-center justify-between mb-4">
   <h1 class="text-2xl font-bold text-unibBlue">Pengajuan Kerja Praktek Saya</h1>
-  <a href="{{ route('kp-applications.create') }}" class="btn-orange">Ajukan KP</a>
+  @php
+    $hasActiveApplication = $apps->contains(function ($app) {
+      return $app->status !== 'REJECTED';
+    });
+  @endphp
+  @if(!$hasActiveApplication)
+    <a href="{{ route('kp-applications.create') }}" class="btn-orange">Ajukan KP</a>
+  @else
+    <span class="px-4 py-2 bg-gray-300 text-gray-600 rounded cursor-not-allowed" title="Anda sudah memiliki pengajuan KP yang sedang diproses">Ajukan KP</span>
+  @endif
 </div>
 
 <div class="card overflow-x-auto">
@@ -69,6 +78,9 @@
                 @else
                   <span class="px-3 py-1 rounded-xl bg-gray-200 text-gray-600 text-xs">Upload KRS dulu</span>
                 @endif
+              @endif
+              @if(in_array($kp->status, ['ASSIGNED_SUPERVISOR','APPROVED','COMPLETED','VERIFIED_PRODI']))
+                <a href="{{ route('mentoring-logs.index') }}" class="btn-orange px-3 py-1 text-xs">Mulai Bimbingan</a>
               @endif
             </div>
           </td>

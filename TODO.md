@@ -1,10 +1,17 @@
-# Remove Admin Prodi Verification Features
+# TODO: Perbaikan Bimbingan Mahasiswa
 
-## Tasks to Complete:
-- [x] Remove verification routes from admin-prodi group in routes/web.php
-- [x] Delete app/Http/Controllers/AdminProdi/VerificationController.php
-- [x] Delete resources/views/admin_prodi/verification/index.blade.php
-- [x] Delete resources/views/admin_prodi/verification/show.blade.php
-- [x] Delete resources/views/admin_prodi/verification/ directory
-- [x] Update resources/views/admin_prodi/index.blade.php to remove verification stats and links
-- [x] Update app/Http/Controllers/AdminProdi/AdminProdiController.php to remove verification stats from dashboard
+## Masalah
+Mahasiswa yang telah masuk ke daftar mahasiswa dosen pembimbing (melalui `supervisor_id`) tidak dapat melakukan bimbingan karena `assigned_supervisor_id` di KP tidak di-set dengan benar.
+
+## Analisis
+1. Mahasiswa di-assign ke supervisor melalui `User::supervisor_id`
+2. Supervisor dapat approve KP mahasiswa yang assigned kepadanya
+3. Tapi `assigned_supervisor_id` di `KpApplication` tidak di-set otomatis saat approve
+4. Mentoring memerlukan `assigned_supervisor_id` yang tidak null
+
+## Solusi
+Ketika supervisor approve KP, pastikan `assigned_supervisor_id` di-set berdasarkan `supervisor_id` mahasiswa.
+
+## Langkah Perbaikan
+- [ ] Update `Supervisor/VerificationController::approve()` untuk set `assigned_supervisor_id` jika belum ada
+- [ ] Test perbaikan dengan membuat KP baru dan approve oleh supervisor

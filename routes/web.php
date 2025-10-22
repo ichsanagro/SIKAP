@@ -91,7 +91,7 @@ Route::middleware(['auth', 'role:MAHASISWA'])->group(function () {
         ->name('kp.apply.other.store');
 
     Route::resource('mentoring-logs', MentoringLogController::class)
-        ->only(['index', 'create', 'store']);
+        ->only(['index', 'create', 'store', 'show']);
 
     Route::resource('activity-logs', ActivityLogController::class)
         ->only(['index', 'create', 'store']);
@@ -226,8 +226,8 @@ Route::prefix('supervisor')
 | Pengawas Lapangan (Field Supervisor)
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth','role:PENGAWAS_LAPANGAN,SUPERADMIN']) // <— PERBAIKAN DI SINI
-    ->prefix('field-supervisor')
+Route::prefix('field-supervisor')
+    ->middleware(['auth','role:PENGAWAS_LAPANGAN,SUPERADMIN'])
     ->name('field.')
     ->group(function () {
 

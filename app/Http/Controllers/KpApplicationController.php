@@ -22,6 +22,16 @@ class KpApplicationController extends Controller
 
     public function create()
     {
+        // Cek apakah mahasiswa sudah memiliki aplikasi KP aktif (status selain REJECTED)
+        $hasActiveApplication = KpApplication::where('student_id', Auth::id())
+            ->where('status', '!=', 'REJECTED')
+            ->exists();
+
+        if ($hasActiveApplication) {
+            return redirect()->route('kp-applications.index')
+                ->with('error', 'Anda sudah memiliki pengajuan KP yang sedang diproses. Tunggu hingga selesai atau ditolak sebelum membuat pengajuan baru.');
+        }
+
         $query = Company::query();
 
         if (request('search')) {
@@ -37,6 +47,16 @@ class KpApplicationController extends Controller
 
     public function store(Request $request)
     {
+        // Cek apakah mahasiswa sudah memiliki aplikasi KP aktif (status selain REJECTED)
+        $hasActiveApplication = KpApplication::where('student_id', Auth::id())
+            ->where('status', '!=', 'REJECTED')
+            ->exists();
+
+        if ($hasActiveApplication) {
+            return redirect()->route('kp-applications.index')
+                ->with('error', 'Anda sudah memiliki pengajuan KP yang sedang diproses. Tunggu hingga selesai atau ditolak sebelum membuat pengajuan baru.');
+        }
+
         $request->validate([
             'title'                 => 'required|string|max:255',
             'placement_option'      => 'required|in:1,2,3',
@@ -176,12 +196,32 @@ if ($kp->placement_option === '3') {
     // Apply form for specific company
     public function applyForm(Company $company)
     {
+        // Cek apakah mahasiswa sudah memiliki aplikasi KP aktif (status selain REJECTED)
+        $hasActiveApplication = KpApplication::where('student_id', Auth::id())
+            ->where('status', '!=', 'REJECTED')
+            ->exists();
+
+        if ($hasActiveApplication) {
+            return redirect()->route('kp-applications.index')
+                ->with('error', 'Anda sudah memiliki pengajuan KP yang sedang diproses. Tunggu hingga selesai atau ditolak sebelum membuat pengajuan baru.');
+        }
+
         return view('student.kp.apply', compact('company'));
     }
 
     // Store apply for specific company
     public function storeApply(Request $request, Company $company)
     {
+        // Cek apakah mahasiswa sudah memiliki aplikasi KP aktif (status selain REJECTED)
+        $hasActiveApplication = KpApplication::where('student_id', Auth::id())
+            ->where('status', '!=', 'REJECTED')
+            ->exists();
+
+        if ($hasActiveApplication) {
+            return redirect()->route('kp-applications.index')
+                ->with('error', 'Anda sudah memiliki pengajuan KP yang sedang diproses. Tunggu hingga selesai atau ditolak sebelum membuat pengajuan baru.');
+        }
+
         $request->validate([
             'title' => 'required|string|max:255',
             'krs' => 'required|file|mimes:pdf,jpg,jpeg,png|max:5120',
@@ -206,12 +246,32 @@ if ($kp->placement_option === '3') {
     // Apply other form
     public function applyOtherForm()
     {
+        // Cek apakah mahasiswa sudah memiliki aplikasi KP aktif (status selain REJECTED)
+        $hasActiveApplication = KpApplication::where('student_id', Auth::id())
+            ->where('status', '!=', 'REJECTED')
+            ->exists();
+
+        if ($hasActiveApplication) {
+            return redirect()->route('kp-applications.index')
+                ->with('error', 'Anda sudah memiliki pengajuan KP yang sedang diproses. Tunggu hingga selesai atau ditolak sebelum membuat pengajuan baru.');
+        }
+
         return view('student.kp.apply_other');
     }
 
     // Store apply other
     public function storeApplyOther(Request $request)
     {
+        // Cek apakah mahasiswa sudah memiliki aplikasi KP aktif (status selain REJECTED)
+        $hasActiveApplication = KpApplication::where('student_id', Auth::id())
+            ->where('status', '!=', 'REJECTED')
+            ->exists();
+
+        if ($hasActiveApplication) {
+            return redirect()->route('kp-applications.index')
+                ->with('error', 'Anda sudah memiliki pengajuan KP yang sedang diproses. Tunggu hingga selesai atau ditolak sebelum membuat pengajuan baru.');
+        }
+
         $request->validate([
             'custom_company_name' => 'required|string|max:255',
             'title' => 'required|string|max:255',

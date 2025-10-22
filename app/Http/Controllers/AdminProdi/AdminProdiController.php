@@ -107,9 +107,11 @@ class AdminProdiController extends Controller
 
         $student->update($updateData);
 
-        // If supervisor_id was changed, update all their KP applications
+        // If supervisor_id was changed, update KP applications that are eligible for mentoring
+        // Only update KP that are APPROVED or in progress (ASSIGNED_SUPERVISOR, APPROVED, COMPLETED)
         if ($request->has('supervisor_id')) {
             KpApplication::where('student_id', $student->id)
+                ->whereIn('status', ['ASSIGNED_SUPERVISOR', 'APPROVED', 'COMPLETED'])
                 ->update(['assigned_supervisor_id' => $request->supervisor_id]);
         }
 
