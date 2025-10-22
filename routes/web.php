@@ -105,6 +105,15 @@ Route::middleware(['auth', 'role:MAHASISWA'])->group(function () {
 
 /*
 |--------------------------------------------------------------------------
+| Mahasiswa - Mentoring Show (outside supervisor group)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'role:MAHASISWA'])->prefix('mentoring')->name('mentoring.')->group(function () {
+    Route::get('{mentoring}', [MentoringLogController::class, 'show'])->name('show');
+});
+
+/*
+|--------------------------------------------------------------------------
 | Admin Prodi (+ Superadmin)
 |--------------------------------------------------------------------------
 */

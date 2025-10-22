@@ -28,7 +28,7 @@
             <span class="px-2 py-1 rounded-xl bg-gray-100">{{ $log->status }}</span>
           </td>
           <td class="py-2 pr-4">
-            <a href="{{ route('mentoring-logs.show', $log) }}" class="text-blue-600 hover:text-blue-800">Lihat</a>
+            <a href="{{ route('mentoring.show', $log) }}" class="text-blue-600 hover:text-blue-800">Lihat</a>
           </td>
         </tr>
       @empty

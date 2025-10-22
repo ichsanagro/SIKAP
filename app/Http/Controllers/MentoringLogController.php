@@ -41,24 +41,16 @@ class MentoringLogController extends Controller
 
     /**
      * Lihat detail bimbingan (MAHASISWA).
-     * Route: GET /mentoring-logs/{log}
+     * Route: GET /mentoring/{mentoring}
      */
-    public function show(MentoringLog $log)
+    public function show(MentoringLog $mentoring)
     {
-        // Pastikan mentoring log milik mahasiswa login
-        if ($log->student_id !== Auth::id()) {
-            abort(403, 'Anda tidak memiliki akses ke catatan bimbingan ini.');
-        }
-
-        // Pastikan status sudah APPROVED (mahasiswa hanya bisa lihat setelah disetujui)
-        if ($log->status !== 'APPROVED') {
-            abort(403, 'Catatan bimbingan ini belum dapat dilihat. Tunggu persetujuan dari dosen pembimbing.');
-        }
+        $this->authorize('view', $mentoring);
 
         // Load relationships untuk tampilan
-        $log->load(['kpApplication.company', 'supervisor']);
+        $mentoring->load(['kpApplication.company', 'supervisor']);
 
-        return view('student.mentoring.show', compact('log'));
+        return view('student.mentoring.show', ['log' => $mentoring]);
     }
 
     /**
