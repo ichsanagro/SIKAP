@@ -97,6 +97,29 @@
                 @enderror
             </div>
 
+            <!-- Status -->
+            <div class="mb-6">
+                <label for="status" class="block text-sm font-medium text-gray-700 mb-2">
+                    Status Bimbingan <span class="text-red-500">*</span>
+                </label>
+                <select name="status" id="status"
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <option value="PENDING" {{ old('status', $mentoringLog->status) === 'PENDING' ? 'selected' : '' }}>
+                        Menunggu Persetujuan
+                    </option>
+                    <option value="APPROVED" {{ old('status', $mentoringLog->status) === 'APPROVED' ? 'selected' : '' }}>
+                        Disetujui
+                    </option>
+                    <option value="REVISION" {{ old('status', $mentoringLog->status) === 'REVISION' ? 'selected' : '' }}>
+                        Perlu Revisi
+                    </option>
+                </select>
+                <p class="mt-1 text-sm text-gray-500">Pilih status bimbingan saat ini</p>
+                @error('status')
+                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                @enderror
+            </div>
+
             <!-- Internal Notes -->
             <div class="mb-6">
                 <label for="notes" class="block text-sm font-medium text-gray-700 mb-2">
