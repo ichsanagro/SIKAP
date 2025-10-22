@@ -190,6 +190,7 @@ class SupervisorController extends Controller
         $request->validate([
             'date' => 'required|date|before_or_equal:today',
             'topic' => 'required|string|max:1000',
+            'student_notes' => 'nullable|string|max:2000',
             'notes' => 'nullable|string|max:5000',
             'status' => 'required|in:PENDING,APPROVED,REVISION',
             'attachment' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:5120',
@@ -198,6 +199,7 @@ class SupervisorController extends Controller
         $updateData = [
             'date' => $request->date,
             'topic' => $request->topic,
+            'student_notes' => $request->student_notes,
             'notes' => $request->notes,
             'status' => $request->status,
         ];
