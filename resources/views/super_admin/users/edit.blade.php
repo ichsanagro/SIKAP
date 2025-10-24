@@ -115,7 +115,7 @@
                 </div>
 
                 <!-- NIM -->
-                <div id="nim-field">
+                <div id="nim-field" style="display: {{ $user->role == 'MAHASISWA' ? 'block' : 'none' }};">
                     <label for="nim" class="block text-sm font-medium text-gray-700">NIM</label>
                     <input type="text" name="nim" id="nim" value="{{ old('nim', $user->nim) }}"
                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
@@ -182,6 +182,10 @@ document.getElementById('role').addEventListener('change', function() {
         nimField.style.display = 'none';
         supervisorField.style.display = 'none';
         fieldSupervisorCompaniesField.style.display = 'block';
+    } else if (this.value === 'ADMIN_PRODI' || this.value === 'DOSEN_SUPERVISOR' || this.value === 'SUPERADMIN') {
+        nimField.style.display = 'none';
+        supervisorField.style.display = 'none';
+        fieldSupervisorCompaniesField.style.display = 'none';
     } else {
         nimField.style.display = 'none';
         supervisorField.style.display = 'none';
