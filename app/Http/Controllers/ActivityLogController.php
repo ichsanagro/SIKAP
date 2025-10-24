@@ -109,16 +109,17 @@ class ActivityLogController extends Controller
     /**
      * Approve aktivitas (PENGAWAS LAPANGAN).
      * POST /lapangan/activities/{log}/approve
+     * POST /field-supervisor/students/{application}/activities/{activityLog}/approve
      */
-    public function approve(ActivityLog $log)
+    public function approve(ActivityLog $activityLog)
     {
-        $this->authorizeFieldSupervisor($log);
+        $this->authorizeFieldSupervisor($activityLog);
 
-        if ($log->status === 'APPROVED') {
+        if ($activityLog->status === 'APPROVED') {
             return back()->with('success', 'Aktivitas sudah disetujui sebelumnya.');
         }
 
-        $log->update(['status' => 'APPROVED']);
+        $activityLog->update(['status' => 'APPROVED']);
 
         return back()->with('success', 'Aktivitas disetujui.');
     }
@@ -126,12 +127,13 @@ class ActivityLogController extends Controller
     /**
      * Minta revisi (PENGAWAS LAPANGAN).
      * POST /lapangan/activities/{log}/revise
+     * POST /field-supervisor/students/{application}/activities/{activityLog}/revise
      */
-    public function revise(ActivityLog $log)
+    public function revise(ActivityLog $activityLog)
     {
-        $this->authorizeFieldSupervisor($log);
+        $this->authorizeFieldSupervisor($activityLog);
 
-        $log->update(['status' => 'REVISION']);
+        $activityLog->update(['status' => 'REVISION']);
 
         return back()->with('success', 'Aktivitas diminta revisi.');
     }

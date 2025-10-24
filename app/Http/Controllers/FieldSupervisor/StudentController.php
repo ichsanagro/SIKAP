@@ -50,7 +50,14 @@ class StudentController extends Controller
 
     public function show(KpApplication $application) {
         $this->authorizeApp($application);
-        return view('field_supervisor.students.show', compact('application'));
+
+        // Fetch activity logs for this student
+        $activityLogs = \App\Models\ActivityLog::where('kp_application_id', $application->id)
+            ->with('student')
+            ->latest('date')
+            ->get();
+
+        return view('field_supervisor.students.show', compact('application', 'activityLogs'));
     }
 
     // Hapus = unassign dari pengawas lapangan ini

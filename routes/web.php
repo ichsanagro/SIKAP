@@ -96,6 +96,9 @@ Route::middleware(['auth', 'role:MAHASISWA'])->group(function () {
     Route::resource('activity-logs', ActivityLogController::class)
         ->only(['index', 'create', 'store']);
 
+    Route::get('activity-logs/{log}/photo', [ActivityLogController::class, 'downloadPhoto'])
+        ->name('activity-logs.photo');
+
     Route::get('reports/create/{kp}', [ReportController::class, 'create'])->name('reports.create');
     Route::post('reports/{kp}', [ReportController::class, 'store'])->name('reports.store');
 
@@ -264,6 +267,10 @@ Route::prefix('field-supervisor')
         Route::get('students', [FieldStudentController::class,'index'])->name('students.index');
         Route::get('students/{application}', [FieldStudentController::class,'show'])->name('students.show');
         Route::delete('students/{application}', [FieldStudentController::class,'destroy'])->name('students.destroy');
+
+        // Activity logs approval routes
+        Route::post('activity-logs/{activityLog}/approve', [ActivityLogController::class, 'approve'])->name('activity-logs.approve');
+        Route::post('activity-logs/{activityLog}/revise', [ActivityLogController::class, 'revise'])->name('activity-logs.revise');
 
         // 3) Evaluasi & feedback kuesioner (tambah & ubah)
         Route::resource('evaluations', FieldEvaluationController::class)

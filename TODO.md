@@ -1,22 +1,14 @@
-# TODO: Create Student Dashboard
+# TODO: Add Approve/Reject Buttons for Activity Logs in Field Supervisor Student Detail Page
 
 ## Steps to Complete
-- [x] Modify DashboardController to show dashboard view for MAHASISWA role instead of redirecting to kp-applications.index
-- [x] Create resources/views/student/dashboard.blade.php with overview content:
-  - Welcome message
-  - KP Application status summary
-  - Recent mentoring logs
-  - Recent activity logs
-  - Quick action links
-- [x] Update sidebar link if needed (currently points to dashboard route)
-- [x] Test the dashboard functionality
+- [x] Add routes for approve/revise activity logs in field supervisor section
+- [x] Update view to show approve/revise buttons for each activity log
+- [x] Test the approval functionality
 
 ## Information Gathered
-- Current DashboardController redirects students to kp-applications.index
-- Student sidebar has "Dashboard" link pointing to route('dashboard')
-- Student views are in resources/views/student/
-- Layout uses app.blade.php
-- Student role is 'MAHASISWA'
+- ActivityLogController has approve() and revise() methods
+- Routes need to be added under field-supervisor prefix
+- View needs to show buttons conditionally based on status
 
 ## Plan
-Create a comprehensive student dashboard showing key information and quick access to main features.
+Add approve and revise buttons directly in the student detail page for field supervisors to quickly approve/reject activity logs without navigating to separate pages.

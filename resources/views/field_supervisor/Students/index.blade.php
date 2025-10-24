@@ -70,14 +70,17 @@
                                     @endif
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <a href="{{ route('field.students.show', $app) }}" class="text-blue-600 hover:text-blue-900 mr-3">Lihat Detail</a>
-                                    <form method="POST" action="{{ route('field.students.destroy', $app) }}"
-                                          onsubmit="return confirm('Apakah Anda yakin ingin melepaskan mahasiswa ini dari pengawasan Anda?')"
-                                          class="inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="text-red-600 hover:text-red-900">Lepaskan</button>
-                                    </form>
+                                    <div class="flex flex-col space-y-2">
+                                        <a href="{{ route('field.students.show', $app) }}" class="text-blue-600 hover:text-blue-900">Aktivitas Mahasiswa</a>
+                                        <a href="{{ route('field.students.show', $app) }}" class="text-blue-600 hover:text-blue-900">Implementasi Mahasiswa</a>
+                                        <form method="POST" action="{{ route('field.students.destroy', $app) }}"
+                                              onsubmit="return confirm('Apakah Anda yakin ingin melepaskan mahasiswa ini dari pengawasan Anda?')"
+                                              class="inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-red-600 hover:text-red-900">Lepaskan</button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach

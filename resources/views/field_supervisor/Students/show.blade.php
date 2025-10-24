@@ -19,6 +19,60 @@
   </div>
 </div>
 
+<!-- Aktivitas Mahasiswa Section -->
+<div class="mt-6">
+  <h2 class="text-lg font-semibold mb-4">Aktivitas Mahasiswa</h2>
+  @if($activityLogs->count() > 0)
+    <div class="space-y-3">
+      @foreach($activityLogs as $log)
+        <div class="p-4 border rounded-lg bg-gray-50">
+          <div class="flex justify-between items-start mb-2">
+            <div class="font-medium">{{ \Carbon\Carbon::parse($log->date)->format('d M Y') }}</div>
+            <div class="flex items-center space-x-2">
+              <span class="px-2 py-1 text-xs rounded-full
+                @if($log->status === 'APPROVED') bg-green-100 text-green-800
+                @elseif($log->status === 'REVISION') bg-yellow-100 text-yellow-800
+                @else bg-gray-100 text-gray-800
+                @endif">
+                {{ $log->status }}
+              </span>
+              @if($log->status !== 'APPROVED')
+                <form method="POST" action="{{ route('field.activity-logs.approve', $log) }}" class="inline">
+                  @csrf
+                  <button type="submit" class="px-3 py-1 text-xs bg-green-600 text-white rounded hover:bg-green-700">
+                    Approve
+                  </button>
+                </form>
+              @endif
+              @if($log->status === 'PENDING')
+                <form method="POST" action="{{ route('field.activity-logs.revise', $log) }}" class="inline">
+                  @csrf
+                  <button type="submit" class="px-3 py-1 text-xs bg-yellow-600 text-white rounded hover:bg-yellow-700">
+                    Revisi
+                  </button>
+                </form>
+              @endif
+            </div>
+          </div>
+          <p class="text-sm text-gray-700 mb-2">{{ $log->description }}</p>
+          @if($log->photo_path)
+            <div class="text-sm">
+              <a href="{{ route('activity-logs.photo', $log) }}" target="_blank" class="text-blue-600 hover:text-blue-800">
+                <i class="fas fa-image mr-1"></i>Lihat Foto
+              </a>
+            </div>
+          @endif
+        </div>
+      @endforeach
+    </div>
+  @else
+    <div class="text-center py-8 text-gray-500">
+      <i class="fas fa-history text-3xl mb-2"></i>
+      <p>Belum ada aktivitas yang dicatat</p>
+    </div>
+  @endif
+</div>
+
 <div class="mt-4 space-x-2">
   <a href="{{ route('field.students.index') }}" class="text-blue-600">Kembali</a>
   <form action="{{ route('field.students.destroy', $application) }}" method="POST" class="inline"
