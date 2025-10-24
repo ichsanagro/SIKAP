@@ -1,9 +1,7 @@
-# Update Sidebar for Modern Professional Look
-
-## Tasks
-- [ ] Update section titles styling to text-[11px] uppercase tracking-wider text-white/70
-- [ ] Update .sidebar-link CSS: change hover to hover:bg-white/10, add active state bg-white/15 shadow-inner, adjust padding to px-4 py-2 mx-2 rounded-lg
-- [ ] Add active class to each menu link based on current route using request()->routeIs()
-- [ ] Test sidebar collapse/expand functionality
-- [ ] Verify hover and active states work correctly
-- [ ] Ensure no 404/403 errors (routes unchanged)
+- [x] Modify resources/views/super_admin/users/create.blade.php to add JavaScript for role-based field visibility
+- [x] Add field-supervisor-companies-field section for PENGAWAS_LAPANGAN role
+- [x] Show NIM field only for MAHASISWA role
+- [x] Show Tempat Magang yang Dibina section when PENGAWAS_LAPANGAN is selected
+- [x] Remove Program Studi field for all roles
+- [x] Remove Program Studi field from edit form and update JavaScript for role-based visibility
+- [x] Remove Program Studi field from register form

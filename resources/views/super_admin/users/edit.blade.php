@@ -115,21 +115,11 @@
                 </div>
 
                 <!-- NIM -->
-                <div>
+                <div id="nim-field">
                     <label for="nim" class="block text-sm font-medium text-gray-700">NIM</label>
                     <input type="text" name="nim" id="nim" value="{{ old('nim', $user->nim) }}"
                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                     @error('nim')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <!-- Prodi -->
-                <div>
-                    <label for="prodi" class="block text-sm font-medium text-gray-700">Program Studi</label>
-                    <input type="text" name="prodi" id="prodi" value="{{ old('prodi', $user->prodi) }}"
-                           class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
-                    @error('prodi')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
@@ -179,16 +169,21 @@
 @section('scripts')
 <script>
 document.getElementById('role').addEventListener('change', function() {
+    const nimField = document.getElementById('nim-field');
     const supervisorField = document.getElementById('supervisor-field');
     const fieldSupervisorCompaniesField = document.getElementById('field-supervisor-companies-field');
 
+    // Show NIM field only for MAHASISWA
     if (this.value === 'MAHASISWA') {
+        nimField.style.display = 'block';
         supervisorField.style.display = 'block';
         fieldSupervisorCompaniesField.style.display = 'none';
     } else if (this.value === 'PENGAWAS_LAPANGAN') {
+        nimField.style.display = 'none';
         supervisorField.style.display = 'none';
         fieldSupervisorCompaniesField.style.display = 'block';
     } else {
+        nimField.style.display = 'none';
         supervisorField.style.display = 'none';
         fieldSupervisorCompaniesField.style.display = 'none';
     }

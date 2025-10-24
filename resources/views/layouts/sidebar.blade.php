@@ -199,14 +199,16 @@
           <i class="fas fa-history"></i>
           <span x-show="sidebarExpanded" class="truncate">Aktivitas</span>
         </a>
-        <a href="{{ route('reports.create', ['kp' => auth()->user()->kpApplications->first()?->id]) }}" class="sidebar-link">
+        @if(auth()->user()->kpApplications->count() > 0)
+        <a href="{{ route('reports.create', ['kp' => auth()->user()->kpApplications->first()->id]) }}" class="sidebar-link">
           <i class="fas fa-chart-bar"></i>
           <span x-show="sidebarExpanded" class="truncate">Laporan</span>
         </a>
-        <a href="{{ route('questionnaire.create', ['kp' => auth()->user()->kpApplications->first()?->id]) }}" class="sidebar-link">
+        <a href="{{ route('questionnaire.create', ['kp' => auth()->user()->kpApplications->first()->id]) }}" class="sidebar-link">
           <i class="fas fa-clipboard-list"></i>
           <span x-show="sidebarExpanded" class="truncate">Kuesioner</span>
         </a>
+        @endif
       </div>
     @endif
   </nav>
@@ -416,14 +418,16 @@
           <i class="fas fa-history"></i>
           <span>Aktivitas</span>
         </a>
-        <a href="{{ route('reports.create', ['kp' => auth()->user()->kpApplications->first()?->id]) }}" class="sidebar-link" @click="closeMobile()">
+        @if(auth()->user()->kpApplications->count() > 0)
+        <a href="{{ route('reports.create', ['kp' => auth()->user()->kpApplications->first()->id]) }}" class="sidebar-link" @click="closeMobile()">
           <i class="fas fa-chart-bar"></i>
           <span>Laporan</span>
         </a>
-        <a href="{{ route('questionnaire.create', ['kp' => auth()->user()->kpApplications->first()?->id]) }}" class="sidebar-link" @click="closeMobile()">
+        <a href="{{ route('questionnaire.create', ['kp' => auth()->user()->kpApplications->first()->id]) }}" class="sidebar-link" @click="closeMobile()">
           <i class="fas fa-clipboard-list"></i>
           <span>Kuesioner</span>
         </a>
+        @endif
       </div>
     @endif
   </nav>

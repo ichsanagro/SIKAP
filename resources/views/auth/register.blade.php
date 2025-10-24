@@ -65,19 +65,6 @@
           @error('nim') <p class="text-red-600 text-sm mt-1">{{ $message }}</p> @enderror
         </div>
 
-        {{-- Prodi --}}
-        <div>
-          <label class="block font-semibold">Program Studi</label>
-          <input
-            type="text"
-            name="prodi"
-            value="{{ old('prodi') }}"
-            placeholder="Contoh: Teknik Informatika"
-            class="mt-1 w-full rounded-xl border p-3 focus:outline-none focus:ring-2 focus:ring-unibBlue focus:border-unibBlue"
-            required>
-          @error('prodi') <p class="text-red-600 text-sm mt-1">{{ $message }}</p> @enderror
-        </div>
-
         {{-- Email --}}
         <div>
           <label class="block font-semibold">Email</label>
