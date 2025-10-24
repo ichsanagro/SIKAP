@@ -17,8 +17,8 @@ class EvaluationController extends Controller
     }
 
     public function create() {
-        $apps = KpApplication::with('student')
-            ->where('supervisor_id', auth()->id())->get();
+        $apps = KpApplication::with(['student', 'company'])
+            ->where('field_supervisor_id', auth()->id())->get();
         return view('field_supervisor.evaluations.create', compact('apps'));
     }
 
@@ -31,7 +31,7 @@ class EvaluationController extends Controller
         ]);
 
         KpApplication::where('id',$data['kp_application_id'])
-            ->where('supervisor_id', auth()->id())->firstOrFail();
+            ->where('field_supervisor_id', auth()->id())->firstOrFail();
 
         $data['supervisor_id'] = auth()->id();
         FieldEvaluation::create($data);
