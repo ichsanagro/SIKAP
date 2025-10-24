@@ -27,7 +27,7 @@
     @endauth
 
     {{-- Main Content --}}
-    <div class="flex-1 flex flex-col">
+    <div class="flex-1 flex flex-col overflow-x-auto">
       {{-- Top Header --}}
       <header class="bg-[#0a3d91] text-white shadow-sm">
         <div class="flex items-center justify-between px-4 py-4">
@@ -83,7 +83,7 @@
       </header>
 
       {{-- Page Content --}}
-      <main class="flex-1 p-4 md:p-6">
+      <main class="flex-1 p-4 md:p-6 min-w-0">
         @if(session('success'))
           <div class="mb-4 p-3 bg-green-100 text-green-700 rounded">{{ session('success') }}</div>
         @endif
