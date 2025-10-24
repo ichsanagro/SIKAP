@@ -69,6 +69,16 @@ class VerificationController extends Controller
 
         $kpApplication->update($updateData);
 
+        // Auto-assign field supervisor if company is selected and no field supervisor assigned yet
+        if ($kpApplication->company_id && !$kpApplication->field_supervisor_id) {
+            $fieldSupervisorId = \App\Models\CompanyFieldSupervisor::where('company_id', $kpApplication->company_id)
+                ->value('field_supervisor_id');
+
+            if ($fieldSupervisorId) {
+                $kpApplication->update(['field_supervisor_id' => $fieldSupervisorId]);
+            }
+        }
+
         return redirect()
             ->route('supervisor.verifications.show', $kpApplication)
             ->with('success', 'Judul KP telah disetujui.');
