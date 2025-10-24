@@ -1,17 +1,9 @@
-# TODO: Perbaikan Bimbingan Mahasiswa
+# Update Sidebar for Modern Professional Look
 
-## Masalah
-Mahasiswa yang telah masuk ke daftar mahasiswa dosen pembimbing (melalui `supervisor_id`) tidak dapat melakukan bimbingan karena `assigned_supervisor_id` di KP tidak di-set dengan benar.
-
-## Analisis
-1. Mahasiswa di-assign ke supervisor melalui `User::supervisor_id`
-2. Supervisor dapat approve KP mahasiswa yang assigned kepadanya
-3. Tapi `assigned_supervisor_id` di `KpApplication` tidak di-set otomatis saat approve
-4. Mentoring memerlukan `assigned_supervisor_id` yang tidak null
-
-## Solusi
-Ketika supervisor approve KP, pastikan `assigned_supervisor_id` di-set berdasarkan `supervisor_id` mahasiswa.
-
-## Langkah Perbaikan
-- [ ] Update `Supervisor/VerificationController::approve()` untuk set `assigned_supervisor_id` jika belum ada
-- [ ] Test perbaikan dengan membuat KP baru dan approve oleh supervisor
+## Tasks
+- [ ] Update section titles styling to text-[11px] uppercase tracking-wider text-white/70
+- [ ] Update .sidebar-link CSS: change hover to hover:bg-white/10, add active state bg-white/15 shadow-inner, adjust padding to px-4 py-2 mx-2 rounded-lg
+- [ ] Add active class to each menu link based on current route using request()->routeIs()
+- [ ] Test sidebar collapse/expand functionality
+- [ ] Verify hover and active states work correctly
+- [ ] Ensure no 404/403 errors (routes unchanged)
