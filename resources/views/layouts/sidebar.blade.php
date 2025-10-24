@@ -107,6 +107,10 @@
           <i class="fas fa-user-graduate"></i>
           <span x-show="sidebarExpanded" class="truncate">Mahasiswa</span>
         </a>
+        <a href="{{ route('admin-prodi.field-supervisors.index') }}" class="sidebar-link">
+          <i class="fas fa-user-tie"></i>
+          <span x-show="sidebarExpanded" class="truncate">Pengawas Lapangan</span>
+        </a>
         <a href="{{ route('admin-prodi.companies.index') }}" class="sidebar-link">
           <i class="fas fa-building"></i>
           <span x-show="sidebarExpanded" class="truncate">Perusahaan</span>

@@ -20,6 +20,7 @@ class AdminProdiController extends Controller
             'assigned_supervisors' => KpApplication::whereNotNull('assigned_supervisor_id')->count(),
             'assigned_field_supervisors' => KpApplication::whereNotNull('field_supervisor_id')->count(),
             'students' => User::where('role', 'MAHASISWA')->count(),
+            'field_supervisors' => User::where('role', 'PENGAWAS_LAPANGAN')->count(),
         ];
 
         return view('admin_prodi.index', compact('stats'));
@@ -143,5 +144,120 @@ class AdminProdiController extends Controller
         $status = $student->is_active ? 'diaktifkan' : 'dinonaktifkan';
 
         return redirect()->route('admin-prodi.students.index')->with('success', "Mahasiswa berhasil {$status}.");
+    }
+
+    // Field Supervisor Management Methods
+    public function fieldSupervisors()
+    {
+        $fieldSupervisors = User::where('role', 'PENGAWAS_LAPANGAN')
+            ->with('supervisedCompanies')
+            ->paginate(20);
+
+        return view('admin_prodi.field_supervisors.index', compact('fieldSupervisors'));
+    }
+
+    public function createFieldSupervisor()
+    {
+        $companies = Company::all();
+        return view('admin_prodi.field_supervisors.create', compact('companies'));
+    }
+
+    public function storeFieldSupervisor(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            'company_ids' => 'nullable|array',
+            'company_ids.*' => 'exists:companies,id',
+        ]);
+
+        $fieldSupervisor = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => 'PENGAWAS_LAPANGAN',
+            'is_active' => true,
+        ]);
+
+        // Attach companies if provided
+        if ($request->company_ids) {
+            $fieldSupervisor->supervisedCompanies()->attach($request->company_ids);
+        }
+
+        return redirect()->route('admin-prodi.field-supervisors.index')->with('success', 'Pengawas Lapangan berhasil ditambahkan.');
+    }
+
+    public function editFieldSupervisor(User $fieldSupervisor)
+    {
+        // Ensure it's a PENGAWAS_LAPANGAN
+        if ($fieldSupervisor->role !== 'PENGAWAS_LAPANGAN') {
+            abort(404);
+        }
+
+        $companies = Company::all();
+        return view('admin_prodi.field_supervisors.edit', compact('fieldSupervisor', 'companies'));
+    }
+
+    public function updateFieldSupervisor(Request $request, User $fieldSupervisor)
+    {
+        // Ensure it's a PENGAWAS_LAPANGAN
+        if ($fieldSupervisor->role !== 'PENGAWAS_LAPANGAN') {
+            abort(404);
+        }
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $fieldSupervisor->id,
+            'password' => 'nullable|string|min:8|confirmed',
+            'company_ids' => 'nullable|array',
+            'company_ids.*' => 'exists:companies,id',
+        ]);
+
+        $updateData = [
+            'name' => $request->name,
+            'email' => $request->email,
+        ];
+
+        if ($request->filled('password')) {
+            $updateData['password'] = Hash::make($request->password);
+        }
+
+        $fieldSupervisor->update($updateData);
+
+        // Sync companies
+        $fieldSupervisor->supervisedCompanies()->sync($request->company_ids ?? []);
+
+        return redirect()->route('admin-prodi.field-supervisors.index')->with('success', 'Data pengawas lapangan berhasil diperbarui.');
+    }
+
+    public function destroyFieldSupervisor(User $fieldSupervisor)
+    {
+        // Ensure it's a PENGAWAS_LAPANGAN
+        if ($fieldSupervisor->role !== 'PENGAWAS_LAPANGAN') {
+            abort(404);
+        }
+
+        // Detach from companies first
+        $fieldSupervisor->supervisedCompanies()->detach();
+
+        // Hard delete
+        $fieldSupervisor->delete();
+
+        return redirect()->route('admin-prodi.field-supervisors.index')->with('success', 'Pengawas Lapangan berhasil dihapus.');
+    }
+
+    public function toggleFieldSupervisorActive(User $fieldSupervisor)
+    {
+        // Ensure it's a PENGAWAS_LAPANGAN
+        if ($fieldSupervisor->role !== 'PENGAWAS_LAPANGAN') {
+            abort(404);
+        }
+
+        $fieldSupervisor->update(['is_active' => !$fieldSupervisor->is_active]);
+
+        $status = $fieldSupervisor->is_active ? 'diaktifkan' : 'dinonaktifkan';
+
+        return redirect()->route('admin-prodi.field-supervisors.index')->with('success', "Pengawas Lapangan berhasil {$status}.");
     }
 }

@@ -147,6 +147,15 @@ Route::prefix('admin-prodi')
         Route::put('students/{student}', [AdminProdiController::class, 'updateStudent'])->name('students.update');
         Route::delete('students/{student}', [AdminProdiController::class, 'destroyStudent'])->name('students.destroy');
         Route::post('students/{student}/toggle-active', [AdminProdiController::class, 'toggleStudentActive'])->name('students.toggle-active');
+
+        // Field Supervisor Management Routes
+        Route::get('field-supervisors', [AdminProdiController::class, 'fieldSupervisors'])->name('field-supervisors.index');
+        Route::get('field-supervisors/create', [AdminProdiController::class, 'createFieldSupervisor'])->name('field-supervisors.create');
+        Route::post('field-supervisors', [AdminProdiController::class, 'storeFieldSupervisor'])->name('field-supervisors.store');
+        Route::get('field-supervisors/{fieldSupervisor}/edit', [AdminProdiController::class, 'editFieldSupervisor'])->name('field-supervisors.edit');
+        Route::put('field-supervisors/{fieldSupervisor}', [AdminProdiController::class, 'updateFieldSupervisor'])->name('field-supervisors.update');
+        Route::delete('field-supervisors/{fieldSupervisor}', [AdminProdiController::class, 'destroyFieldSupervisor'])->name('field-supervisors.destroy');
+        Route::post('field-supervisors/{fieldSupervisor}/toggle-active', [AdminProdiController::class, 'toggleFieldSupervisorActive'])->name('field-supervisors.toggle-active');
     });
 
 /*
