@@ -89,16 +89,12 @@ class AdminProdiController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $student->id,
             'password' => 'nullable|string|min:8|confirmed',
-            'nim' => 'required|string|max:255|unique:users,nim,' . $student->id,
-            'prodi' => 'required|string|max:255',
             'supervisor_id' => 'nullable|exists:users,id',
         ]);
 
         $updateData = [
             'name' => $request->name,
             'email' => $request->email,
-            'nim' => $request->nim,
-            'prodi' => $request->prodi,
             'supervisor_id' => $request->supervisor_id,
         ];
 

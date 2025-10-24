@@ -39,22 +39,18 @@
                 <div>
                     <label for="nim" class="block text-sm font-medium text-gray-700">NIM</label>
                     <input type="text" name="nim" id="nim" value="{{ old('nim', $student->nim) }}"
-                           class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 @error('nim') border-red-500 @enderror"
-                           required>
-                    @error('nim')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
+                           class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 bg-gray-100 cursor-not-allowed"
+                           readonly>
+                    <p class="mt-1 text-sm text-gray-500">NIM tidak dapat diubah</p>
                 </div>
 
                 <!-- Prodi -->
                 <div>
                     <label for="prodi" class="block text-sm font-medium text-gray-700">Program Studi</label>
                     <input type="text" name="prodi" id="prodi" value="{{ old('prodi', $student->prodi) }}"
-                           class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 @error('prodi') border-red-500 @enderror"
-                           required>
-                    @error('prodi')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
+                           class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 bg-gray-100 cursor-not-allowed"
+                           readonly>
+                    <p class="mt-1 text-sm text-gray-500">Program Studi tidak dapat diubah</p>
                 </div>
 
                 <!-- Supervisor -->
