@@ -45,16 +45,7 @@
                     @enderror
                 </div>
 
-                <!-- Prodi -->
-                <div>
-                    <label for="prodi" class="block text-sm font-medium text-gray-700">Program Studi</label>
-                    <input type="text" name="prodi" id="prodi" value="{{ old('prodi') }}"
-                           class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 @error('prodi') border-red-500 @enderror"
-                           required>
-                    @error('prodi')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
+
 
                 <!-- Supervisor -->
                 <div>

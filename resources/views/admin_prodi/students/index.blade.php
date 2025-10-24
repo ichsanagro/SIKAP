@@ -36,7 +36,7 @@
                         <th class="text-left p-4">Nama</th>
                         <th class="text-left p-4">Email</th>
                         <th class="text-left p-4">NIM</th>
-                        <th class="text-left p-4">Prodi</th>
+
                         <th class="text-left p-4">Supervisor</th>
                         <th class="text-left p-4">Status</th>
                         <th class="text-left p-4">Pengajuan KP</th>
@@ -51,7 +51,7 @@
                         <td class="p-4 font-medium">{{ $student->name }}</td>
                         <td class="p-4">{{ $student->email }}</td>
                         <td class="p-4">{{ $student->nim }}</td>
-                        <td class="p-4">{{ $student->prodi }}</td>
+
                         <td class="p-4">
                             @if($student->supervisor)
                                 {{ $student->supervisor->name }}
@@ -93,7 +93,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="10" class="p-8 text-center text-gray-500">Belum ada mahasiswa terdaftar.</td>
+                        <td colspan="9" class="p-8 text-center text-gray-500">Belum ada mahasiswa terdaftar.</td>
                     </tr>
                 @endforelse
                 </tbody>

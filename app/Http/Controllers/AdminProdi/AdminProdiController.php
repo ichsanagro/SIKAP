@@ -49,7 +49,6 @@ class AdminProdiController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'nim' => 'required|string|max:255|unique:users',
-            'prodi' => 'required|string|max:255',
             'supervisor_id' => 'nullable|exists:users,id',
         ]);
 
@@ -59,7 +58,6 @@ class AdminProdiController extends Controller
             'password' => Hash::make($request->password),
             'role' => 'MAHASISWA',
             'nim' => $request->nim,
-            'prodi' => $request->prodi,
             'supervisor_id' => $request->supervisor_id,
             'is_active' => true,
         ]);
