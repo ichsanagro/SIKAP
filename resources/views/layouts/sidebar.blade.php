@@ -115,6 +115,10 @@
           <i class="fas fa-building"></i>
           <span x-show="sidebarExpanded" class="truncate">Perusahaan</span>
         </a>
+        <a href="{{ route('admin-prodi.seminar.index') }}" class="sidebar-link">
+          <i class="fas fa-graduation-cap"></i>
+          <span x-show="sidebarExpanded" class="truncate">Seminar KP</span>
+        </a>
       </div>
     @endif
 
@@ -150,6 +154,10 @@
         <a href="{{ route('supervisor.questionnaires.index') }}" class="sidebar-link">
           <i class="fas fa-clipboard-list"></i>
           <span x-show="sidebarExpanded" class="truncate">Kuesioner</span>
+        </a>
+        <a href="{{ route('supervisor.seminar.index') }}" class="sidebar-link">
+          <i class="fas fa-graduation-cap"></i>
+          <span x-show="sidebarExpanded" class="truncate">Seminar KP</span>
         </a>
       </div>
     @endif
@@ -213,6 +221,10 @@
           <span x-show="sidebarExpanded" class="truncate">Kuesioner</span>
         </a>
         @endif
+        <a href="{{ route('seminar.index') }}" class="sidebar-link">
+          <i class="fas fa-graduation-cap"></i>
+          <span x-show="sidebarExpanded" class="truncate">Seminar KP</span>
+        </a>
       </div>
     @endif
   </nav>

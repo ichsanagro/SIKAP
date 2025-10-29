@@ -1,4 +1,4 @@
-{{-- @php
+@php
   $isActive = fn($pattern) => request()->is($pattern) ? 'text-unibBlue font-semibold' : 'text-gray-600';
 @endphp
 
@@ -13,5 +13,8 @@
     <li>
       <a href="{{ route('activity-logs.index') }}" class="{{ $isActive('activity-logs*') }}">Aktivitas Lapangan</a>
     </li>
+    <li>
+      <a href="{{ route('seminar.index') }}" class="{{ $isActive('seminar*') }}">Seminar KP</a>
+    </li>
   </ul>
-</nav> --}}
+</nav>

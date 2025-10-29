@@ -66,6 +66,8 @@ Route::middleware(['auth'])->group(function () {
 | Mahasiswa
 |--------------------------------------------------------------------------
 */
+use App\Http\Controllers\SeminarApplicationController;
+
 Route::middleware(['auth', 'role:MAHASISWA'])->group(function () {
     Route::resource('kp-applications', KpApplicationController::class)
         ->parameters(['kp-applications' => 'kp_application'])
@@ -104,6 +106,10 @@ Route::middleware(['auth', 'role:MAHASISWA'])->group(function () {
 
     Route::get('questionnaire/{kp}', [QuestionnaireController::class, 'create'])->name('questionnaire.create');
     Route::post('questionnaire/{kp}', [QuestionnaireController::class, 'store'])->name('questionnaire.store');
+
+    // Seminar KP routes
+    Route::get('/seminar', [SeminarApplicationController::class, 'index'])->name('seminar.index');
+    Route::post('/seminar', [SeminarApplicationController::class, 'store'])->name('seminar.store');
 });
 
 /*
@@ -121,6 +127,7 @@ Route::middleware(['auth', 'role:MAHASISWA'])->prefix('mentoring')->name('mentor
 |--------------------------------------------------------------------------
 */
 use App\Http\Controllers\AdminProdi\AdminProdiController;
+use App\Http\Controllers\AdminProdi\SeminarReviewController;
 
 Route::prefix('admin-prodi')
     ->middleware(['auth', 'role:ADMIN_PRODI,SUPERADMIN'])
@@ -159,6 +166,11 @@ Route::prefix('admin-prodi')
         Route::put('field-supervisors/{fieldSupervisor}', [AdminProdiController::class, 'updateFieldSupervisor'])->name('field-supervisors.update');
         Route::delete('field-supervisors/{fieldSupervisor}', [AdminProdiController::class, 'destroyFieldSupervisor'])->name('field-supervisors.destroy');
         Route::post('field-supervisors/{fieldSupervisor}/toggle-active', [AdminProdiController::class, 'toggleFieldSupervisorActive'])->name('field-supervisors.toggle-active');
+
+        // Seminar Review Routes
+        Route::get('/seminar-applications', [SeminarReviewController::class, 'index'])->name('seminar.index');
+        Route::post('/seminar-applications/{application}/approve', [SeminarReviewController::class, 'approve'])->name('seminar.approve');
+        Route::post('/seminar-applications/{application}/reject', [SeminarReviewController::class, 'reject'])->name('seminar.reject');
     });
 
 /*
@@ -194,6 +206,7 @@ Route::prefix('super-admin')
 */
 use App\Http\Controllers\SupervisorController;
 use App\Http\Controllers\Supervisor\VerificationController as SupervisorVerificationController;
+use App\Http\Controllers\Supervisor\SeminarStudentController;
 
 Route::prefix('supervisor')
     ->middleware(['auth', 'role:DOSEN_SUPERVISOR,SUPERADMIN'])
@@ -240,6 +253,9 @@ Route::prefix('supervisor')
         Route::get('questionnaires', [SupervisorController::class, 'questionnaires'])->name('questionnaires.index');
         Route::get('questionnaires/{kpApplication}/create', [SupervisorController::class, 'createQuestionnaire'])->name('questionnaires.create');
         Route::post('questionnaires/{kpApplication}', [SupervisorController::class, 'storeQuestionnaire'])->name('questionnaires.store');
+
+        // Seminar Students
+        Route::get('/seminar-students', [SeminarStudentController::class, 'index'])->name('seminar.index');
     });
 
 /*
