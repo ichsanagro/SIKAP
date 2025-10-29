@@ -43,7 +43,8 @@
           @endauth
 
           {{-- Logo/Title --}}
-          <div class="flex-1 text-center md:text-left">
+          <div class="flex-1 text-center md:text-left flex items-center gap-2">
+            <img src="{{ asset('logo-unib.PNG') }}" alt="Logo Universitas Bengkulu" class="h-12 w-auto">
             <h1 class="text-xl font-bold">SIKAP</h1>
           </div>
 
