@@ -69,14 +69,7 @@
                         </div>
                     </div>
                     @endif
-                    @if($log->notes)
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Catatan Internal Dosen</label>
-                        <div class="mt-1 text-sm text-gray-900 whitespace-pre-wrap bg-yellow-50 rounded-lg p-4 border-l-4 border-yellow-500">
-                            {{ $log->notes }}
-                        </div>
-                    </div>
-                    @endif
+
                 </div>
             </div>
 

@@ -3,19 +3,9 @@
 @section('content')
 <div class="max-w-7xl mx-auto p-6">
     <!-- Header -->
-    <div class="flex items-center justify-between mb-6">
-        <div>
-            <h1 class="text-3xl font-bold text-gray-900">Catatan Bimbingan</h1>
-            <p class="text-gray-600 mt-2">Kelola catatan bimbingan mahasiswa</p>
-        </div>
-        <div class="flex space-x-3">
-            <a href="{{ route('supervisor.mentoring.create') }}" class="btn-primary">
-                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                </svg>
-                Tambah Catatan
-            </a>
-        </div>
+    <div class="mb-6">
+        <h1 class="text-3xl font-bold text-gray-900">Catatan Bimbingan</h1>
+        <p class="text-gray-600 mt-2">Kelola catatan bimbingan mahasiswa</p>
     </div>
 
     <!-- Filter by Student -->
@@ -124,14 +114,6 @@
                 </svg>
                 <h3 class="mt-2 text-sm font-medium text-gray-900">Belum ada catatan bimbingan</h3>
                 <p class="mt-1 text-sm text-gray-500">Mulai tambahkan catatan bimbingan untuk mahasiswa Anda.</p>
-                <div class="mt-6">
-                    <a href="{{ route('supervisor.mentoring.create') }}" class="btn-primary">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                        </svg>
-                        Tambah Catatan Pertama
-                    </a>
-                </div>
             </div>
         @endif
     </div>

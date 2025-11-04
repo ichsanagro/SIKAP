@@ -191,7 +191,6 @@ class SupervisorController extends Controller
             'date' => 'required|date|before_or_equal:today',
             'topic' => 'required|string|max:1000',
             'student_notes' => 'nullable|string|max:2000',
-            'notes' => 'nullable|string|max:5000',
             'status' => 'required|in:PENDING,APPROVED,REVISION',
             'attachment' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:5120',
         ]);
@@ -200,12 +199,12 @@ class SupervisorController extends Controller
             'date' => $request->date,
             'topic' => $request->topic,
             'student_notes' => $request->student_notes,
-            'notes' => $request->notes,
             'status' => $request->status,
         ];
 
         // Jangan ubah field student_id dan supervisor_id
-        // Hanya update status, notes, date, topic, dan attachment
+        // Hanya update status, student_notes, date, topic, dan attachment
+        // notes (catatan internal mahasiswa) tidak boleh diubah oleh supervisor
 
         if ($request->hasFile('attachment')) {
             $path = $request->file('attachment')->store('mentoring_attachments', 'public');

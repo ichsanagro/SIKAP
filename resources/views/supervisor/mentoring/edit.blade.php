@@ -97,6 +97,17 @@
                 @enderror
             </div>
 
+            <!-- Internal Notes (Read-only) -->
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Catatan Internal Mahasiswa
+                </label>
+                <div class="bg-gray-50 border border-gray-300 rounded-lg px-3 py-2">
+                    <span class="text-sm text-gray-900">{{ $mentoringLog->notes ?: 'Tidak ada catatan internal' }}</span>
+                </div>
+                <p class="mt-1 text-sm text-gray-500">Catatan internal mahasiswa tidak dapat diubah oleh dosen pembimbing.</p>
+            </div>
+
             <!-- Status -->
             <div class="mb-6">
                 <label for="status" class="block text-sm font-medium text-gray-700 mb-2">
@@ -120,20 +131,7 @@
                 @enderror
             </div>
 
-            <!-- Internal Notes -->
-            <div class="mb-6">
-                <label for="notes" class="block text-sm font-medium text-gray-700 mb-2">
-                    Catatan Internal (Opsional)
-                </label>
-                <textarea name="notes" id="notes" rows="4"
-                          placeholder="Catatan internal untuk dosen pembimbing (tidak akan dilihat mahasiswa)"
-                          class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                          maxlength="5000">{{ old('notes', $mentoringLog->notes) }}</textarea>
-                <p class="mt-1 text-sm text-gray-500">Maksimal 5000 karakter. Catatan ini hanya untuk internal dosen.</p>
-                @error('notes')
-                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                @enderror
-            </div>
+
 
             <!-- Current Attachment -->
             @if($mentoringLog->attachment_path)
