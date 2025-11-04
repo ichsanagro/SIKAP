@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-@include('student.partials.nav')
 
 <div class="flex items-center justify-between mb-4">
   <h1 class="text-2xl font-bold text-unibBlue">Aktivitas Lapangan</h1>

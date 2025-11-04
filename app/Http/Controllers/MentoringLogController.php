@@ -90,6 +90,15 @@ class MentoringLogController extends Controller
             return back()->with('error', 'Data dosen pembimbing tidak valid. Silakan hubungi admin.')->withInput();
         }
 
+        // Check if student already has a mentoring log on the same date
+        $existingLog = MentoringLog::where('student_id', Auth::id())
+            ->where('date', $request->date)
+            ->first();
+
+        if ($existingLog) {
+            return back()->with('error', 'Anda sudah melakukan bimbingan di hari itu.')->withInput();
+        }
+
         // Simpan berkas (opsional)
         $path = null;
         if ($request->hasFile('attachment')) {

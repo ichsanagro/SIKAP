@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-@include('student.partials.nav')
 
 <div class="grid md:grid-cols-2 gap-6">
   <div class="card">

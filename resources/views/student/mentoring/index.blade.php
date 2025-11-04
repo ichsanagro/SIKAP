@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-@include('student.partials.nav')
 
 <div class="flex items-center justify-between mb-4">
   <h1 class="text-2xl font-bold text-unibBlue">Catatan Bimbingan</h1>
@@ -25,7 +24,17 @@
           <td class="py-2 pr-4">{{ $log->kpApplication->title }}</td>
           <td class="py-2 pr-4">{{ $log->topic }}</td>
           <td class="py-2 pr-4">
-            <span class="px-2 py-1 rounded-xl bg-gray-100">{{ $log->status }}</span>
+            <span class="px-2 py-1 rounded-xl bg-gray-100">
+              @if($log->status === 'APPROVED')
+                Disetujui
+              @elseif($log->status === 'REVISION')
+                Perlu Revisi
+              @elseif($log->status === 'PENDING')
+                Menunggu
+              @else
+                {{ $log->status }}
+              @endif
+            </span>
           </td>
           <td class="py-2 pr-4">
             <a href="{{ route('mentoring.show', $log) }}" class="text-blue-600 hover:text-blue-800">Lihat</a>

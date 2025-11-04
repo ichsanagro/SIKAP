@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-@include('student.partials.nav')
 
 <div class="card">
   <h2 class="text-2xl font-bold text-unibBlue mb-4">Unggah Laporan Akhir</h2>

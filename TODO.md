@@ -1,7 +1,7 @@
-# TODO List
+# TODO: Add Validation for Duplicate Mentoring Log Dates
 
-## Add University Logo to Header
-- [x] Download logo from provided URL
-- [x] Place logo in public directory
-- [x] Edit app.blade.php to include logo next to "SIKAP" text
-- [x] Test the changes on a page to ensure logo displays correctly
+## Steps to Complete:
+1. [x] Modify the `store` method in `MentoringLogController.php` to add a check for existing mentoring logs on the same date for the student.
+2. [x] Add the validation logic after the initial request validations.
+3. [x] If a log exists on the same date, return back with the error message "Anda sudah melakukan bimbingan di hari itu." and preserve input.
+4. Test the functionality to ensure the validation works correctly.

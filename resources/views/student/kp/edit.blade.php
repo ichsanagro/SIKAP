@@ -3,7 +3,6 @@
 
 @section('content')
   {{-- Tab navigasi mahasiswa (opsional) --}}
-  @include('student.partials.nav')
 
   <div class="card">
     <h2 class="text-2xl font-bold text-unibBlue mb-4">Edit Draft Kerja Praktek</h2>
