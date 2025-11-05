@@ -4,17 +4,17 @@
 <div class="max-w-7xl mx-auto p-6">
     <div class="flex items-center justify-between mb-6">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900">Company Quotas Management</h1>
+            <h1 class="text-3xl font-bold text-gray-900">Manajemen Kuota Perusahaan</h1>
             <p class="text-gray-600 mt-2">Kelola semua kuota perusahaan per periode</p>
         </div>
         <a href="{{ route('super-admin.index') }}" class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition">
-            ← Back to Dashboard
+            ← Kembali ke Dasbor
         </a>
     </div>
 
     <div class="bg-white shadow rounded-lg overflow-hidden">
         <div class="px-6 py-4 border-b border-gray-200">
-            <h2 class="text-lg font-semibold">All Company Quotas ({{ $quotas->total() }})</h2>
+            <h2 class="text-lg font-semibold">Semua Kuota Perusahaan ({{ $quotas->total() }})</h2>
         </div>
 
         <div class="overflow-x-auto">
@@ -22,10 +22,10 @@
                 <thead class="bg-gray-50">
                     <tr>
                         <th class="text-left p-4">ID</th>
-                        <th class="text-left p-4">Company</th>
-                        <th class="text-left p-4">Period</th>
-                        <th class="text-left p-4">Quota</th>
-                        <th class="text-left p-4">Created</th>
+                        <th class="text-left p-4">Perusahaan</th>
+                        <th class="text-left p-4">Periode</th>
+                        <th class="text-left p-4">Kuota</th>
+                        <th class="text-left p-4">Dibuat</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -46,7 +46,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" class="p-8 text-center text-gray-500">No quotas found.</td>
+                        <td colspan="5" class="p-8 text-center text-gray-500">Tidak ada kuota ditemukan.</td>
                     </tr>
                 @endforelse
                 </tbody>

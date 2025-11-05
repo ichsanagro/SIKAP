@@ -4,11 +4,11 @@
 <div class="max-w-4xl mx-auto p-6">
     <div class="flex items-center justify-between mb-6">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900">Create New User</h1>
-            <p class="text-gray-600 mt-2">Add a new user to the system</p>
+            <h1 class="text-3xl font-bold text-gray-900">Buat Pengguna Baru</h1>
+            <p class="text-gray-600 mt-2">Tambahkan pengguna baru ke sistem</p>
         </div>
         <a href="{{ route('super-admin.users.index') }}" class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition">
-            ← Back to Users
+            ← Kembali ke Pengguna
         </a>
     </div>
 
@@ -19,7 +19,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Name -->
                 <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                    <label for="name" class="block text-sm font-medium text-gray-700">Nama</label>
                     <input type="text" name="name" id="name" value="{{ old('name') }}" required
                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                     @error('name')
@@ -39,7 +39,7 @@
 
                 <!-- Password -->
                 <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                    <label for="password" class="block text-sm font-medium text-gray-700">Kata Sandi</label>
                     <input type="password" name="password" id="password" required
                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                     @error('password')
@@ -49,17 +49,17 @@
 
                 <!-- Password Confirmation -->
                 <div>
-                    <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+                    <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Konfirmasi Kata Sandi</label>
                     <input type="password" name="password_confirmation" id="password_confirmation" required
                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                 </div>
 
                 <!-- Role -->
                 <div>
-                    <label for="role" class="block text-sm font-medium text-gray-700">Role</label>
+                    <label for="role" class="block text-sm font-medium text-gray-700">Peran</label>
                     <select name="role" id="role" required
                             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
-                        <option value="">Select Role</option>
+                        <option value="">Pilih Peran</option>
                         <option value="MAHASISWA" {{ old('role') == 'MAHASISWA' ? 'selected' : '' }}>Mahasiswa</option>
                         <option value="ADMIN_PRODI" {{ old('role') == 'ADMIN_PRODI' ? 'selected' : '' }}>Admin Prodi</option>
                         <option value="DOSEN_SUPERVISOR" {{ old('role') == 'DOSEN_SUPERVISOR' ? 'selected' : '' }}>Dosen Supervisor</option>
@@ -124,10 +124,10 @@
 
             <div class="mt-6 flex justify-end">
                 <a href="{{ route('super-admin.users.index') }}" class="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition mr-3">
-                    Cancel
+                    Batal
                 </a>
                 <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
-                    Create User
+                    Buat Pengguna
                 </button>
             </div>
         </form>

@@ -4,11 +4,11 @@
 <div class="max-w-4xl mx-auto p-6">
     <div class="flex items-center justify-between mb-6">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900">Edit User</h1>
-            <p class="text-gray-600 mt-2">Update user information</p>
+            <h1 class="text-3xl font-bold text-gray-900">Edit Pengguna</h1>
+            <p class="text-gray-600 mt-2">Perbarui informasi pengguna</p>
         </div>
         <a href="{{ route('super-admin.users.index') }}" class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition">
-            ← Back to Users
+            ← Kembali ke Pengguna
         </a>
     </div>
 
@@ -20,7 +20,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Name -->
                 <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                    <label for="name" class="block text-sm font-medium text-gray-700">Nama</label>
                     <input type="text" name="name" id="name" value="{{ old('name', $user->name) }}" required
                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                     @error('name')
@@ -40,7 +40,7 @@
 
                 <!-- Password -->
                 <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700">New Password (leave blank to keep current)</label>
+                    <label for="password" class="block text-sm font-medium text-gray-700">Kata Sandi Baru (biarkan kosong untuk mempertahankan yang lama)</label>
                     <input type="password" name="password" id="password"
                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                     @error('password')
@@ -50,17 +50,17 @@
 
                 <!-- Password Confirmation -->
                 <div>
-                    <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirm New Password</label>
+                    <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Konfirmasi Kata Sandi Baru</label>
                     <input type="password" name="password_confirmation" id="password_confirmation"
                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                 </div>
 
                 <!-- Role -->
                 <div>
-                    <label for="role" class="block text-sm font-medium text-gray-700">Role</label>
+                    <label for="role" class="block text-sm font-medium text-gray-700">Peran</label>
                     <select name="role" id="role" required
                             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
-                        <option value="">Select Role</option>
+                        <option value="">Pilih Peran</option>
                         <option value="MAHASISWA" {{ old('role', $user->role) == 'MAHASISWA' ? 'selected' : '' }}>Mahasiswa</option>
                         <option value="ADMIN_PRODI" {{ old('role', $user->role) == 'ADMIN_PRODI' ? 'selected' : '' }}>Admin Prodi</option>
                         <option value="DOSEN_SUPERVISOR" {{ old('role', $user->role) == 'DOSEN_SUPERVISOR' ? 'selected' : '' }}>Dosen Supervisor</option>
@@ -147,7 +147,7 @@
                     <div class="mt-1">
                         <span class="px-2 py-1 rounded-full text-xs font-medium
                             {{ $user->is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                            {{ $user->is_active ? 'Active' : 'Inactive' }}
+                            {{ $user->is_active ? 'Aktif' : 'Nonaktif' }}
                         </span>
                     </div>
                 </div>
@@ -155,10 +155,10 @@
 
             <div class="mt-6 flex justify-end">
                 <a href="{{ route('super-admin.users.index') }}" class="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition mr-3">
-                    Cancel
+                    Batal
                 </a>
                 <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
-                    Update User
+                    Perbarui Pengguna
                 </button>
             </div>
         </form>

@@ -1,7 +1,23 @@
-# TODO: Add Validation for Duplicate Mentoring Log Dates
+# TODO: Translate Super Admin Pages to Indonesian
 
-## Steps to Complete:
-1. [x] Modify the `store` method in `MentoringLogController.php` to add a check for existing mentoring logs on the same date for the student.
-2. [x] Add the validation logic after the initial request validations.
-3. [x] If a log exists on the same date, return back with the error message "Anda sudah melakukan bimbingan di hari itu." and preserve input.
-4. Test the functionality to ensure the validation works correctly.
+## Files to Edit:
+- [x] resources/views/super_admin/index.blade.php - Completed translation of dashboard headings, statistics labels, and section titles
+- [x] resources/views/super_admin/activity_logs/index.blade.php - Completed translation of page title, table headers, status labels, and empty state message
+- [x] resources/views/super_admin/applications/index.blade.php - Completed translation of page title, table headers, status labels, and empty state message
+- [x] resources/views/super_admin/companies/index.blade.php - Completed translation of page title, table headers, and empty state message
+- [x] resources/views/super_admin/evaluations/index.blade.php - Completed translation of page title, table headers, and empty state message
+- [x] resources/views/super_admin/mentoring_logs/index.blade.php - Completed translation of page title, table headers, status labels, and empty state message
+- [x] resources/views/super_admin/quotas/index.blade.php - Completed translation of page title, table headers, and empty state message
+- [x] resources/views/super_admin/reports/index.blade.php - Completed translation of page title, table headers, status labels, and empty state message
+- [x] resources/views/super_admin/scores/index.blade.php - Completed translation of page title, table headers, and empty state message
+- [x] resources/views/super_admin/users/index.blade.php - Completed translation of page title, table headers, buttons, and empty state message
+- [x] resources/views/super_admin/users/create.blade.php - Completed translation of page title, form labels, buttons, and select options
+- [x] resources/views/super_admin/users/edit.blade.php - Completed translation of page title, form labels, buttons, and status labels
+
+## Translation Tasks:
+- Translate all English text to Indonesian
+- Keep technical terms and proper nouns in English where appropriate
+- Maintain consistent terminology throughout
+- Ensure all buttons, labels, and messages are translated
+- Update table headers, form labels, and status messages
+- Translate confirmation dialogs and error messages

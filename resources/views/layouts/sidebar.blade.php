@@ -21,71 +21,71 @@
     @if(auth()->user()->role === 'SUPERADMIN')
       {{-- Data Management --}}
       <div class="space-y-2">
-        <h3 x-show="sidebarExpanded" class="text-[11px] uppercase tracking-wider text-white/70 px-3 py-1">Data Management</h3>
+        <h3 x-show="sidebarExpanded" class="text-[11px] uppercase tracking-wider text-white/70 px-3 py-1">Manajemen Data</h3>
         <a href="{{ route('super-admin.index') }}"
            :class="(sidebarExpanded ? 'sidebar-link' : 'sidebar-link sidebar-link--compact') + ' {{ request()->routeIs('super-admin.index') ? ' sidebar-link--active' : '' }}'">
           <i class="fas fa-tachometer-alt"></i>
-          <span x-show="sidebarExpanded" class="truncate">Dashboard</span>
+          <span x-show="sidebarExpanded" class="truncate">Dasbor</span>
         </a>
         <a href="{{ route('super-admin.users.index') }}"
            :class="(sidebarExpanded ? 'sidebar-link' : 'sidebar-link sidebar-link--compact') + ' {{ request()->routeIs('super-admin.users.*') ? ' sidebar-link--active' : '' }}'">
           <i class="fas fa-users"></i>
-          <span x-show="sidebarExpanded" class="truncate">Users</span>
+          <span x-show="sidebarExpanded" class="truncate">Pengguna</span>
         </a>
         <a href="{{ route('super-admin.applications.index') }}"
            :class="(sidebarExpanded ? 'sidebar-link' : 'sidebar-link sidebar-link--compact') + ' {{ request()->routeIs('super-admin.applications.*') ? ' sidebar-link--active' : '' }}'">
           <i class="fas fa-file-alt"></i>
-          <span x-show="sidebarExpanded" class="truncate">Applications</span>
+          <span x-show="sidebarExpanded" class="truncate">Pengajuan</span>
         </a>
         <a href="{{ route('super-admin.companies.index') }}"
            :class="(sidebarExpanded ? 'sidebar-link' : 'sidebar-link sidebar-link--compact') + ' {{ request()->routeIs('super-admin.companies.*') ? ' sidebar-link--active' : '' }}'">
           <i class="fas fa-building"></i>
-          <span x-show="sidebarExpanded" class="truncate">Companies</span>
+          <span x-show="sidebarExpanded" class="truncate">Perusahaan</span>
         </a>
       </div>
 
       {{-- Activity & Evaluation --}}
       <div class="space-y-2">
-        <h3 x-show="sidebarExpanded" class="text-[11px] uppercase tracking-wider text-white/70 px-3 py-1">Activity & Evaluation</h3>
+        <h3 x-show="sidebarExpanded" class="text-[11px] uppercase tracking-wider text-white/70 px-3 py-1">Aktivitas & Evaluasi</h3>
         <a href="{{ route('super-admin.mentoring-logs.index') }}"
            :class="(sidebarExpanded ? 'sidebar-link' : 'sidebar-link sidebar-link--compact') + ' {{ request()->routeIs('super-admin.mentoring-logs.*') ? ' sidebar-link--active' : '' }}'">
           <i class="fas fa-comments"></i>
-          <span x-show="sidebarExpanded" class="truncate">Mentoring Logs</span>
+          <span x-show="sidebarExpanded" class="truncate">Log Mentoring</span>
         </a>
         <a href="{{ route('super-admin.activity-logs.index') }}"
            :class="(sidebarExpanded ? 'sidebar-link' : 'sidebar-link sidebar-link--compact') + ' {{ request()->routeIs('super-admin.activity-logs.*') ? ' sidebar-link--active' : '' }}'">
           <i class="fas fa-history"></i>
-          <span x-show="sidebarExpanded" class="truncate">Activity Logs</span>
+          <span x-show="sidebarExpanded" class="truncate">Log Aktivitas</span>
         </a>
         <a href="{{ route('super-admin.reports.index') }}"
            :class="(sidebarExpanded ? 'sidebar-link' : 'sidebar-link sidebar-link--compact') + ' {{ request()->routeIs('super-admin.reports.*') ? ' sidebar-link--active' : '' }}'">
           <i class="fas fa-chart-bar"></i>
-          <span x-show="sidebarExpanded" class="truncate">Reports</span>
+          <span x-show="sidebarExpanded" class="truncate">Laporan</span>
         </a>
       </div>
 
       {{-- Scoring & Evaluation --}}
       <div class="space-y-2">
-        <h3 x-show="sidebarExpanded" class="text-[11px] uppercase tracking-wider text-white/70 px-3 py-1">Scoring & Evaluation</h3>
+        <h3 x-show="sidebarExpanded" class="text-[11px] uppercase tracking-wider text-white/70 px-3 py-1">Penilaian & Evaluasi</h3>
         <a href="{{ route('super-admin.scores.index') }}"
            :class="(sidebarExpanded ? 'sidebar-link' : 'sidebar-link sidebar-link--compact') + ' {{ request()->routeIs('super-admin.scores.*') ? ' sidebar-link--active' : '' }}'">
           <i class="fas fa-star"></i>
-          <span x-show="sidebarExpanded" class="truncate">KP Scores</span>
+          <span x-show="sidebarExpanded" class="truncate">Nilai KP</span>
         </a>
         <a href="{{ route('super-admin.evaluations.index') }}"
            :class="(sidebarExpanded ? 'sidebar-link' : 'sidebar-link sidebar-link--compact') + ' {{ request()->routeIs('super-admin.evaluations.*') ? ' sidebar-link--active' : '' }}'">
           <i class="fas fa-check-circle"></i>
-          <span x-show="sidebarExpanded" class="truncate">Evaluations</span>
+          <span x-show="sidebarExpanded" class="truncate">Evaluasi</span>
         </a>
       </div>
 
       {{-- Company Management --}}
       <div class="space-y-2">
-        <h3 x-show="sidebarExpanded" class="text-[11px] uppercase tracking-wider text-white/70 px-3 py-1">Company Management</h3>
+        <h3 x-show="sidebarExpanded" class="text-[11px] uppercase tracking-wider text-white/70 px-3 py-1">Manajemen Perusahaan</h3>
         <a href="{{ route('super-admin.quotas.index') }}"
            :class="(sidebarExpanded ? 'sidebar-link' : 'sidebar-link sidebar-link--compact') + ' {{ request()->routeIs('super-admin.quotas.*') ? ' sidebar-link--active' : '' }}'">
           <i class="fas fa-tags"></i>
-          <span x-show="sidebarExpanded" class="truncate">Quotas</span>
+          <span x-show="sidebarExpanded" class="truncate">Kuota</span>
         </a>
       </div>
     @endif
@@ -94,7 +94,7 @@
     @if(auth()->user()->role === 'ADMIN_PRODI')
       {{-- Management --}}
       <div class="space-y-2">
-        <h3 x-show="sidebarExpanded" class="text-[11px] uppercase tracking-wider text-white/70 px-3 py-1">Management</h3>
+        <h3 x-show="sidebarExpanded" class="text-[11px] uppercase tracking-wider text-white/70 px-3 py-1">Manajemen</h3>
         <a href="{{ route('admin-prodi.index') }}" class="sidebar-link">
           <i class="fas fa-tachometer-alt"></i>
           <span x-show="sidebarExpanded" class="truncate">Dashboard</span>
@@ -126,7 +126,7 @@
     @if(auth()->user()->role === 'DOSEN_SUPERVISOR')
       {{-- Supervision --}}
       <div class="space-y-2">
-        <h3 x-show="sidebarExpanded" class="text-[11px] uppercase tracking-wider text-white/70 px-3 py-1">Supervision</h3>
+        <h3 x-show="sidebarExpanded" class="text-[11px] uppercase tracking-wider text-white/70 px-3 py-1">Supervisi</h3>
         <a href="{{ route('supervisor.dashboard') }}" class="sidebar-link">
           <i class="fas fa-tachometer-alt"></i>
           <span x-show="sidebarExpanded" class="truncate">Dashboard</span>
@@ -166,7 +166,7 @@
     @if(auth()->user()->role === 'PENGAWAS_LAPANGAN')
       {{-- Field Supervision --}}
       <div class="space-y-2">
-        <h3 x-show="sidebarExpanded" class="text-[11px] uppercase tracking-wider text-white/70 px-3 py-1">Field Supervision</h3>
+        <h3 x-show="sidebarExpanded" class="text-[11px] uppercase tracking-wider text-white/70 px-3 py-1">Supervisi Lapangan</h3>
         <a href="{{ route('field.dashboard') }}" class="sidebar-link">
           <i class="fas fa-tachometer-alt"></i>
           <span x-show="sidebarExpanded" class="truncate">Dashboard</span>
@@ -194,7 +194,7 @@
     @if(auth()->user()->role === 'MAHASISWA')
       {{-- Student Activities --}}
       <div class="space-y-2">
-        <h3 x-show="sidebarExpanded" class="text-[11px] uppercase tracking-wider text-white/70 px-3 py-1">Student Activities</h3>
+        <h3 x-show="sidebarExpanded" class="text-[11px] uppercase tracking-wider text-white/70 px-3 py-1">Aktivitas Mahasiswa</h3>
         <a href="{{ route('dashboard') }}" class="sidebar-link">
           <i class="fas fa-tachometer-alt"></i>
           <span x-show="sidebarExpanded" class="truncate">Dashboard</span>
@@ -266,61 +266,61 @@
     @if(auth()->user()->role === 'SUPERADMIN')
       {{-- Data Management --}}
       <div class="space-y-2">
-        <h3 class="text-[11px] uppercase tracking-wider text-white/70 px-3 py-1">Data Management</h3>
+        <h3 class="text-[11px] uppercase tracking-wider text-white/70 px-3 py-1">Manajemen Data</h3>
         <a href="{{ route('super-admin.index') }}" class="sidebar-link" @click="closeMobile()">
           <i class="fas fa-tachometer-alt"></i>
-          <span>Dashboard</span>
+          <span>Dasbor</span>
         </a>
         <a href="{{ route('super-admin.users.index') }}" class="sidebar-link" @click="closeMobile()">
           <i class="fas fa-users"></i>
-          <span>Users</span>
+          <span>Pengguna</span>
         </a>
         <a href="{{ route('super-admin.applications.index') }}" class="sidebar-link" @click="closeMobile()">
           <i class="fas fa-file-alt"></i>
-          <span>Applications</span>
+          <span>Pengajuan</span>
         </a>
         <a href="{{ route('super-admin.companies.index') }}" class="sidebar-link" @click="closeMobile()">
           <i class="fas fa-building"></i>
-          <span>Companies</span>
+          <span>Perusahaan</span>
         </a>
       </div>
 
       {{-- Activity & Evaluation --}}
       <div class="space-y-2">
-        <h3 class="text-[11px] uppercase tracking-wider text-white/70 px-3 py-1">Activity & Evaluation</h3>
+        <h3 class="text-[11px] uppercase tracking-wider text-white/70 px-3 py-1">Aktivitas & Evaluasi</h3>
         <a href="{{ route('super-admin.mentoring-logs.index') }}" class="sidebar-link" @click="closeMobile()">
           <i class="fas fa-comments"></i>
-          <span>Mentoring Logs</span>
+          <span>Log Bimbingan</span>
         </a>
         <a href="{{ route('super-admin.activity-logs.index') }}" class="sidebar-link" @click="closeMobile()">
           <i class="fas fa-history"></i>
-          <span>Activity Logs</span>
+          <span>Log Aktivitas</span>
         </a>
         <a href="{{ route('super-admin.reports.index') }}" class="sidebar-link" @click="closeMobile()">
           <i class="fas fa-chart-bar"></i>
-          <span>Reports</span>
+          <span>Laporan</span>
         </a>
       </div>
 
       {{-- Scoring & Evaluation --}}
       <div class="space-y-2">
-        <h3 class="text-[11px] uppercase tracking-wider text-white/70 px-3 py-1">Scoring & Evaluation</h3>
+        <h3 class="text-[11px] uppercase tracking-wider text-white/70 px-3 py-1">Penilaian & Evaluasi</h3>
         <a href="{{ route('super-admin.scores.index') }}" class="sidebar-link" @click="closeMobile()">
           <i class="fas fa-star"></i>
-          <span>KP Scores</span>
+          <span>Nilai KP</span>
         </a>
         <a href="{{ route('super-admin.evaluations.index') }}" class="sidebar-link" @click="closeMobile()">
           <i class="fas fa-check-circle"></i>
-          <span>Evaluations</span>
+          <span>Evaluasi</span>
         </a>
       </div>
 
       {{-- Company Management --}}
       <div class="space-y-2">
-        <h3 class="text-[11px] uppercase tracking-wider text-white/70 px-3 py-1">Company Management</h3>
+        <h3 class="text-[11px] uppercase tracking-wider text-white/70 px-3 py-1">Manajemen Perusahaan</h3>
         <a href="{{ route('super-admin.quotas.index') }}" class="sidebar-link" @click="closeMobile()">
           <i class="fas fa-tags"></i>
-          <span>Quotas</span>
+          <span>Kuota</span>
         </a>
       </div>
     @endif
@@ -329,7 +329,7 @@
     @if(auth()->user()->role === 'ADMIN_PRODI')
       {{-- Management --}}
       <div class="space-y-2">
-        <h3 class="text-[11px] uppercase tracking-wider text-white/70 px-3 py-1">Management</h3>
+        <h3 class="text-[11px] uppercase tracking-wider text-white/70 px-3 py-1">Manajemen</h3>
         <a href="{{ route('admin-prodi.index') }}" class="sidebar-link" @click="closeMobile()">
           <i class="fas fa-tachometer-alt"></i>
           <span>Dashboard</span>
@@ -353,7 +353,7 @@
     @if(auth()->user()->role === 'DOSEN_SUPERVISOR')
       {{-- Supervision --}}
       <div class="space-y-2">
-        <h3 class="text-[11px] uppercase tracking-wider text-white/70 px-3 py-1">Supervision</h3>
+        <h3 class="text-[11px] uppercase tracking-wider text-white/70 px-3 py-1">Supervisi</h3>
         <a href="{{ route('supervisor.dashboard') }}" class="sidebar-link" @click="closeMobile()">
           <i class="fas fa-tachometer-alt"></i>
           <span>Dashboard</span>
@@ -389,7 +389,7 @@
     @if(auth()->user()->role === 'PENGAWAS_LAPANGAN')
       {{-- Field Supervision --}}
       <div class="space-y-2">
-        <h3 class="text-[11px] uppercase tracking-wider text-white/70 px-3 py-1">Field Supervision</h3>
+        <h3 class="text-[11px] uppercase tracking-wider text-white/70 px-3 py-1">Supervisi Lapangan</h3>
         <a href="{{ route('field.dashboard') }}" class="sidebar-link" @click="closeMobile()">
           <i class="fas fa-tachometer-alt"></i>
           <span>Dashboard</span>
@@ -417,7 +417,7 @@
     @if(auth()->user()->role === 'MAHASISWA')
       {{-- Student Activities --}}
       <div class="space-y-2">
-        <h3 class="text-[11px] uppercase tracking-wider text-white/70 px-3 py-1">Student Activities</h3>
+        <h3 class="text-[11px] uppercase tracking-wider text-white/70 px-3 py-1">Aktivitas Mahasiswa</h3>
         <a href="{{ route('dashboard') }}" class="sidebar-link" @click="closeMobile()">
           <i class="fas fa-tachometer-alt"></i>
           <span>Dashboard</span>
