@@ -188,24 +188,28 @@ class SupervisorController extends Controller
         $this->authorize('update', $mentoringLog);
 
         $request->validate([
-            'date' => 'required|date|before_or_equal:today',
-            'topic' => 'required|string|max:1000',
+            'date' => 'nullable|date|before_or_equal:today',
+            'topic' => 'nullable|string|max:1000',
             'student_notes' => 'nullable|string|max:2000',
             'status' => 'required|in:PENDING,APPROVED,REVISION',
             'attachment' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:5120',
         ]);
 
-        $updateData = [
-            'date' => $request->date,
-            'topic' => $request->topic,
-            'student_notes' => $request->student_notes,
-            'status' => $request->status,
-        ];
+        $updateData = [];
 
-        // Jangan ubah field student_id dan supervisor_id
-        // Hanya update status, student_notes, date, topic, dan attachment
-        // notes (catatan internal mahasiswa) tidak boleh diubah oleh supervisor
+        // Only update fields that are provided
+        if ($request->filled('date')) {
+            $updateData['date'] = $request->date;
+        }
+        if ($request->filled('topic')) {
+            $updateData['topic'] = $request->topic;
+        }
+        if ($request->has('student_notes')) {
+            $updateData['student_notes'] = $request->student_notes;
+        }
+        $updateData['status'] = $request->status;
 
+        // Handle attachment
         if ($request->hasFile('attachment')) {
             $path = $request->file('attachment')->store('mentoring_attachments', 'public');
             $updateData['attachment_path'] = $path;
