@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class KpScore extends Model
 {
     protected $fillable = [
-        'kp_application_id','supervisor_id','discipline','skill','attitude','report','final_score','notes'
+        'kp_application_id','supervisor_id','discipline','skill','attitude','report','mastery','final_score','notes'
     ];
 
     public function application() { return $this->belongsTo(KpApplication::class, 'kp_application_id'); }
