@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\KpApplication;
 use App\Models\MentoringLog;
 use App\Models\KpScore;
+use App\Models\SupervisorScore;
 use App\Models\Report;
 use App\Models\Questionnaire;
 use Illuminate\Http\Request;
@@ -241,30 +242,34 @@ class SupervisorController extends Controller
     {
         $user = Auth::user();
 
-        $scores = KpScore::with(['application.student'])
-            ->where('supervisor_id', $user->id)
+        $applications = KpApplication::with(['student', 'supervisorScore'])
+            ->where('assigned_supervisor_id', $user->id)
             ->paginate(20);
 
-        return view('supervisor.scores.index', compact('scores'));
+        return view('supervisor.scores.index', compact('applications'));
     }
 
     /**
      * Form tambah nilai mahasiswa
      */
-    public function createScore()
+    public function createScore(Request $request)
     {
         $user = Auth::user();
 
-        // Get students assigned via supervisor_id relationship
-        $supervisedStudentIds = User::where('supervisor_id', $user->id)->pluck('id');
-
         $applications = KpApplication::with('student')
-            ->whereIn('student_id', $supervisedStudentIds)
-            ->where('verification_status', 'APPROVED')
-            ->where('status', 'COMPLETED')
+            ->where('assigned_supervisor_id', $user->id)
+            ->whereDoesntHave('supervisorScore')
             ->get();
 
-        return view('supervisor.scores.create', compact('applications'));
+        $selectedApp = null;
+        if ($request->has('application')) {
+            $selectedApp = KpApplication::with('student')
+                ->where('id', $request->application)
+                ->where('assigned_supervisor_id', $user->id)
+                ->first();
+        }
+
+        return view('supervisor.scores.create', compact('applications', 'selectedApp'));
     }
 
     /**
@@ -274,34 +279,38 @@ class SupervisorController extends Controller
     {
         $request->validate([
             'kp_application_id' => 'required|exists:kp_applications,id',
-            'score' => 'required|numeric|min:0|max:100',
-            'grade' => 'required|in:A,B,C,D,E',
+            'report' => 'required|integer|min:0|max:100',
+            'presentation' => 'required|integer|min:0|max:100',
+            'attitude' => 'required|integer|min:0|max:100',
             'notes' => 'nullable|string|max:1000',
         ]);
 
         $user = Auth::user();
         $kpApplication = KpApplication::findOrFail($request->kp_application_id);
 
-        // Pastikan KP milik supervisor ini dan sudah completed
+        // Pastikan KP milik supervisor ini
         if ($kpApplication->assigned_supervisor_id !== $user->id) {
             abort(403, 'Anda bukan pembimbing untuk KP ini.');
         }
 
-        if ($kpApplication->status !== 'COMPLETED') {
-            return back()->with('error', 'KP belum selesai.')->withInput();
-        }
-
         // Cek apakah sudah ada nilai
-        $existingScore = KpScore::where('kp_application_id', $kpApplication->id)->first();
+        $existingScore = $kpApplication->supervisorScore;
         if ($existingScore) {
             return back()->with('error', 'Nilai untuk KP ini sudah ada.')->withInput();
         }
 
-        KpScore::create([
+        // Calculate final score and grade
+        $finalScore = round(($request->report + $request->presentation + $request->attitude) / 3, 2);
+        $grade = $this->calculateGrade($finalScore);
+
+        SupervisorScore::create([
             'kp_application_id' => $kpApplication->id,
             'supervisor_id' => $user->id,
-            'score' => $request->score,
-            'grade' => $request->grade,
+            'report' => $request->report,
+            'presentation' => $request->presentation,
+            'attitude' => $request->attitude,
+            'final_score' => $finalScore,
+            'grade' => $grade,
             'notes' => $request->notes,
         ]);
 
@@ -312,29 +321,37 @@ class SupervisorController extends Controller
     /**
      * Form edit nilai mahasiswa
      */
-    public function editScore(KpScore $kpScore)
+    public function editScore(SupervisorScore $supervisorScore)
     {
-        $this->authorizeScore($kpScore);
+        $this->authorizeScore($supervisorScore);
 
-        return view('supervisor.scores.edit', compact('kpScore'));
+        return view('supervisor.scores.edit', compact('supervisorScore'));
     }
 
     /**
      * Update nilai mahasiswa
      */
-    public function updateScore(Request $request, KpScore $kpScore)
+    public function updateScore(Request $request, SupervisorScore $supervisorScore)
     {
-        $this->authorizeScore($kpScore);
+        $this->authorizeScore($supervisorScore);
 
         $request->validate([
-            'score' => 'required|numeric|min:0|max:100',
-            'grade' => 'required|in:A,B,C,D,E',
+            'report' => 'required|integer|min:0|max:100',
+            'presentation' => 'required|integer|min:0|max:100',
+            'attitude' => 'required|integer|min:0|max:100',
             'notes' => 'nullable|string|max:1000',
         ]);
 
-        $kpScore->update([
-            'score' => $request->score,
-            'grade' => $request->grade,
+        // Calculate final score and grade
+        $finalScore = round(($request->report + $request->presentation + $request->attitude) / 3, 2);
+        $grade = $this->calculateGrade($finalScore);
+
+        $supervisorScore->update([
+            'report' => $request->report,
+            'presentation' => $request->presentation,
+            'attitude' => $request->attitude,
+            'final_score' => $finalScore,
+            'grade' => $grade,
             'notes' => $request->notes,
         ]);
 
@@ -517,12 +534,34 @@ class SupervisorController extends Controller
         }
     }
 
-    private function authorizeScore(KpScore $kpScore): void
+    private function authorizeScore(SupervisorScore $supervisorScore): void
     {
         $user = Auth::user();
-        if ($kpScore->supervisor_id !== $user->id && $user->role !== 'SUPERADMIN') {
+        if ($supervisorScore->supervisor_id !== $user->id && $user->role !== 'SUPERADMIN') {
             abort(403, 'Anda bukan pembimbing untuk nilai ini.');
         }
+    }
+
+    /**
+     * Hapus nilai mahasiswa
+     */
+    public function destroyScore(SupervisorScore $supervisorScore)
+    {
+        $this->authorizeScore($supervisorScore);
+
+        $supervisorScore->delete();
+
+        return redirect()->route('supervisor.scores.index')
+            ->with('success', 'Nilai mahasiswa berhasil dihapus.');
+    }
+
+    private function calculateGrade(float $score): string
+    {
+        if ($score >= 85) return 'A';
+        if ($score >= 75) return 'B';
+        if ($score >= 65) return 'C';
+        if ($score >= 55) return 'D';
+        return 'E';
     }
 
     private function authorizeReport(Report $report): void

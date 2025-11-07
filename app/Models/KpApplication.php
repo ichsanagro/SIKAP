@@ -85,6 +85,11 @@ class KpApplication extends Model
         return $this->hasOne(KpScore::class, 'kp_application_id');
     }
 
+    public function supervisorScore()
+    {
+        return $this->hasOne(SupervisorScore::class, 'kp_application_id');
+    }
+
     // ====== HELPERS ======
     public function statusBadgeClass(): string
     {

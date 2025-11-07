@@ -238,8 +238,9 @@ Route::prefix('supervisor')
         Route::get('scores', [SupervisorController::class, 'scores'])->name('scores.index');
         Route::get('scores/create', [SupervisorController::class, 'createScore'])->name('scores.create');
         Route::post('scores', [SupervisorController::class, 'storeScore'])->name('scores.store');
-        Route::get('scores/{kpScore}/edit', [SupervisorController::class, 'editScore'])->name('scores.edit');
-        Route::put('scores/{kpScore}', [SupervisorController::class, 'updateScore'])->name('scores.update');
+        Route::get('scores/{supervisorScore}/edit', [SupervisorController::class, 'editScore'])->name('scores.edit');
+        Route::put('scores/{supervisorScore}', [SupervisorController::class, 'updateScore'])->name('scores.update');
+        Route::delete('scores/{supervisorScore}', [SupervisorController::class, 'destroyScore'])->name('scores.destroy');
 
         // Melihat dokumen mahasiswa - lihat (dengan approve/reject)
         Route::get('documents', [SupervisorController::class, 'documents'])->name('documents.index');
