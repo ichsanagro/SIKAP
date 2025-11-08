@@ -17,6 +17,7 @@
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dosen Penguji</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dokumen</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
@@ -54,10 +55,16 @@
                                         Bimbingan KP
                                     </a>
                                 </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <a href="{{ route('supervisor.seminar.show', $application) }}"
+                                       class="text-blue-600 hover:text-blue-900">
+                                        Lihat
+                                    </a>
+                                </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="px-6 py-4 text-center text-gray-500">
+                                <td colspan="6" class="px-6 py-4 text-center text-gray-500">
                                     Tidak ada mahasiswa seminar KP
                                 </td>
                             </tr>

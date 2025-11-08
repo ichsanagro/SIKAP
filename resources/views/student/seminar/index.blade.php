@@ -35,6 +35,28 @@
                                             {{ $application->statusText() }}
                                         </span>
                                     </div>
+                                    @if($application->status === 'APPROVED' && ($application->seminar_date || $application->seminar_time || $application->seminar_location))
+                                        <div class="mt-3 p-4 bg-green-50 border border-green-200 rounded-lg">
+                                            <h4 class="text-sm font-semibold text-green-800 mb-2">Jadwal Seminar</h4>
+                                            <div class="space-y-1 text-sm text-green-700">
+                                                @if($application->seminar_date)
+                                                    <p><strong>Tanggal:</strong> {{ $application->seminar_date->format('d M Y') }}</p>
+                                                @endif
+                                                @if($application->seminar_time)
+                                                    <p><strong>Waktu:</strong> {{ $application->seminar_time->format('H:i') }}</p>
+                                                @endif
+                                                @if($application->seminar_location)
+                                                    <p><strong>Tempat:</strong> {{ $application->seminar_location }}</p>
+                                                @endif
+                                                @if($application->examiner_notes)
+                                                    <div class="mt-2 pt-2 border-t border-green-300">
+                                                        <p><strong>Catatan:</strong> {{ $application->examiner_notes }}</p>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    @endif
+
                                     @if($application->status === 'REJECTED' && $application->admin_note)
                                         <div class="mt-2 p-3 bg-red-50 border border-red-200 rounded">
                                             <p class="text-sm text-red-700">

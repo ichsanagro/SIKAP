@@ -257,6 +257,8 @@ Route::prefix('supervisor')
 
         // Seminar Students
         Route::get('/seminar-students', [SeminarStudentController::class, 'index'])->name('seminar.index');
+        Route::get('/seminar-students/{application}', [SeminarStudentController::class, 'show'])->name('seminar.show');
+        Route::put('/seminar-students/{application}/schedule', [SeminarStudentController::class, 'updateSchedule'])->name('seminar.update-schedule');
     });
 
 /*

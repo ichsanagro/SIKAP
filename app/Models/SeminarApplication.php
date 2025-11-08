@@ -14,11 +14,17 @@ class SeminarApplication extends Model
         'status',
         'examiner_id',
         'admin_note',
+        'seminar_date',
+        'seminar_time',
+        'seminar_location',
+        'examiner_notes',
     ];
 
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
+        'seminar_date' => 'date',
+        'seminar_time' => 'datetime:H:i',
     ];
 
     // Relations
