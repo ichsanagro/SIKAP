@@ -27,6 +27,10 @@ class User extends Authenticatable
         return $this->hasMany(KpApplication::class, 'student_id');
     }
 
+    public function seminarApplications(): HasMany {
+        return $this->hasMany(SeminarApplication::class, 'student_id');
+    }
+
     // Relasi supervisor
     public function supervisor(): BelongsTo {
         return $this->belongsTo(User::class, 'supervisor_id');

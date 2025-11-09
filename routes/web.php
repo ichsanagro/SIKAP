@@ -207,6 +207,7 @@ Route::prefix('super-admin')
 use App\Http\Controllers\SupervisorController;
 use App\Http\Controllers\Supervisor\VerificationController as SupervisorVerificationController;
 use App\Http\Controllers\Supervisor\SeminarStudentController;
+use App\Http\Controllers\Supervisor\SeminarExaminerScoreController;
 
 Route::prefix('supervisor')
     ->middleware(['auth', 'role:DOSEN_SUPERVISOR,SUPERADMIN'])
@@ -259,6 +260,12 @@ Route::prefix('supervisor')
         Route::get('/seminar-students', [SeminarStudentController::class, 'index'])->name('seminar.index');
         Route::get('/seminar-students/{application}', [SeminarStudentController::class, 'show'])->name('seminar.show');
         Route::put('/seminar-students/{application}/schedule', [SeminarStudentController::class, 'updateSchedule'])->name('seminar.update-schedule');
+
+        // Seminar Examiner Scores
+        Route::get('/seminar-students/scores/create', [SeminarExaminerScoreController::class, 'create'])->name('seminar.scores.create');
+        Route::post('/seminar-students/scores', [SeminarExaminerScoreController::class, 'store'])->name('seminar.scores.store');
+        Route::get('/seminar-students/scores/{examinerSeminarScore}/edit', [SeminarExaminerScoreController::class, 'edit'])->name('seminar.scores.edit');
+        Route::put('/seminar-students/scores/{examinerSeminarScore}', [SeminarExaminerScoreController::class, 'update'])->name('seminar.scores.update');
     });
 
 /*

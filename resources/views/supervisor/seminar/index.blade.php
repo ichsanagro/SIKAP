@@ -60,6 +60,24 @@
                                        class="text-blue-600 hover:text-blue-900">
                                         Lihat
                                     </a>
+                                    @php
+                                        $examinerScore = \App\Models\ExaminerSeminarScore::where('kp_application_id', $application->student->kpApplications->first()->id ?? null)
+                                            ->where('examiner_id', Auth::id())
+                                            ->first();
+                                    @endphp
+                                    @if($examinerScore)
+                                        <br>
+                                        <a href="{{ route('supervisor.seminar.scores.edit', $examinerScore) }}"
+                                           class="text-orange-600 hover:text-orange-900">
+                                            Ubah Nilai
+                                        </a>
+                                    @else
+                                        <br>
+                                        <a href="{{ route('supervisor.seminar.scores.create', ['application' => $application->student->kpApplications->first()->id ?? null]) }}"
+                                           class="text-green-600 hover:text-green-900">
+                                            Beri Nilai
+                                        </a>
+                                    @endif
                                 </td>
                             </tr>
                         @empty
