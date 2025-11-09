@@ -32,6 +32,10 @@ class KpApplication extends Model
         // new fields for files
         'proposal_path',
         'approval_path',
+
+        // drive links
+        'krs_drive_link',
+        'proposal_drive_link',
     ];
 
     protected $casts = [

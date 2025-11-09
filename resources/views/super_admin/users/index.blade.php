@@ -37,7 +37,6 @@
                         <th class="text-left p-4">Email</th>
                         <th class="text-left p-4">Peran</th>
                         <th class="text-left p-4">NIM</th>
-                        <th class="text-left p-4">Prodi</th>
                         <th class="text-left p-4">Status</th>
                         <th class="text-left p-4">Pengajuan</th>
                         <th class="text-left p-4">Dibuat</th>
@@ -61,7 +60,6 @@
                             </span>
                         </td>
                         <td class="p-4">{{ $user->nim ?? '-' }}</td>
-                        <td class="p-4">{{ $user->prodi ?? '-' }}</td>
                         <td class="p-4">
                             <span class="px-2 py-1 rounded-full text-xs font-medium
                                 {{ $user->is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
@@ -96,7 +94,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="10" class="p-8 text-center text-gray-500">Tidak ada pengguna ditemukan.</td>
+                        <td colspan="9" class="p-8 text-center text-gray-500">Tidak ada pengguna ditemukan.</td>
                     </tr>
                 @endforelse
                 </tbody>

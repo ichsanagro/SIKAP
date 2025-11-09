@@ -102,7 +102,7 @@
             <div class="mb-6">
                 <h2 class="text-lg font-semibold text-gray-900 mb-4">Dokumen</h2>
                 <div class="space-y-3">
-                    @if($kpApplication->krs_path)
+                    @if($kpApplication->krs_drive_link)
                         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                             <div class="flex items-center">
                                 <svg class="w-5 h-5 text-gray-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -110,11 +110,11 @@
                                 </svg>
                                 <span class="text-sm text-gray-900">KRS</span>
                             </div>
-                            <a href="{{ route('kp.krs.download', $kpApplication) }}" class="text-blue-600 hover:text-blue-800 text-sm">Unduh</a>
+                            <a href="{{ $kpApplication->krs_drive_link }}" target="_blank" class="text-blue-600 hover:text-blue-800 text-sm">Buka Link</a>
                         </div>
                     @endif
 
-                    @if($kpApplication->proposal_path)
+                    @if($kpApplication->proposal_drive_link)
                         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                             <div class="flex items-center">
                                 <svg class="w-5 h-5 text-gray-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -122,7 +122,7 @@
                                 </svg>
                                 <span class="text-sm text-gray-900">Proposal</span>
                             </div>
-                            <a href="#" class="text-blue-600 hover:text-blue-800 text-sm">Unduh</a>
+                            <a href="{{ $kpApplication->proposal_drive_link }}" target="_blank" class="text-blue-600 hover:text-blue-800 text-sm">Buka Link</a>
                         </div>
                     @endif
 

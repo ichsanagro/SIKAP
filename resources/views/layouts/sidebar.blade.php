@@ -50,7 +50,7 @@
         <a href="{{ route('super-admin.mentoring-logs.index') }}"
            :class="(sidebarExpanded ? 'sidebar-link' : 'sidebar-link sidebar-link--compact') + ' {{ request()->routeIs('super-admin.mentoring-logs.*') ? ' sidebar-link--active' : '' }}'">
           <i class="fas fa-comments"></i>
-          <span x-show="sidebarExpanded" class="truncate">Log Mentoring</span>
+          <span x-show="sidebarExpanded" class="truncate">Log Bimbingan</span>
         </a>
         <a href="{{ route('super-admin.activity-logs.index') }}"
            :class="(sidebarExpanded ? 'sidebar-link' : 'sidebar-link sidebar-link--compact') + ' {{ request()->routeIs('super-admin.activity-logs.*') ? ' sidebar-link--active' : '' }}'">

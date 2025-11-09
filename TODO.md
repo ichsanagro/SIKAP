@@ -1,9 +1,21 @@
-# Seminar Students Action Column Implementation
+# TODO: Ubah Unggah KRS dan Proposal menjadi Link Drive
 
-## Tasks
-- [x] Add "Aksi" column header to supervisor/seminar/index.blade.php
-- [x] Add action cell with "Lihat" button in the table rows
-- [x] Create show method in SeminarStudentController
-- [x] Add route for supervisor.seminar.show in routes/web.php
-- [x] Create show view for seminar details (resources/views/supervisor/seminar/show.blade.php)
-- [x] Test the functionality (routes cached, ready for testing)
+## Tugas Utama
+- Ubah halaman /companies/{company}/apply untuk mahasiswa: ganti unggah file KRS dan proposal menjadi kolom link drive
+- Sesuaikan tampilan pada dosen pembimbing (supervisor verifications)
+
+## Langkah-langkah
+1. **Update Migration**: Tambahkan kolom untuk link drive KRS dan proposal
+2. **Update Model**: Tambahkan kolom baru ke fillable di KpApplication
+3. **Update Controller**: Ubah storeApply untuk menyimpan link drive alih-alih file
+4. **Update View Mahasiswa**: Ubah apply.blade.php untuk input link drive
+5. **Update View Supervisor**: Ubah verifications/show.blade.php untuk menampilkan link drive
+6. **Test**: Pastikan perubahan berfungsi dengan baik
+
+## Status
+- [x] Migration untuk kolom link drive
+- [x] Update model KpApplication
+- [x] Update KpApplicationController storeApply
+- [x] Update resources/views/student/kp/apply.blade.php
+- [x] Update resources/views/supervisor/verifications/show.blade.php
+- [x] Test perubahan (Server running on http://127.0.0.1:8000)

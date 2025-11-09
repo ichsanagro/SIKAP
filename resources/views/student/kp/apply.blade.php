@@ -15,15 +15,15 @@
     </div>
 
     <div>
-      <label class="block font-semibold">Unggah KRS (PDF/JPG/PNG, maks 5MB)</label>
-      <input type="file" name="krs" accept="application/pdf,image/*" class="mt-1" required>
-      @error('krs') <p class="text-red-600 text-sm">{{ $message }}</p> @enderror
+      <label class="block font-semibold">Link Drive KRS</label>
+      <input type="url" name="krs_drive_link" value="{{ old('krs_drive_link') }}" placeholder="https://drive.google.com/..." class="mt-1 w-full border rounded-xl p-3" required>
+      @error('krs_drive_link') <p class="text-red-600 text-sm">{{ $message }}</p> @enderror
     </div>
 
     <div>
-      <label class="block font-semibold">Unggah Proposal (PDF, maks 5MB)</label>
-      <input type="file" name="proposal" accept="application/pdf" class="mt-1" required>
-      @error('proposal') <p class="text-red-600 text-sm">{{ $message }}</p> @enderror
+      <label class="block font-semibold">Link Drive Proposal</label>
+      <input type="url" name="proposal_drive_link" value="{{ old('proposal_drive_link') }}" placeholder="https://drive.google.com/..." class="mt-1 w-full border rounded-xl p-3" required>
+      @error('proposal_drive_link') <p class="text-red-600 text-sm">{{ $message }}</p> @enderror
     </div>
 
     <div class="pt-2 flex gap-3">

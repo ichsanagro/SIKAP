@@ -224,8 +224,8 @@ if ($kp->placement_option === '3') {
 
         $request->validate([
             'title' => 'required|string|max:255',
-            'krs' => 'required|file|mimes:pdf,jpg,jpeg,png|max:5120',
-            'proposal' => 'required|file|mimes:pdf|max:5120',
+            'krs_drive_link' => 'required|url',
+            'proposal_drive_link' => 'required|url',
         ]);
 
         $data = [
@@ -234,8 +234,8 @@ if ($kp->placement_option === '3') {
             'placement_option' => '1', // Assuming batch 1, but can adjust
             'company_id' => $company->id,
             'status' => 'SUBMITTED', // Pending for supervisor
-            'krs_path' => $request->file('krs')->store('krs', 'public'),
-            'proposal_path' => $request->file('proposal')->store('proposals', 'public'),
+            'krs_drive_link' => $request->krs_drive_link,
+            'proposal_drive_link' => $request->proposal_drive_link,
         ];
 
         KpApplication::create($data);
