@@ -30,10 +30,6 @@
                         <p class="mt-1 text-sm text-gray-900">{{ $kpApplication->student->nim }}</p>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">Prodi</label>
-                        <p class="mt-1 text-sm text-gray-900">{{ $kpApplication->student->prodi }}</p>
-                    </div>
-                    <div>
                         <label class="block text-sm font-medium text-gray-700">Email</label>
                         <p class="mt-1 text-sm text-gray-900">{{ $kpApplication->student->email }}</p>
                     </div>

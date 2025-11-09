@@ -165,12 +165,12 @@
             <!-- Attachment -->
             <div class="mb-6">
                 <label for="attachment" class="block text-sm font-medium text-gray-700 mb-2">
-                    Lampiran (Opsional)
+                    Lampiran (Link Google Drive, Opsional)
                 </label>
-                <input type="file" name="attachment" id="attachment"
-                       accept=".pdf,.jpg,.jpeg,.png"
+                <input type="url" name="attachment" id="attachment" value="{{ old('attachment') }}"
+                       placeholder="https://drive.google.com/..."
                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                <p class="mt-1 text-sm text-gray-500">Format yang didukung: PDF, JPG, JPEG, PNG. Maksimal 5MB</p>
+                <p class="mt-1 text-sm text-gray-500">Masukkan link Google Drive untuk lampiran</p>
                 @error('attachment')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                 @enderror

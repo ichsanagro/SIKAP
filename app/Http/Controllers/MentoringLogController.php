@@ -64,7 +64,7 @@ class MentoringLogController extends Controller
             'date'              => 'required|date|before_or_equal:today',
             'topic'             => 'required|string|max:1000',
             'notes'             => 'nullable|string|max:5000',
-            'attachment'        => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:5120', // 5MB
+            'attachment'        => 'nullable|url', // Link Google Drive
         ]);
 
         $kp = KpApplication::with('supervisor')
@@ -99,11 +99,8 @@ class MentoringLogController extends Controller
             return back()->with('error', 'Anda sudah melakukan bimbingan di hari itu.')->withInput();
         }
 
-        // Simpan berkas (opsional)
-        $path = null;
-        if ($request->hasFile('attachment')) {
-            $path = $request->file('attachment')->store('mentoring_attachments', 'public');
-        }
+        // Simpan link drive (opsional)
+        $path = $request->attachment; // Langsung simpan link
 
         MentoringLog::create([
             'kp_application_id' => $kp->id,

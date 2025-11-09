@@ -39,8 +39,8 @@
         <textarea name="notes" class="mt-1 w-full border rounded-xl p-3" rows="4"></textarea>
       </div>
       <div>
-        <label class="block font-semibold">Lampiran (opsional)</label>
-        <input type="file" name="attachment" accept=".pdf,.jpg,.jpeg,.png" class="mt-1">
+        <label class="block font-semibold">Lampiran (Link Google Drive, opsional)</label>
+        <input type="url" name="attachment" placeholder="https://drive.google.com/..." class="mt-1 w-full border rounded-xl p-3">
       </div>
       <div class="pt-2">
         <button class="btn-primary">Simpan</button>

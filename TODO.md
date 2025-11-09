@@ -1,21 +1,19 @@
-# TODO: Ubah Unggah KRS dan Proposal menjadi Link Drive
+# TODO: Ubah Lampiran Mentoring Logs ke Link Drive
 
 ## Tugas Utama
-- Ubah halaman /companies/{company}/apply untuk mahasiswa: ganti unggah file KRS dan proposal menjadi kolom link drive
-- Sesuaikan tampilan pada dosen pembimbing (supervisor verifications)
+- Ubah kolom lampiran pada halaman create mentoring logs untuk mahasiswa dari upload file menjadi input link Google Drive saja.
+- Sesuaikan halaman yang sama untuk dosen pembimbing.
 
 ## Langkah-langkah
-1. **Update Migration**: Tambahkan kolom untuk link drive KRS dan proposal
-2. **Update Model**: Tambahkan kolom baru ke fillable di KpApplication
-3. **Update Controller**: Ubah storeApply untuk menyimpan link drive alih-alih file
-4. **Update View Mahasiswa**: Ubah apply.blade.php untuk input link drive
-5. **Update View Supervisor**: Ubah verifications/show.blade.php untuk menampilkan link drive
-6. **Test**: Pastikan perubahan berfungsi dengan baik
+- [x] Ubah view mahasiswa: resources/views/student/mentoring/create.blade.php - ganti input file dengan input text untuk link drive.
+- [x] Ubah view dosen: resources/views/supervisor/mentoring/create.blade.php - sama.
+- [x] Ubah controller mahasiswa: MentoringLogController::store - ubah validation 'attachment' => 'nullable|url', simpan $request->attachment langsung ke attachment_path.
+- [x] Ubah controller dosen: SupervisorController::storeMentoringLog - sama.
+- [x] Ubah view show mahasiswa: resources/views/student/mentoring/show.blade.php - deteksi link drive vs file lokal.
+- [x] Ubah view show dosen: resources/views/supervisor/mentoring/show.blade.php - sama.
+- [x] Ubah view edit dosen: resources/views/supervisor/mentoring/edit.blade.php - ubah input attachment ke URL.
+- [x] Ubah controller update dosen: SupervisorController::updateMentoringLog - ubah validation dan penyimpanan.
+- [ ] Test: Pastikan form submit berhasil dan link tersimpan.
 
 ## Status
-- [x] Migration untuk kolom link drive
-- [x] Update model KpApplication
-- [x] Update KpApplicationController storeApply
-- [x] Update resources/views/student/kp/apply.blade.php
-- [x] Update resources/views/supervisor/verifications/show.blade.php
-- [x] Test perubahan (Server running on http://127.0.0.1:8000)
+- Implementasi selesai. Semua perubahan telah diterapkan pada view dan controller untuk create, show, dan edit.

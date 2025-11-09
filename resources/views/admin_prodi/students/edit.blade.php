@@ -44,15 +44,6 @@
                     <p class="mt-1 text-sm text-gray-500">NIM tidak dapat diubah</p>
                 </div>
 
-                <!-- Prodi -->
-                <div>
-                    <label for="prodi" class="block text-sm font-medium text-gray-700">Program Studi</label>
-                    <input type="text" name="prodi" id="prodi" value="{{ old('prodi', $student->prodi) }}"
-                           class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 bg-gray-100 cursor-not-allowed"
-                           readonly>
-                    <p class="mt-1 text-sm text-gray-500">Program Studi tidak dapat diubah</p>
-                </div>
-
                 <!-- Supervisor -->
                 <div>
                     <label for="supervisor_id" class="block text-sm font-medium text-gray-700">Dosen Pembimbing (Opsional)</label>

@@ -146,9 +146,15 @@
                             </svg>
                             <span class="text-sm text-gray-900">{{ basename($mentoringLog->attachment_path) }}</span>
                         </div>
-                        <a href="{{ asset('storage/' . $mentoringLog->attachment_path) }}"
-                           target="_blank"
-                           class="text-blue-600 hover:text-blue-800 text-sm">Lihat</a>
+                        @if(str_starts_with($mentoringLog->attachment_path, 'http'))
+                            <a href="{{ $mentoringLog->attachment_path }}"
+                               target="_blank"
+                               class="text-blue-600 hover:text-blue-800 text-sm">Lihat</a>
+                        @else
+                            <a href="{{ asset('storage/' . $mentoringLog->attachment_path) }}"
+                               target="_blank"
+                               class="text-blue-600 hover:text-blue-800 text-sm">Lihat</a>
+                        @endif
                     </div>
                     <p class="mt-1 text-sm text-gray-500">Upload file baru untuk mengganti lampiran saat ini</p>
                 </div>
@@ -157,12 +163,12 @@
             <!-- Attachment -->
             <div class="mb-6">
                 <label for="attachment" class="block text-sm font-medium text-gray-700 mb-2">
-                    {{ $mentoringLog->attachment_path ? 'Ganti Lampiran (Opsional)' : 'Lampiran (Opsional)' }}
+                    {{ $mentoringLog->attachment_path ? 'Ganti Lampiran (Link Google Drive, Opsional)' : 'Lampiran (Link Google Drive, Opsional)' }}
                 </label>
-                <input type="file" name="attachment" id="attachment"
-                       accept=".pdf,.jpg,.jpeg,.png"
+                <input type="url" name="attachment" id="attachment" value="{{ old('attachment') }}"
+                       placeholder="https://drive.google.com/..."
                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                <p class="mt-1 text-sm text-gray-500">Format yang didukung: PDF, JPG, JPEG, PNG. Maksimal 5MB</p>
+                <p class="mt-1 text-sm text-gray-500">Masukkan link Google Drive untuk lampiran</p>
                 @error('attachment')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                 @enderror

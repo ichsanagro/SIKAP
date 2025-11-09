@@ -134,7 +134,7 @@ class SupervisorController extends Controller
             'topic' => 'required|string|max:1000',
             'student_notes' => 'nullable|string|max:2000',
             'notes' => 'nullable|string|max:5000',
-            'attachment' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:5120',
+            'attachment' => 'nullable|url', // Link Google Drive
         ]);
 
         $user = Auth::user();
@@ -150,10 +150,7 @@ class SupervisorController extends Controller
             abort(403, 'Student ID tidak sesuai dengan KP yang dipilih.');
         }
 
-        $path = null;
-        if ($request->hasFile('attachment')) {
-            $path = $request->file('attachment')->store('mentoring_attachments', 'public');
-        }
+        $path = $request->attachment; // Langsung simpan link drive
 
         MentoringLog::create([
             'kp_application_id' => $kpApplication->id,
@@ -193,7 +190,7 @@ class SupervisorController extends Controller
             'topic' => 'nullable|string|max:1000',
             'student_notes' => 'nullable|string|max:2000',
             'status' => 'required|in:PENDING,APPROVED,REVISION',
-            'attachment' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:5120',
+            'attachment' => 'nullable|url', // Link Google Drive
         ]);
 
         $updateData = [];
@@ -211,9 +208,8 @@ class SupervisorController extends Controller
         $updateData['status'] = $request->status;
 
         // Handle attachment
-        if ($request->hasFile('attachment')) {
-            $path = $request->file('attachment')->store('mentoring_attachments', 'public');
-            $updateData['attachment_path'] = $path;
+        if ($request->filled('attachment')) {
+            $updateData['attachment_path'] = $request->attachment; // Langsung simpan link
         }
 
         $mentoringLog->update($updateData);

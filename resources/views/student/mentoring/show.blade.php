@@ -87,11 +87,19 @@
                                 <p class="text-sm text-gray-500">{{ basename($log->attachment_path) }}</p>
                             </div>
                         </div>
-                        <a href="{{ asset('storage/' . $log->attachment_path) }}"
-                           target="_blank"
-                           class="text-blue-600 hover:text-blue-800 text-sm font-medium">
-                            Lihat File →
-                        </a>
+                        @if(str_starts_with($log->attachment_path, 'http'))
+                            <a href="{{ $log->attachment_path }}"
+                               target="_blank"
+                               class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                                Lihat File →
+                            </a>
+                        @else
+                            <a href="{{ asset('storage/' . $log->attachment_path) }}"
+                               target="_blank"
+                               class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                                Lihat File →
+                            </a>
+                        @endif
                     </div>
                 </div>
             @endif
