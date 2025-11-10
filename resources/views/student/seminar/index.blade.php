@@ -90,28 +90,28 @@
 
                         <div>
                             <label for="kegiatan_harian_kp" class="block text-sm font-medium text-gray-700 mb-2">
-                                File Kegiatan Harian KP <span class="text-red-500">*</span>
+                                Link Drive Kegiatan Harian KP <span class="text-red-500">*</span>
                             </label>
-                            <input type="file"
+                            <input type="url"
                                    id="kegiatan_harian_kp"
                                    name="kegiatan_harian_kp"
-                                   accept=".pdf"
+                                   placeholder="https://drive.google.com/..."
                                    required
-                                   class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
-                            <p class="mt-1 text-sm text-gray-500">Format: PDF, Maksimal 10MB</p>
+                                   class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                            <p class="mt-1 text-sm text-gray-500">Masukkan link Google Drive yang dapat diakses publik</p>
                         </div>
 
                         <div>
                             <label for="bimbingan_kp" class="block text-sm font-medium text-gray-700 mb-2">
-                                File Bimbingan KP <span class="text-red-500">*</span>
+                                Link Drive Bimbingan KP <span class="text-red-500">*</span>
                             </label>
-                            <input type="file"
+                            <input type="url"
                                    id="bimbingan_kp"
                                    name="bimbingan_kp"
-                                   accept=".pdf"
+                                   placeholder="https://drive.google.com/..."
                                    required
-                                   class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
-                            <p class="mt-1 text-sm text-gray-500">Format: PDF, Maksimal 10MB</p>
+                                   class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                            <p class="mt-1 text-sm text-gray-500">Masukkan link Google Drive yang dapat diakses publik</p>
                         </div>
 
                         <div class="flex justify-end space-x-3">

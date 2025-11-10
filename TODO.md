@@ -1,19 +1,24 @@
-# TODO: Ubah Lampiran Mentoring Logs ke Link Drive
+# TODO: Perubahan Input Seminar dari File Upload ke Link Drive
 
-## Tugas Utama
-- Ubah kolom lampiran pada halaman create mentoring logs untuk mahasiswa dari upload file menjadi input link Google Drive saja.
-- Sesuaikan halaman yang sama untuk dosen pembimbing.
+## ✅ Completed Tasks
+- [x] Buat migrasi database untuk rename kolom `kegiatan_harian_path` dan `bimbingan_kp_path` menjadi `kegiatan_harian_drive_link` dan `bimbingan_kp_drive_link`
+- [x] Update model `SeminarApplication` fillable fields
+- [x] Update `SeminarApplicationController` validation dan store logic (dari file upload ke URL validation)
+- [x] Update view mahasiswa `resources/views/student/seminar/index.blade.php` form input (dari file input ke URL input)
+- [x] Update view supervisor `resources/views/supervisor/seminar/index.blade.php` link display
+- [x] Update view supervisor `resources/views/supervisor/seminar/show.blade.php` link display
+- [x] Update view admin prodi `resources/views/admin_prodi/seminar/index.blade.php` link display
+- [x] Jalankan migrasi database
 
-## Langkah-langkah
-- [x] Ubah view mahasiswa: resources/views/student/mentoring/create.blade.php - ganti input file dengan input text untuk link drive.
-- [x] Ubah view dosen: resources/views/supervisor/mentoring/create.blade.php - sama.
-- [x] Ubah controller mahasiswa: MentoringLogController::store - ubah validation 'attachment' => 'nullable|url', simpan $request->attachment langsung ke attachment_path.
-- [x] Ubah controller dosen: SupervisorController::storeMentoringLog - sama.
-- [x] Ubah view show mahasiswa: resources/views/student/mentoring/show.blade.php - deteksi link drive vs file lokal.
-- [x] Ubah view show dosen: resources/views/supervisor/mentoring/show.blade.php - sama.
-- [x] Ubah view edit dosen: resources/views/supervisor/mentoring/edit.blade.php - ubah input attachment ke URL.
-- [x] Ubah controller update dosen: SupervisorController::updateMentoringLog - ubah validation dan penyimpanan.
-- [ ] Test: Pastikan form submit berhasil dan link tersimpan.
+## 🔄 Next Steps
+- [ ] Test perubahan pada semua role terkait (mahasiswa, admin prodi, dosen supervisor)
+- [ ] Verifikasi bahwa link drive dapat diakses dengan benar
+- [ ] Pastikan tidak ada error pada form submission dan display
 
-## Status
-- Implementasi selesai. Semua perubahan telah diterapkan pada view dan controller untuk create, show, dan edit.
+## 📋 Testing Checklist
+- [ ] Mahasiswa dapat menginput link drive kegiatan harian dan bimbingan KP
+- [ ] Admin Prodi dapat melihat dan mengklik link drive pada halaman review
+- [ ] Dosen Supervisor dapat melihat dan mengklik link drive pada halaman index dan show
+- [ ] Link drive terbuka di tab baru dengan target="_blank"
+- [ ] Validasi URL berfungsi dengan benar
+- [ ] Tidak ada error pada database query setelah migrasi

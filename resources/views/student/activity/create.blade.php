@@ -23,8 +23,8 @@
       <textarea name="description" class="mt-1 w-full border rounded-xl p-3" rows="4" required></textarea>
     </div>
     <div>
-      <label class="block font-semibold">Foto (opsional)</label>
-      <input type="file" name="photo" accept=".jpg,.jpeg,.png" class="mt-1">
+      <label class="block font-semibold">Link Drive (opsional)</label>
+      <input type="url" name="drive_link" placeholder="https://drive.google.com/..." class="mt-1 w-full border rounded-xl p-3">
     </div>
     <div class="pt-2">
       <button class="btn-primary">Simpan</button>

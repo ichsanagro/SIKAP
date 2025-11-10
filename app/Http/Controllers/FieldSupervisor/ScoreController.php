@@ -72,7 +72,7 @@ class ScoreController extends Controller
         ]);
         $data['final_score'] = round(($data['discipline'] + $data['skill'] + $data['attitude'] + $data['report'] + $data['mastery'])/5, 2);
         $score->update($data);
-        return back()->with('success','Nilai diperbarui.');
+        return redirect()->route('field.scores.index')->with('success','Nilai berhasil diperbarui.');
     }
 
     public function destroy(KpScore $score) {

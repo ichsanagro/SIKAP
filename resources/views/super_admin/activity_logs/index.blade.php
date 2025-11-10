@@ -41,7 +41,7 @@
                         <td class="p-4">{{ $log->date ? $log->date->format('d M Y') : '-' }}</td>
                         <td class="p-4">{{ Str::limit($log->description, 40) }}</td>
                         <td class="p-4">
-                            @if($log->photo_path)
+                            @if($log->drive_link)
                                 <span class="text-green-600">✓</span>
                             @else
                                 <span class="text-gray-400">-</span>

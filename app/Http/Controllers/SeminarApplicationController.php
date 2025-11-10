@@ -21,17 +21,14 @@ class SeminarApplicationController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'kegiatan_harian_kp' => 'required|file|mimes:pdf|max:10240', // 10MB
-            'bimbingan_kp' => 'required|file|mimes:pdf|max:10240', // 10MB
+            'kegiatan_harian_kp' => 'required|url',
+            'bimbingan_kp' => 'required|url',
         ]);
-
-        $kegiatanPath = $request->file('kegiatan_harian_kp')->store('seminar', 'public');
-        $bimbinganPath = $request->file('bimbingan_kp')->store('seminar', 'public');
 
         SeminarApplication::create([
             'student_id' => Auth::id(),
-            'kegiatan_harian_path' => $kegiatanPath,
-            'bimbingan_kp_path' => $bimbinganPath,
+            'kegiatan_harian_drive_link' => $request->kegiatan_harian_kp,
+            'bimbingan_kp_drive_link' => $request->bimbingan_kp,
             'status' => 'PENDING',
         ]);
 

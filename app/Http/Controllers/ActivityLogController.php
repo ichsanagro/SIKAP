@@ -48,7 +48,7 @@ class ActivityLogController extends Controller
             'kp_application_id' => 'required|exists:kp_applications,id',
             'date'              => 'required|date|before_or_equal:today',
             'description'       => 'required|string|max:3000',
-            'photo'             => 'nullable|image|mimes:jpg,jpeg,png|max:5120', // 5MB
+            'drive_link'        => 'nullable|url',
         ]);
 
         $kp = KpApplication::with('fieldSupervisor')
@@ -64,17 +64,12 @@ class ActivityLogController extends Controller
             return back()->with('error', 'Pengawas lapangan belum ditetapkan.')->withInput();
         }
 
-        $photoPath = null;
-        if ($request->hasFile('photo')) {
-            $photoPath = $request->file('photo')->store('activity_photos', 'public');
-        }
-
         ActivityLog::create([
             'kp_application_id' => $kp->id,
             'student_id'        => Auth::id(),
             'date'              => $request->date,
             'description'       => $request->description,
-            'photo_path'        => $photoPath,
+            'drive_link'        => $request->drive_link,
             'status'            => 'PENDING',
         ]);
 
@@ -138,28 +133,7 @@ class ActivityLogController extends Controller
         return back()->with('success', 'Aktivitas diminta revisi.');
     }
 
-    /**
-     * (Opsional) Unduh foto aktivitas:
-     * GET /activity-logs/{log}/photo
-     */
-    public function downloadPhoto(ActivityLog $log)
-    {
-        $user = Auth::user();
 
-        $isOwner       = $log->student_id === $user->id;
-        $isFieldSup    = $log->kpApplication?->field_supervisor_id === $user->id;
-        $isSuperAdmin  = $user->role === 'SUPERADMIN';
-
-        if (!$isOwner && !$isFieldSup && !$isSuperAdmin) {
-            abort(403);
-        }
-
-        if (!$log->photo_path || !Storage::disk('public')->exists($log->photo_path)) {
-            abort(404, 'Foto tidak ditemukan.');
-        }
-
-        return Storage::disk('public')->download($log->photo_path);
-    }
 
     /**
      * Hanya pengawas terkait (atau superadmin) yang boleh approve/revise.

@@ -55,10 +55,10 @@
             </div>
           </div>
           <p class="text-sm text-gray-700 mb-2">{{ $log->description }}</p>
-          @if($log->photo_path)
+          @if($log->drive_link)
             <div class="text-sm">
-              <a href="{{ route('activity-logs.photo', $log) }}" target="_blank" class="text-blue-600 hover:text-blue-800">
-                <i class="fas fa-image mr-1"></i>Lihat Foto
+              <a href="{{ $log->drive_link }}" target="_blank" class="text-blue-600 hover:text-blue-800">
+                <i class="fas fa-external-link-alt mr-1"></i>Buka Link Drive
               </a>
             </div>
           @endif

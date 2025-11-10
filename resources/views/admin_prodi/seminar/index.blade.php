@@ -41,13 +41,13 @@
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                    <a href="{{ Storage::url($application->kegiatan_harian_path) }}"
+                                    <a href="{{ $application->kegiatan_harian_drive_link }}"
                                        target="_blank"
                                        class="text-blue-600 hover:text-blue-800 underline">
                                         Kegiatan Harian
                                     </a>
                                     <br>
-                                    <a href="{{ Storage::url($application->bimbingan_kp_path) }}"
+                                    <a href="{{ $application->bimbingan_kp_drive_link }}"
                                        target="_blank"
                                        class="text-blue-600 hover:text-blue-800 underline">
                                         Bimbingan KP

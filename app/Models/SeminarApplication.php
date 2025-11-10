@@ -9,8 +9,8 @@ class SeminarApplication extends Model
 {
     protected $fillable = [
         'student_id',
-        'kegiatan_harian_path',
-        'bimbingan_kp_path',
+        'kegiatan_harian_drive_link',
+        'bimbingan_kp_drive_link',
         'status',
         'examiner_id',
         'admin_note',

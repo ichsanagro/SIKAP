@@ -12,7 +12,7 @@ class ActivityLog extends Model
         'student_id',
         'date',
         'description',
-        'photo_path',
+        'drive_link',
         'status',
     ];
 
