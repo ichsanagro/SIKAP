@@ -138,13 +138,13 @@
                 </div>
             </a>
 
-            <a href="{{ route('supervisor.questionnaires.index') }}" class="flex items-center p-4 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition">
+            <a href="{{ route('questionnaires.index') }}" class="flex items-center p-4 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition">
                 <svg class="w-8 h-8 text-indigo-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
                 </svg>
                 <div>
-                    <p class="font-medium text-indigo-900">Kuesioner Instansi</p>
-                    <p class="text-sm text-indigo-700">Isi feedback perusahaan</p>
+                    <p class="font-medium text-indigo-900">Kuesioner</p>
+                    <p class="text-sm text-indigo-700">Isi kuesioner yang tersedia</p>
                 </div>
             </a>
         </div>

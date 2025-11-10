@@ -417,101 +417,9 @@ class SupervisorController extends Controller
         return back()->with('success', 'Laporan ditolak dengan alasan: ' . $request->rejection_reason);
     }
 
-    /**
-     * Approve kuesioner instansi mitra
-     */
-    public function approveQuestionnaire(Questionnaire $questionnaire)
-    {
-        $this->authorizeQuestionnaire($questionnaire);
 
-        $questionnaire->update(['status' => 'APPROVED']);
 
-        return back()->with('success', 'Kuesioner berhasil disetujui.');
-    }
 
-    /**
-     * Reject kuesioner instansi mitra
-     */
-    public function rejectQuestionnaire(Request $request, Questionnaire $questionnaire)
-    {
-        $this->authorizeQuestionnaire($questionnaire);
-
-        $request->validate([
-            'rejection_reason' => 'required|string|max:1000',
-        ]);
-
-        $questionnaire->update([
-            'status' => 'REJECTED',
-            'rejection_reason' => $request->rejection_reason,
-        ]);
-
-        return back()->with('success', 'Kuesioner ditolak dengan alasan: ' . $request->rejection_reason);
-    }
-
-    /**
-     * Daftar kuesioner instansi mitra - aksi: isi (create)
-     */
-    public function questionnaires()
-    {
-        $user = Auth::user();
-
-        $questionnaires = Questionnaire::with(['kpApplication.company'])
-            ->whereHas('kpApplication', function($q) use ($user) {
-                $q->where('assigned_supervisor_id', $user->id);
-            })
-            ->paginate(20);
-
-        return view('supervisor.questionnaires.index', compact('questionnaires'));
-    }
-
-    /**
-     * Form isi kuesioner instansi mitra
-     */
-    public function createQuestionnaire(KpApplication $kpApplication)
-    {
-        $this->authorizeSupervisor($kpApplication);
-
-        // Pastikan KP sudah completed dan belum ada kuesioner
-        if ($kpApplication->status !== 'COMPLETED') {
-            return back()->with('error', 'KP belum selesai.');
-        }
-
-        $existingQuestionnaire = Questionnaire::where('kp_application_id', $kpApplication->id)->first();
-        if ($existingQuestionnaire) {
-            return back()->with('error', 'Kuesioner untuk KP ini sudah ada.');
-        }
-
-        return view('supervisor.questionnaires.create', compact('kpApplication'));
-    }
-
-    /**
-     * Simpan kuesioner instansi mitra
-     */
-    public function storeQuestionnaire(Request $request, KpApplication $kpApplication)
-    {
-        $this->authorizeSupervisor($kpApplication);
-
-        $request->validate([
-            'company_rating' => 'required|integer|min:1|max:5',
-            'supervisor_rating' => 'required|integer|min:1|max:5',
-            'facilities_rating' => 'required|integer|min:1|max:5',
-            'overall_experience' => 'required|string|max:1000',
-            'suggestions' => 'nullable|string|max:1000',
-        ]);
-
-        Questionnaire::create([
-            'kp_application_id' => $kpApplication->id,
-            'company_rating' => $request->company_rating,
-            'supervisor_rating' => $request->supervisor_rating,
-            'facilities_rating' => $request->facilities_rating,
-            'overall_experience' => $request->overall_experience,
-            'suggestions' => $request->suggestions,
-            'status' => 'PENDING',
-        ]);
-
-        return redirect()->route('supervisor.questionnaires.index')
-            ->with('success', 'Kuesioner berhasil disimpan.');
-    }
 
     // Authorization helpers
     private function authorizeSupervisor(KpApplication $kpApplication): void
@@ -569,12 +477,5 @@ class SupervisorController extends Controller
         }
     }
 
-    private function authorizeQuestionnaire(Questionnaire $questionnaire): void
-    {
-        $user = Auth::user();
-        $kpApplication = $questionnaire->kpApplication;
-        if ($kpApplication->assigned_supervisor_id !== $user->id && $user->role !== 'SUPERADMIN') {
-            abort(403, 'Anda bukan pembimbing untuk kuesioner ini.');
-        }
-    }
+
 }

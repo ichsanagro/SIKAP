@@ -119,6 +119,10 @@
           <i class="fas fa-graduation-cap"></i>
           <span x-show="sidebarExpanded" class="truncate">Seminar KP</span>
         </a>
+        <a href="{{ route('admin-prodi.questionnaires.index') }}" class="sidebar-link">
+          <i class="fas fa-clipboard-list"></i>
+          <span x-show="sidebarExpanded" class="truncate">Kuesioner</span>
+        </a>
       </div>
     @endif
 
@@ -152,7 +156,7 @@
           <span x-show="sidebarExpanded" class="truncate">Dokumen</span>
         </a>
         <a href="{{ route('supervisor.questionnaires.index') }}" class="sidebar-link">
-          <i class="fas fa-clipboard-list"></i>
+          <i class="fas fa-poll"></i>
           <span x-show="sidebarExpanded" class="truncate">Kuesioner</span>
         </a>
         <a href="{{ route('supervisor.seminar.index') }}" class="sidebar-link">
@@ -216,11 +220,11 @@
           <i class="fas fa-chart-bar"></i>
           <span x-show="sidebarExpanded" class="truncate">Laporan</span>
         </a>
-        <a href="{{ route('questionnaire.create', ['kp' => auth()->user()->kpApplications->first()->id]) }}" class="sidebar-link">
-          <i class="fas fa-clipboard-list"></i>
+        @endif
+        <a href="{{ route('questionnaires.index') }}" class="sidebar-link">
+          <i class="fas fa-poll"></i>
           <span x-show="sidebarExpanded" class="truncate">Kuesioner</span>
         </a>
-        @endif
         <a href="{{ route('seminar.index') }}" class="sidebar-link">
           <i class="fas fa-graduation-cap"></i>
           <span x-show="sidebarExpanded" class="truncate">Seminar KP</span>
@@ -346,6 +350,10 @@
           <i class="fas fa-building"></i>
           <span>Perusahaan</span>
         </a>
+        <a href="{{ route('admin-prodi.questionnaires.index') }}" class="sidebar-link" @click="closeMobile()">
+          <i class="fas fa-clipboard-list"></i>
+          <span>Kuesioner</span>
+        </a>
       </div>
     @endif
 
@@ -379,7 +387,7 @@
           <span>Dokumen</span>
         </a>
         <a href="{{ route('supervisor.questionnaires.index') }}" class="sidebar-link" @click="closeMobile()">
-          <i class="fas fa-clipboard-list"></i>
+          <i class="fas fa-poll"></i>
           <span>Kuesioner</span>
         </a>
       </div>
@@ -441,6 +449,10 @@
         </a>
         <a href="{{ route('questionnaire.create', ['kp' => auth()->user()->kpApplications->first()->id]) }}" class="sidebar-link" @click="closeMobile()">
           <i class="fas fa-clipboard-list"></i>
+          <span>Kuesioner KP</span>
+        </a>
+        <a href="{{ route('supervisor.questionnaires.index') }}" class="sidebar-link" @click="closeMobile()">
+          <i class="fas fa-poll"></i>
           <span>Kuesioner</span>
         </a>
         @endif

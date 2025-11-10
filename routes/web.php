@@ -104,6 +104,9 @@ Route::middleware(['auth', 'role:MAHASISWA'])->group(function () {
     Route::get('questionnaire/{kp}', [QuestionnaireController::class, 'create'])->name('questionnaire.create');
     Route::post('questionnaire/{kp}', [QuestionnaireController::class, 'store'])->name('questionnaire.store');
 
+    // Questionnaire routes for students
+    Route::resource('questionnaires', App\Http\Controllers\QuestionnaireResponseController::class)->only(['index', 'show', 'store']);
+
     // Seminar KP routes
     Route::get('/seminar', [SeminarApplicationController::class, 'index'])->name('seminar.index');
     Route::post('/seminar', [SeminarApplicationController::class, 'store'])->name('seminar.store');
@@ -168,6 +171,10 @@ Route::prefix('admin-prodi')
         Route::get('/seminar-applications', [SeminarReviewController::class, 'index'])->name('seminar.index');
         Route::post('/seminar-applications/{application}/approve', [SeminarReviewController::class, 'approve'])->name('seminar.approve');
         Route::post('/seminar-applications/{application}/reject', [SeminarReviewController::class, 'reject'])->name('seminar.reject');
+
+        // Questionnaire Management Routes
+        Route::resource('questionnaires', App\Http\Controllers\AdminProdi\QuestionnaireController::class);
+        Route::post('questionnaires/{questionnaire}/toggle-active', [App\Http\Controllers\AdminProdi\QuestionnaireController::class, 'toggleActive'])->name('questionnaires.toggle-active');
     });
 
 /*
@@ -245,14 +252,6 @@ Route::prefix('supervisor')
         Route::get('documents/{kpApplication}', [SupervisorController::class, 'showDocument'])->name('documents.show');
         Route::post('documents/reports/{report}/approve', [SupervisorController::class, 'approveReport'])->name('documents.reports.approve');
         Route::post('documents/reports/{report}/reject', [SupervisorController::class, 'rejectReport'])->name('documents.reports.reject');
-        Route::post('documents/questionnaires/{questionnaire}/approve', [SupervisorController::class, 'approveQuestionnaire'])->name('documents.questionnaires.approve');
-        Route::post('documents/questionnaires/{questionnaire}/reject', [SupervisorController::class, 'rejectQuestionnaire'])->name('documents.questionnaires.reject');
-
-        // Mengisi kuesioner terhadap instansi mitra
-        Route::get('questionnaires', [SupervisorController::class, 'questionnaires'])->name('questionnaires.index');
-        Route::get('questionnaires/{kpApplication}/create', [SupervisorController::class, 'createQuestionnaire'])->name('questionnaires.create');
-        Route::post('questionnaires/{kpApplication}', [SupervisorController::class, 'storeQuestionnaire'])->name('questionnaires.store');
-
         // Seminar Students
         Route::get('/seminar-students', [SeminarStudentController::class, 'index'])->name('seminar.index');
         Route::get('/seminar-students/{application}', [SeminarStudentController::class, 'show'])->name('seminar.show');
@@ -263,6 +262,9 @@ Route::prefix('supervisor')
         Route::post('/seminar-students/scores', [SeminarExaminerScoreController::class, 'store'])->name('seminar.scores.store');
         Route::get('/seminar-students/scores/{examinerSeminarScore}/edit', [SeminarExaminerScoreController::class, 'edit'])->name('seminar.scores.edit');
         Route::put('/seminar-students/scores/{examinerSeminarScore}', [SeminarExaminerScoreController::class, 'update'])->name('seminar.scores.update');
+
+        // Questionnaire routes for supervisors
+        Route::resource('questionnaires', App\Http\Controllers\QuestionnaireResponseController::class)->only(['index', 'show', 'store']);
     });
 
 /*
