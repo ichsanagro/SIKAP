@@ -44,6 +44,28 @@ class QuestionnaireResponseController extends Controller
         return view('questionnaires.fill', compact('questionnaire'));
     }
 
+    public function fill(QuestionnaireTemplate $questionnaire)
+    {
+        $user = Auth::user();
+
+        // Check if user can access this questionnaire
+        if ($questionnaire->target_role !== $user->role || !$questionnaire->is_active) {
+            abort(403, 'Anda tidak memiliki akses ke kuesioner ini.');
+        }
+
+        // Check if user has already responded
+        $existingResponse = QuestionnaireResponse::where('questionnaire_template_id', $questionnaire->id)
+            ->where('user_id', $user->id)
+            ->first();
+
+        if ($existingResponse) {
+            return redirect()->route('questionnaires.show', $questionnaire)->with('info', 'Anda sudah mengisi kuesioner ini.');
+        }
+
+        $questionnaire->load('questions');
+        return view('questionnaires.fill', compact('questionnaire'));
+    }
+
     public function store(Request $request, QuestionnaireTemplate $questionnaire)
     {
         $user = Auth::user();

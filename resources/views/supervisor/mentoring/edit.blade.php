@@ -46,7 +46,7 @@
             <!-- KP Application (Read-only) -->
             <div class="mb-6">
                 <label class="block text-sm font-medium text-gray-700 mb-2">
-                    Kerja Praktek
+                    Kerja Praktik
                 </label>
                 <div class="bg-gray-50 border border-gray-300 rounded-lg px-3 py-2">
                     <span class="text-sm text-gray-900">

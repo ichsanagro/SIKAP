@@ -10,7 +10,7 @@
         Selamat datang di SIKAP
       </h1>
       <p class="mt-3 text-gray-600">
-        Portal Kerja Praktek: ajukan judul, pilih tempat magang, catat bimbingan & aktivitas,
+        Portal Kerja Praktik: ajukan judul, pilih tempat magang, catat bimbingan & aktivitas,
         unggah laporan, hingga isi kuesioner—semuanya dalam satu tempat.
       </p>
 

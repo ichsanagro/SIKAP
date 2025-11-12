@@ -4,7 +4,7 @@
 <div class="max-w-2xl mx-auto p-6">
     <div class="mb-6">
         <h1 class="text-3xl font-bold text-gray-900">Tambah Instansi Baru</h1>
-        <p class="text-gray-600 mt-2">Tambahkan data instansi untuk kerja praktek mahasiswa.</p>
+        <p class="text-gray-600 mt-2">Tambahkan data instansi untuk kerja praktik mahasiswa.</p>
     </div>
 
     <div class="bg-white rounded-lg shadow p-6">

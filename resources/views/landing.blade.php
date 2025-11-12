@@ -6,7 +6,7 @@
     <div class="max-w-6xl mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
       <div class="text-center lg:text-left">
         <h1 class="text-4xl lg:text-6xl font-extrabold text-unibBlue leading-tight">
-          Sistem Informasi Manajemen Kerja Praktek
+          Sistem Informasi Manajemen Kerja Praktik
         </h1>
         <p class="mt-6 text-lg lg:text-xl text-gray-600 leading-relaxed">
           Ajukan judul, pilih tempat magang (opsi 1/2 dari Prodi atau cari sendiri), catat bimbingan & aktivitas, unggah laporan, dan isi kuesioner—semua dalam satu portal.
@@ -37,7 +37,7 @@
     <div class="max-w-6xl mx-auto px-4">
       <div class="text-center mb-12">
         <h2 class="text-3xl lg:text-4xl font-bold text-unibBlue">Fitur Unggulan</h2>
-        <p class="mt-4 text-lg text-gray-600">Platform lengkap untuk mendukung proses Kerja Praktek Anda.</p>
+        <p class="mt-4 text-lg text-gray-600">Platform lengkap untuk mendukung proses Kerja Praktik Anda.</p>
       </div>
       <div class="grid md:grid-cols-3 gap-8">
         <div class="card text-center p-6">
@@ -121,7 +121,7 @@
   {{-- CTA Section --}}
   <section class="py-16 bg-unibBlue text-white">
     <div class="max-w-4xl mx-auto px-4 text-center">
-      <h2 class="text-3xl lg:text-4xl font-bold mb-4">Siap Mulai Kerja Praktek Anda?</h2>
+      <h2 class="text-3xl lg:text-4xl font-bold mb-4">Siap Mulai Kerja Praktik Anda?</h2>
       <p class="text-lg mb-8">Daftar sekarang dan nikmati pengalaman KP yang lebih mudah dan efisien.</p>
       <a href="{{ route('register') }}" class="btn-orange inline-block">Daftar Sekarang</a>
     </div>

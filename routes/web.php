@@ -106,6 +106,7 @@ Route::middleware(['auth', 'role:MAHASISWA'])->group(function () {
 
     // Questionnaire routes for students
     Route::resource('questionnaires', App\Http\Controllers\QuestionnaireResponseController::class)->only(['index', 'show', 'store']);
+    Route::get('questionnaires/{questionnaire}/fill', [App\Http\Controllers\QuestionnaireResponseController::class, 'fill'])->name('questionnaires.fill');
 
     // Seminar KP routes
     Route::get('/seminar', [SeminarApplicationController::class, 'index'])->name('seminar.index');
@@ -175,6 +176,12 @@ Route::prefix('admin-prodi')
         // Questionnaire Management Routes
         Route::resource('questionnaires', App\Http\Controllers\AdminProdi\QuestionnaireController::class);
         Route::post('questionnaires/{questionnaire}/toggle-active', [App\Http\Controllers\AdminProdi\QuestionnaireController::class, 'toggleActive'])->name('questionnaires.toggle-active');
+
+        // Questionnaire Responses Routes
+        Route::get('questionnaire-responses', [App\Http\Controllers\AdminProdi\QuestionnaireResponseController::class, 'index'])->name('questionnaire-responses.index');
+        Route::get('questionnaire-responses/{response}', [App\Http\Controllers\AdminProdi\QuestionnaireResponseController::class, 'show'])->name('questionnaire-responses.show');
+        Route::get('questionnaires/{questionnaire}/responses', [App\Http\Controllers\AdminProdi\QuestionnaireResponseController::class, 'byTemplate'])->name('questionnaires.responses');
+        Route::get('questionnaire-responses/export', [App\Http\Controllers\AdminProdi\QuestionnaireResponseController::class, 'export'])->name('questionnaire-responses.export');
     });
 
 /*

@@ -123,6 +123,10 @@
           <i class="fas fa-clipboard-list"></i>
           <span x-show="sidebarExpanded" class="truncate">Kuesioner</span>
         </a>
+        <a href="{{ route('admin-prodi.questionnaire-responses.index') }}" class="sidebar-link">
+          <i class="fas fa-poll-h"></i>
+          <span x-show="sidebarExpanded" class="truncate">Tanggapan Kuesioner</span>
+        </a>
       </div>
     @endif
 
@@ -357,6 +361,10 @@
         <a href="{{ route('admin-prodi.questionnaires.index') }}" class="sidebar-link" @click="closeMobile()">
           <i class="fas fa-clipboard-list"></i>
           <span>Kuesioner</span>
+        </a>
+        <a href="{{ route('admin-prodi.questionnaire-responses.index') }}" class="sidebar-link" @click="closeMobile()">
+          <i class="fas fa-poll-h"></i>
+          <span>Tanggapan Kuesioner</span>
         </a>
       </div>
     @endif

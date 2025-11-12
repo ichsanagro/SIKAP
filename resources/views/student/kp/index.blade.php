@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="flex items-center justify-between mb-4">
-  <h1 class="text-2xl font-bold text-unibBlue">Pengajuan Kerja Praktek Saya</h1>
+  <h1 class="text-2xl font-bold text-unibBlue">Pengajuan Kerja Praktik Saya</h1>
   @php
     $hasActiveApplication = $apps->contains(function ($app) {
       return $app->status !== 'REJECTED';

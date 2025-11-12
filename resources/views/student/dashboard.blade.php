@@ -213,7 +213,7 @@
             <span class="text-sm font-medium text-gray-700">Laporan</span>
           </a>
 
-          <a href="{{ route('questionnaire.create', ['kp' => $activeKp->id]) }}" class="flex flex-col items-center p-4 bg-indigo-50 hover:bg-indigo-100 rounded-lg transition-colors">
+          <a href="{{ route('questionnaires.index') }}" class="flex flex-col items-center p-4 bg-indigo-50 hover:bg-indigo-100 rounded-lg transition-colors">
             <i class="fas fa-clipboard-list text-indigo-600 text-xl mb-2"></i>
             <span class="text-sm font-medium text-gray-700">Kuesioner</span>
           </a>
@@ -223,10 +223,10 @@
             <span class="text-sm font-medium text-gray-400">Laporan</span>
           </div>
 
-          <div class="flex flex-col items-center p-4 bg-gray-50 rounded-lg opacity-50 cursor-not-allowed">
-            <i class="fas fa-clipboard-list text-gray-400 text-xl mb-2"></i>
-            <span class="text-sm font-medium text-gray-400">Kuesioner</span>
-          </div>
+          <a href="{{ route('questionnaires.index') }}" class="flex flex-col items-center p-4 bg-indigo-50 hover:bg-indigo-100 rounded-lg transition-colors">
+            <i class="fas fa-clipboard-list text-indigo-600 text-xl mb-2"></i>
+            <span class="text-sm font-medium text-gray-700">Kuesioner</span>
+          </a>
         @endif
       </div>
     </div>

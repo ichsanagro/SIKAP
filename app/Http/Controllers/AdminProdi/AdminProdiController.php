@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\KpApplication;
 use App\Models\Company;
 use App\Models\User;
+use App\Models\QuestionnaireResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -21,6 +22,7 @@ class AdminProdiController extends Controller
             'assigned_field_supervisors' => KpApplication::whereNotNull('field_supervisor_id')->count(),
             'students' => User::where('role', 'MAHASISWA')->count(),
             'field_supervisors' => User::where('role', 'PENGAWAS_LAPANGAN')->count(),
+            'questionnaire_responses' => QuestionnaireResponse::count(),
         ];
 
         return view('admin_prodi.index', compact('stats'));

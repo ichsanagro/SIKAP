@@ -22,7 +22,7 @@
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                             <div>
                                 <label for="report" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Laporan Kerja Praktek
+                                    Laporan Kerja Praktik
                                 </label>
                                 <input type="number" name="report" id="report" min="0" max="100" required
                                        value="{{ old('report', $supervisorScore->report) }}"

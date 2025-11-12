@@ -8,7 +8,7 @@
   <thead class="bg-gray-50">
   <tr>
     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">Mahasiswa</th>
-    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">Laporan Kerja Praktek</th>
+    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">Laporan Kerja Praktik</th>
     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">Presentasi dan Pemahaman Materi</th>
     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">Sikap dan Etika</th>
     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">Total Skor</th>

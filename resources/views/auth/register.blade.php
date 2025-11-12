@@ -10,7 +10,7 @@
         Buat Akun SIKAP
       </h1>
       <p class="mt-3 text-gray-600">
-        Akses portal Kerja Praktek untuk ajukan judul, pilih tempat, catat bimbingan & aktivitas,
+        Akses portal Kerja Praktik untuk ajukan judul, pilih tempat, catat bimbingan & aktivitas,
         unggah laporan, hingga isi kuesioner — semuanya terintegrasi.
       </p>
 

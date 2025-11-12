@@ -39,7 +39,7 @@
 
     <!-- KP Details -->
     <div class="bg-white rounded-lg shadow p-6 mb-6">
-        <h2 class="text-lg font-semibold text-gray-900 mb-4">Detail Kerja Praktek</h2>
+        <h2 class="text-lg font-semibold text-gray-900 mb-4">Detail Kerja Praktik</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="md:col-span-2">
                 <label class="block text-sm font-medium text-gray-700">Judul KP</label>

@@ -83,7 +83,7 @@
             <!-- KP Application Selection -->
             <div class="mb-6">
                 <label for="kp_application_id" class="block text-sm font-medium text-gray-700 mb-2">
-                    Kerja Praktek <span class="text-red-500">*</span>
+                    Kerja Praktik <span class="text-red-500">*</span>
                 </label>
                 <select name="kp_application_id" id="kp_application_id"
                         class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -98,7 +98,7 @@
             <!-- Auto-populated Title Display -->
             <div class="mb-6">
                 <label class="block text-sm font-medium text-gray-700 mb-2">
-                    Judul Kerja Praktek
+                    Judul Kerja Praktik
                 </label>
                 <div id="kp_title_display" class="w-full bg-gray-50 border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-900">
                     Pilih mahasiswa dan KP terlebih dahulu

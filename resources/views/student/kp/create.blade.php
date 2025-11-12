@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="card">
-  <h2 class="text-2xl font-bold text-unibBlue mb-4">Ajukan Kerja Praktek</h2>
+  <h2 class="text-2xl font-bold text-unibBlue mb-4">Ajukan Kerja Praktik</h2>
 
   {{-- Search Bar --}}
   <form method="GET" action="{{ route('kp-applications.create') }}" class="mb-6">

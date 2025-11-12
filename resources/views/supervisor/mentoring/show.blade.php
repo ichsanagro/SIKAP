@@ -130,7 +130,7 @@
 
             <!-- KP Info -->
             <div class="bg-white rounded-lg shadow p-6">
-                <h3 class="text-lg font-semibold text-gray-900 mb-4">Kerja Praktek</h3>
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Kerja Praktik</h3>
                 <div class="space-y-2">
                     <div>
                         <label class="block text-xs font-medium text-gray-500">Judul</label>
