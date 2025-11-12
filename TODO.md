@@ -20,6 +20,11 @@
 - [x] Dosen supervisor dapat mengisi dan submit kuesioner (manual test)
 - [x] Route lama supervisor.questionnaires.* tidak lagi dapat diakses (manual test)
 - [x] Tidak ada error pada aplikasi setelah perubahan (manual test)
+- [x] Pengawas lapangan dapat mengakses halaman kuesioner melalui sidebar (manual test)
+- [x] Pengawas lapangan dapat melihat kuesioner yang ditargetkan untuk PENGAWAS_LAPANGAN (manual test)
+- [x] Pengawas lapangan dapat mengisi dan submit kuesioner (manual test)
+- [x] Route field.questionnaires.* dapat diakses dengan benar (manual test)
+- [x] Error "explode(): Argument #2 ($string) must be of type string, array given" telah diperbaiki
 
 ## 📝 Notes
 - Automated browser testing is not available in this environment

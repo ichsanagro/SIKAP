@@ -305,4 +305,7 @@ Route::prefix('field-supervisor')
         Route::resource('company-quotas', FieldCompanyQuotaController::class)
             ->only(['index','create','store','edit','update','destroy'])
             ->names('company-quotas');
+
+        // 5) Questionnaire routes for field supervisors
+        Route::resource('questionnaires', App\Http\Controllers\FieldSupervisor\QuestionnaireController::class)->only(['index', 'show', 'store']);
     });

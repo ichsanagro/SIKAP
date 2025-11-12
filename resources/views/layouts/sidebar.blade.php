@@ -191,6 +191,10 @@
           <i class="fas fa-tags"></i>
           <span x-show="sidebarExpanded" class="truncate">Kuota</span>
         </a>
+        <a href="{{ route('field.questionnaires.index') }}" class="sidebar-link">
+          <i class="fas fa-poll"></i>
+          <span x-show="sidebarExpanded" class="truncate">Kuesioner</span>
+        </a>
       </div>
     @endif
 
@@ -417,6 +421,10 @@
         <a href="{{ route('field.company-quotas.index') }}" class="sidebar-link" @click="closeMobile()">
           <i class="fas fa-tags"></i>
           <span>Kuota</span>
+        </a>
+        <a href="{{ route('field.questionnaires.index') }}" class="sidebar-link" @click="closeMobile()">
+          <i class="fas fa-poll"></i>
+          <span>Kuesioner</span>
         </a>
       </div>
     @endif

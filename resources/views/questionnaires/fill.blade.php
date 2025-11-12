@@ -48,22 +48,28 @@
                         <textarea name="question_{{ $question->id }}" rows="4" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" {{ $question->is_required ? 'required' : '' }}>{{ old('question_' . $question->id) }}</textarea>
                     @elseif($question->question_type == 'radio')
                         @if($question->options)
-                            @foreach($question->options as $option)
+                            @php
+                                $options = is_array($question->options) ? $question->options : explode(',', $question->options);
+                            @endphp
+                            @foreach($options as $optionIndex => $option)
                             <div class="flex items-center">
-                                <input type="radio" name="question_{{ $question->id }}" value="{{ $option }}" id="radio_{{ $question->id }}_{{ $loop->index }}" class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300" {{ old('question_' . $question->id) == $option ? 'checked' : '' }} {{ $question->is_required ? 'required' : '' }}>
-                                <label for="radio_{{ $question->id }}_{{ $loop->index }}" class="ml-3 block text-sm font-medium text-gray-700">
-                                    {{ $option }}
+                                <input type="radio" name="question_{{ $question->id }}" value="{{ trim($option) }}" id="radio_{{ $question->id }}_{{ $optionIndex }}" class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300" {{ old('question_' . $question->id) == trim($option) ? 'checked' : '' }} {{ $question->is_required ? 'required' : '' }}>
+                                <label for="radio_{{ $question->id }}_{{ $optionIndex }}" class="ml-3 block text-sm font-medium text-gray-700">
+                                    {{ trim($option) }}
                                 </label>
                             </div>
                             @endforeach
                         @endif
                     @elseif($question->question_type == 'checkbox')
                         @if($question->options)
-                            @foreach($question->options as $optionIndex => $option)
+                            @php
+                                $options = is_array($question->options) ? $question->options : explode(',', $question->options);
+                            @endphp
+                            @foreach($options as $optionIndex => $option)
                             <div class="flex items-center">
-                                <input type="checkbox" name="question_{{ $question->id }}[]" value="{{ $option }}" id="checkbox_{{ $question->id }}_{{ $optionIndex }}" class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded" {{ in_array($option, old('question_' . $question->id, [])) ? 'checked' : '' }}>
+                                <input type="checkbox" name="question_{{ $question->id }}[]" value="{{ trim($option) }}" id="checkbox_{{ $question->id }}_{{ $optionIndex }}" class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded" {{ in_array(trim($option), old('question_' . $question->id, [])) ? 'checked' : '' }}>
                                 <label for="checkbox_{{ $question->id }}_{{ $optionIndex }}" class="ml-3 block text-sm font-medium text-gray-700">
-                                    {{ $option }}
+                                    {{ trim($option) }}
                                 </label>
                             </div>
                             @endforeach
@@ -72,8 +78,11 @@
                         <select name="question_{{ $question->id }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" {{ $question->is_required ? 'required' : '' }}>
                             <option value="">Pilih jawaban</option>
                             @if($question->options)
-                                @foreach($question->options as $option)
-                                <option value="{{ $option }}" {{ old('question_' . $question->id) == $option ? 'selected' : '' }}>{{ $option }}</option>
+                                @php
+                                    $options = is_array($question->options) ? $question->options : explode(',', $question->options);
+                                @endphp
+                                @foreach($options as $option)
+                                <option value="{{ trim($option) }}" {{ old('question_' . $question->id) == trim($option) ? 'selected' : '' }}>{{ trim($option) }}</option>
                                 @endforeach
                             @endif
                         </select>
