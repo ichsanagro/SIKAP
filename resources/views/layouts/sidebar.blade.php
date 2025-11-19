@@ -127,6 +127,10 @@
           <i class="fas fa-poll-h"></i>
           <span x-show="sidebarExpanded" class="truncate">Tanggapan Kuesioner</span>
         </a>
+        <a href="{{ route('admin-prodi.recap-scores.index') }}" class="sidebar-link">
+          <i class="fas fa-chart-line"></i>
+          <span x-show="sidebarExpanded" class="truncate">Rekap Nilai</span>
+        </a>
       </div>
     @endif
 
@@ -365,6 +369,10 @@
         <a href="{{ route('admin-prodi.questionnaire-responses.index') }}" class="sidebar-link" @click="closeMobile()">
           <i class="fas fa-poll-h"></i>
           <span>Tanggapan Kuesioner</span>
+        </a>
+        <a href="{{ route('admin-prodi.recap-scores.index') }}" class="sidebar-link" @click="closeMobile()">
+          <i class="fas fa-chart-line"></i>
+          <span>Rekap Nilai</span>
         </a>
       </div>
     @endif

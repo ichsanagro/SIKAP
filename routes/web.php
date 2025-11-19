@@ -182,6 +182,10 @@ Route::prefix('admin-prodi')
         Route::get('questionnaire-responses/{response}', [App\Http\Controllers\AdminProdi\QuestionnaireResponseController::class, 'show'])->name('questionnaire-responses.show');
         Route::get('questionnaires/{questionnaire}/responses', [App\Http\Controllers\AdminProdi\QuestionnaireResponseController::class, 'byTemplate'])->name('questionnaires.responses');
         Route::get('questionnaire-responses/export', [App\Http\Controllers\AdminProdi\QuestionnaireResponseController::class, 'export'])->name('questionnaire-responses.export');
+
+        // Rekap Nilai Routes
+        Route::get('recap-scores', [App\Http\Controllers\AdminProdi\ScoreRecapController::class, 'index'])->name('recap-scores.index');
+        Route::get('recap-scores/{kpApplication}', [App\Http\Controllers\AdminProdi\ScoreRecapController::class, 'show'])->name('recap-scores.show');
     });
 
 /*
