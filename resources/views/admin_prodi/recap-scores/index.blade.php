@@ -21,10 +21,10 @@
                         <th class="text-left p-4">Mahasiswa</th>
                         <th class="text-left p-4">NIM</th>
                         <th class="text-left p-4">Perusahaan</th>
-                        <th class="text-left p-4">Supervisor</th>
+                        <th class="text-left p-4">Dosen Pembimbing</th>
                         <th class="text-left p-4">Pengawas Lapangan</th>
-                        <th class="text-left p-4">Nilai Supervisor</th>
-                        <th class="text-left p-4">Nilai Pengawas</th>
+                        <th class="text-left p-4">Nilai Dosen Pembimbing</th>
+                        <th class="text-left p-4">Nilai Pengawas Lapangan </th>
                         <th class="text-left p-4">Nilai Seminar</th>
                         <th class="text-left p-4">Total</th>
                         <th class="text-left p-4">Aksi</th>

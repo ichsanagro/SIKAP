@@ -37,7 +37,7 @@
                     <dd class="mt-1 text-sm text-gray-900">{{ $kpApplication->company->name ?? 'N/A' }}</dd>
                 </div>
                 <div>
-                    <dt class="text-sm font-medium text-gray-500">Supervisor</dt>
+                    <dt class="text-sm font-medium text-gray-500">Dosen pembimbing</dt>
                     <dd class="mt-1 text-sm text-gray-900">{{ $kpApplication->supervisor->name ?? 'N/A' }}</dd>
                 </div>
                 <div>
@@ -64,7 +64,7 @@
         <!-- Supervisor Score -->
         <div class="bg-white shadow rounded-lg">
             <div class="px-6 py-4 border-b border-gray-200">
-                <h3 class="text-lg font-semibold text-gray-900">Nilai Supervisor</h3>
+                <h3 class="text-lg font-semibold text-gray-900">Nilai Dosen Pembimbing</h3>
             </div>
             <div class="p-6">
                 @if($kpApplication->supervisorScore)
@@ -185,11 +185,11 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div class="text-center p-4 bg-blue-50 rounded-lg">
                     <div class="text-2xl font-bold text-blue-600">{{ number_format($supervisorScore, 2) }}</div>
-                    <div class="text-sm text-blue-600">Supervisor (40%)</div>
+                    <div class="text-sm text-blue-600">Dosen Pembimbing (40%)</div>
                 </div>
                 <div class="text-center p-4 bg-green-50 rounded-lg">
                     <div class="text-2xl font-bold text-green-600">{{ number_format($fieldScore, 2) }}</div>
-                    <div class="text-sm text-green-600">Pengawas (40%)</div>
+                    <div class="text-sm text-green-600">Pengawas Lapangan(40%)</div>
                 </div>
                 <div class="text-center p-4 bg-purple-50 rounded-lg">
                     <div class="text-2xl font-bold text-purple-600">{{ number_format($seminarScore, 2) }}</div>
