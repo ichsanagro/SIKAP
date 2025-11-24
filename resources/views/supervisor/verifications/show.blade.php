@@ -94,6 +94,43 @@
                 </div>
             </div>
 
+            @if(auth()->user()->role === 'DOSEN_SUPERVISOR' && isset($similarApplications) && $similarApplications->isNotEmpty())
+                <div class="mb-6 p-4 bg-yellow-100 border border-yellow-300 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <svg class="w-6 h-6 text-yellow-700 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.366-.54 1.297-.54 1.663 0l6.518 9.59c.33.485-.08 1.311-.831 1.311H2.57c-.75 0-1.16-.826-.83-1.311l6.517-9.59zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-9a.75.75 0 00-.75.75v4.5a.75.75 0 001.5 0V4.75A.75.75 0 0010 4z" clip-rule="evenodd" /></svg>
+                        <p class="font-semibold text-yellow-700">⚠ Terdapat judul yang mirip / potensi plagiarisme dengan judul ini.</p>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white rounded-lg shadow overflow-hidden">
+                            <thead class="bg-yellow-200 text-yellow-900">
+                                <tr>
+                                    <th class="py-2 px-4 text-left text-sm font-semibold">Nama Mahasiswa</th>
+                                    <th class="py-2 px-4 text-left text-sm font-semibold">NIM</th>
+                                    <th class="py-2 px-4 text-left text-sm font-semibold">Dosen Pembimbing</th>
+                                    <th class="py-2 px-4 text-left text-sm font-semibold">Status Pengajuan</th>
+                                    <th class="py-2 px-4 text-left text-sm font-semibold">Judul Lengkap</th>
+                                    <th class="py-2 px-4 text-left text-sm font-semibold">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-yellow-300">
+                                @foreach($similarApplications as $simApp)
+                                <tr>
+                                    <td class="py-2 px-4 text-sm">{{ $simApp->student->name ?? '-' }}</td>
+                                    <td class="py-2 px-4 text-sm">{{ $simApp->student->nim ?? '-' }}</td>
+                                    <td class="py-2 px-4 text-sm">{{ $simApp->supervisor->name ?? '-' }}</td>
+                                    <td class="py-2 px-4 text-sm">{{ $simApp->status }}</td>
+                                    <td class="py-2 px-4 text-sm break-words">{{ $simApp->title }}</td>
+                                    <td class="py-2 px-4 text-sm">
+                                        <a href="{{ route('supervisor.verifications.show', $simApp->id) }}" class="text-blue-600 hover:underline">Lihat Detail</a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            @endif
+
             <!-- Documents -->
             <div class="mb-6">
                 <h2 class="text-lg font-semibold text-gray-900 mb-4">Dokumen</h2>

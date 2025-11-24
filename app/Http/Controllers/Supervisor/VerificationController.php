@@ -39,7 +39,82 @@ class VerificationController extends Controller
 
         $kpApplication->load(['student', 'company']);
 
-        return view('supervisor.verifications.show', compact('kpApplication'));
+        // Improved similar titles detection logic
+        $stopwords = ['sistem','informasi','perancangan','analisis','pengembangan','penerapan','aplikasi','berbasis','manajemen','eksternal','framework','studi','kasus','pada','pt','cv'];
+
+        // Normalize title to lowercase and remove simple punctuation
+        $normalizedTitle = strtolower($kpApplication->title);
+        $normalizedTitle = preg_replace('/[^\w\s]/u', '', $normalizedTitle); // Remove punctuation
+
+        // Extract words and filter by length > 4 and not stopwords
+        $allWords = explode(' ', $normalizedTitle);
+        $importantKeywords = array_filter($allWords, function($word) use ($stopwords) {
+            return strlen($word) > 4 && !in_array($word, $stopwords);
+        });
+
+        if (empty($importantKeywords)) {
+            // Fallback logic: get recent KP excluding current
+            $query = KpApplication::with(['student', 'supervisor'])
+                ->where('id', '!=', $kpApplication->id)
+                ->orderBy('created_at', 'desc')
+                ->limit(50)
+                ->get();
+
+            $normalizedCurrentTitle = trim(preg_replace('/[^\w\s]/u', '', strtolower($kpApplication->title)));
+
+            $similarApplications = $query->filter(function($application) use ($normalizedCurrentTitle) {
+                $title = strtolower($application->title);
+                $normalizedTitle = trim(preg_replace('/[^\w\s]/u', '', $title));
+
+                if (strpos($normalizedCurrentTitle, $normalizedTitle) !== false
+                    || strpos($normalizedTitle, $normalizedCurrentTitle) !== false) {
+                    return true;
+                }
+                return false;
+            })->take(20); // Limit to top 20 after filtering
+        } else {
+            // Query titles containing at least one important keyword
+            $query = KpApplication::with(['student', 'supervisor'])
+                ->where('id', '!=', $kpApplication->id)
+                ->where(function($q) use ($importantKeywords) {
+                    foreach ($importantKeywords as $keyword) {
+                        $q->orWhere('title', 'LIKE', '%' . $keyword . '%');
+                    }
+                })
+                ->orderBy('created_at', 'desc')
+                ->limit(50) // Get a buffer of results to filter later in PHP
+                ->get();
+
+            // Flexible filtering with dynamic threshold and substring inclusion
+            $threshold = count($importantKeywords) <= 2 ? 1 : 2;
+
+            $normalizedCurrentTitle = trim(preg_replace('/[^\w\s]/u', '', strtolower($kpApplication->title)));
+
+            $similarApplications = $query->filter(function($application) use ($importantKeywords, $threshold, $normalizedCurrentTitle) {
+                $title = strtolower($application->title);
+                $normalizedTitle = trim(preg_replace('/[^\w\s]/u', '', $title));
+
+                // Check substring inclusion rule
+                if (strpos($normalizedCurrentTitle, $normalizedTitle) !== false
+                    || strpos($normalizedTitle, $normalizedCurrentTitle) !== false) {
+                    return true;
+                }
+
+                // Count keyword matches
+                $matchCount = 0;
+                foreach ($importantKeywords as $keyword) {
+                    if (strpos($title, $keyword) !== false) {
+                        $matchCount++;
+                        if ($matchCount >= $threshold) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            })->take(20); // Limit to top 20 after filtering
+        }
+
+        return view('supervisor.verifications.show', compact('kpApplication', 'similarApplications'));
     }
 
     /**
