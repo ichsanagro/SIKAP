@@ -206,6 +206,12 @@ if ($kp->placement_option === '3') {
                 ->with('error', 'Anda sudah memiliki pengajuan KP yang sedang diproses. Tunggu hingga selesai atau ditolak sebelum membuat pengajuan baru.');
         }
 
+        // Validate quota
+        if ($company->quota <= 0) {
+            return redirect()->route('kp.company.detail', $company)
+                ->with('error', 'Kuota KP di instansi ini sudah penuh. Tidak dapat mengajukan KP.');
+        }
+
         return view('student.kp.apply', compact('company'));
     }
 
@@ -220,6 +226,12 @@ if ($kp->placement_option === '3') {
         if ($hasActiveApplication) {
             return redirect()->route('kp-applications.index')
                 ->with('error', 'Anda sudah memiliki pengajuan KP yang sedang diproses. Tunggu hingga selesai atau ditolak sebelum membuat pengajuan baru.');
+        }
+
+        // Validate quota
+        if ($company->quota <= 0) {
+            return redirect()->route('kp.company.detail', $company)
+                ->with('error', 'Kuota KP di instansi ini sudah penuh. Tidak dapat mengajukan KP.');
         }
 
         $request->validate([

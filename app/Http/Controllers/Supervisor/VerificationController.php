@@ -144,6 +144,29 @@ class VerificationController extends Controller
 
         $kpApplication->update($updateData);
 
+        // Decrement company quota safely if company exists and quota > 0
+        if ($kpApplication->company_id) {
+            $company = $kpApplication->company()->lockForUpdate()->first();
+            if ($company && $company->quota > 0) {
+                $company->decrement('quota');
+
+                // If quota is now zero, reject all other SUBMITTED KP applications for the same company
+                $updatedCompany = $kpApplication->company()->first(); // Refresh company data
+                if ($updatedCompany->quota == 0) {
+                    $otherApplications = \App\Models\KpApplication::where('company_id', $kpApplication->company_id)
+                        ->where('status', 'SUBMITTED')
+                        ->where('id', '!=', $kpApplication->id)
+                        ->get();
+
+                    foreach ($otherApplications as $app) {
+                        $app->update(['status' => 'REJECTED']);
+                    }
+                    // Optionally, you could add a log or flash message here
+                    // session()->flash('warning', 'Pengajuan KP lain ditolak karena kuota instansi sudah penuh.');
+                }
+            }
+        }
+
         // Auto-assign field supervisor if company is selected and no field supervisor assigned yet
         if ($kpApplication->company_id && !$kpApplication->field_supervisor_id) {
             $fieldSupervisorId = \App\Models\CompanyFieldSupervisor::where('company_id', $kpApplication->company_id)
