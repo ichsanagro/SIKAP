@@ -12,8 +12,15 @@
     <p class="text-sm text-gray-500">Kuota tersedia: {{ $company->quota }}</p>
   </div>
 
-  <div class="text-center">
+<div class="text-center">
+  @if($company->quota > 0)
     <a href="{{ route('kp.apply.form', $company) }}" class="btn-primary">Ajukan KP</a>
-  </div>
+  @else
+    <button class="btn-primary cursor-not-allowed opacity-50" disabled title="Kuota penuh, tidak bisa mengajukan KP di instansi ini">
+      Ajukan KP
+    </button>
+    <p class="text-red-600 mt-2 text-sm">Kuota sudah penuh. Mahasiswa tidak dapat mengajukan KP di instansi ini.</p>
+  @endif
+</div>
 </div>
 @endsection
