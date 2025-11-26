@@ -98,9 +98,6 @@ Route::middleware(['auth', 'role:MAHASISWA'])->group(function () {
     Route::resource('activity-logs', ActivityLogController::class)
         ->only(['index', 'create', 'store']);
 
-    Route::get('reports/create/{kp}', [ReportController::class, 'create'])->name('reports.create');
-    Route::post('reports/{kp}', [ReportController::class, 'store'])->name('reports.store');
-
     Route::get('questionnaire/{kp}', [QuestionnaireController::class, 'create'])->name('questionnaire.create');
     Route::post('questionnaire/{kp}', [QuestionnaireController::class, 'store'])->name('questionnaire.store');
 

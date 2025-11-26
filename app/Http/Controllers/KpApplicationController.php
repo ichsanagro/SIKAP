@@ -89,7 +89,7 @@ class KpApplicationController extends Controller
     public function show(KpApplication $kp_application)
     {
         $this->authorizeOwner($kp_application);
-        $kp_application->load(['company', 'supervisor', 'fieldSupervisor', 'report']);
+        $kp_application->load(['company', 'supervisor', 'fieldSupervisor']);
 
         return view('student.kp.show', ['kp' => $kp_application]);
     }

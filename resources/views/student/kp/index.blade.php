@@ -21,7 +21,6 @@
     <thead class="text-left text-gray-600">
       <tr>
         <th class="py-2 pr-4">Judul</th>
-        <th class="py-2 pr-4">Pilihan</th>
         <th class="py-2 pr-4">Perusahaan</th>
         <th class="py-2 pr-4">Dosen Pembimbing</th>
         <th class="py-2 pr-4">Status</th>
@@ -32,12 +31,7 @@
       @forelse($apps as $kp)
         <tr class="border-t">
           <td class="py-2 pr-4 font-medium">{{ $kp->title }}</td>
-          <td class="py-2 pr-4">
-            @if($kp->placement_option === '1') Opsi 1 (Batch 1)
-            @elseif($kp->placement_option === '2') Opsi 2 (Batch 2)
-            @else Opsi 3 (Mandiri)
-            @endif
-          </td>
+          
           <td class="py-2 pr-4">
             @if(in_array($kp->placement_option, ['1','2']) && $kp->company)
               {{ $kp->company->name }}
@@ -60,7 +54,12 @@
                 'bg-red-100 text-red-800' => $kp->status === 'REJECTED',
               ])
             ">
-              {{ $kp->status }}
+              {{ match($kp->status) {
+                'APPROVED' => 'Disetujui',
+                'SUBMITTED' => 'Diserahkan',
+                'REJECTED' => 'Ditolak',
+                default => $kp->status
+              } }}
             </span>
           </td>
           <td class="py-2">
@@ -85,7 +84,7 @@
           </td>
         </tr>
       @empty
-        <tr><td colspan="6" class="py-6 text-center text-gray-500">Belum ada pengajuan. Klik “Ajukan KP”.</td></tr>
+        <tr><td colspan="5" class="py-6 text-center text-gray-500">Belum ada pengajuan. Klik “Ajukan KP”.</td></tr>
       @endforelse
     </tbody>
   </table>

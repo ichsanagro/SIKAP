@@ -81,7 +81,7 @@ class KpApplication extends Model
 
     public function report()
     {
-        return $this->hasOne(Report::class);
+
     }
 
     public function score()
