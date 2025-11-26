@@ -75,7 +75,7 @@ class SupervisorController extends Controller
     {
         $this->authorizeSupervisor($kpApplication);
 
-        $kpApplication->load(['student', 'company', 'mentoringLogs', 'reports', 'scores']);
+        $kpApplication->load(['student', 'company', 'mentoringLogs', 'report', 'score']);
 
         return view('supervisor.students.show', compact('kpApplication'));
     }
