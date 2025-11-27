@@ -22,12 +22,6 @@ class StudentController extends Controller
                 $q->where('field_supervisor_id', auth()->id());
             })->count(),
             'evaluations' => \App\Models\FieldEvaluation::where('supervisor_id', auth()->id())->count(),
-            'quotas' => \App\Models\CompanyQuota::whereIn('company_id',
-                KpApplication::where('field_supervisor_id', auth()->id())
-                    ->whereNotNull('company_id')
-                    ->distinct()
-                    ->pluck('company_id')
-            )->count(),
         ];
 
         // Recent data

@@ -16,8 +16,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 // Field Supervisor (Pengawas Lapangan)
 use App\Http\Controllers\FieldSupervisor\ScoreController as FieldScoreController;
 use App\Http\Controllers\FieldSupervisor\StudentController as FieldStudentController;
-use App\Http\Controllers\FieldSupervisor\EvaluationController as FieldEvaluationController;
-use App\Http\Controllers\FieldSupervisor\CompanyQuotaController as FieldCompanyQuotaController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -309,10 +308,7 @@ Route::prefix('field-supervisor')
         Route::resource('evaluations', FieldEvaluationController::class)
             ->only(['index','create','store','edit','update']);
 
-        // 4) Kuota instansi per periode (tambah, ubah, hapus)
-        Route::resource('company-quotas', FieldCompanyQuotaController::class)
-            ->only(['index','create','store','edit','update','destroy'])
-            ->names('company-quotas');
+
 
         // 5) Questionnaire routes for field supervisors
         Route::resource('questionnaires', App\Http\Controllers\FieldSupervisor\QuestionnaireController::class)->only(['index', 'show', 'store']);

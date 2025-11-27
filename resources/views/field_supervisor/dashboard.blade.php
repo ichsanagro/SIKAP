@@ -9,7 +9,7 @@
     </div>
 
     <!-- Quick Actions -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         <!-- Data Mahasiswa KP -->
         <div class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow">
             <div class="flex items-center">
@@ -60,7 +60,7 @@
                 </div>
                 <div class="ml-4">
                     <h3 class="text-lg font-semibold text-gray-900">Evaluasi & Feedback</h3>
-                    <p class="text-sm text-gray-600">Berikan evaluasi mahasiswa</p>
+                    <p class="text-sm text-gray-600">Kuesioner evaluasi kinerja</p>
                 </div>
             </div>
             <div class="mt-4">
@@ -69,30 +69,10 @@
                 </a>
             </div>
         </div>
-
-        <!-- Kuota Instansi -->
-        <div class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow">
-            <div class="flex items-center">
-                <div class="p-3 bg-orange-100 rounded-lg">
-                    <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-                    </svg>
-                </div>
-                <div class="ml-4">
-                    <h3 class="text-lg font-semibold text-gray-900">Kuota Instansi</h3>
-                    <p class="text-sm text-gray-600">Tentukan kuota mahasiswa per periode</p>
-                </div>
-            </div>
-            <div class="mt-4">
-                <a href="{{ route('field.company-quotas.index') }}" class="text-orange-600 hover:text-orange-800 text-sm font-medium">
-                    Kelola Kuota →
-                </a>
-            </div>
-        </div>
     </div>
 
     <!-- Statistics Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         <!-- Total Mahasiswa -->
         <div class="bg-white rounded-lg shadow p-6">
             <div class="flex items-center">
@@ -134,21 +114,6 @@
                 <div class="ml-4">
                     <p class="text-sm font-medium text-gray-600">Total Evaluasi</p>
                     <p class="text-2xl font-bold text-gray-900">{{ $stats['evaluations'] ?? 0 }}</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Total Kuota -->
-        <div class="bg-white rounded-lg shadow p-6">
-            <div class="flex items-center">
-                <div class="p-3 bg-orange-100 rounded-lg">
-                    <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-                    </svg>
-                </div>
-                <div class="ml-4">
-                    <p class="text-sm font-medium text-gray-600">Total Kuota</p>
-                    <p class="text-2xl font-bold text-gray-900">{{ $stats['quotas'] ?? 0 }}</p>
                 </div>
             </div>
         </div>
@@ -196,19 +161,19 @@
                                 <p class="text-xs text-gray-500">{{ optional($evaluation->application->company)->name ?? '-' }}</p>
                             </div>
                             <div class="text-right">
-                                <p class="text-sm font-semibold text-gray-900">{{ $evaluation->rating ?? '-' }}/100</p>
-                                <p class="text-xs text-gray-500">Rating</p>
+                                <p class="text-sm font-semibold text-gray-900">{{ $evaluation->overall_score ?? 'N/A' }}</p>
+                                <p class="text-xs text-gray-500">Overall Score</p>
                             </div>
                         </div>
                     @endforeach
                 </div>
                 <div class="mt-4">
-                    <a href="{{ route('field.evaluations.index') }}" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                    <a href="{{ route('field.evaluations.index') }}" class="text-purple-600 hover:text-purple-800 text-sm font-medium">
                         Lihat Semua Evaluasi →
                     </a>
                 </div>
             @else
-                <p class="text-gray-500 text-sm">Belum ada evaluasi yang diberikan</p>
+                <p class="text-gray-500 text-sm">Belum ada evaluasi yang dibuat</p>
             @endif
         </div>
     </div>
