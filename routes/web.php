@@ -10,7 +10,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\QuestionnaireController;
 use App\Http\Controllers\AdminProdi\CompanyController as AdminCompanyController;
 
-use App\Http\Controllers\AdminProdi\AssignmentController;
+
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 // Field Supervisor (Pengawas Lapangan)

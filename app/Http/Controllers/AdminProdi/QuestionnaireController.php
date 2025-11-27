@@ -108,14 +108,14 @@ class QuestionnaireController extends Controller
             }
         });
 
-        return redirect()->route('admin_prodi.questionnaires.index')
+        return redirect()->route('admin-prodi.questionnaires.index')
             ->with('success', 'Kuesioner berhasil diperbarui.');
     }
 
     public function destroy(QuestionnaireTemplate $questionnaire)
     {
         $questionnaire->delete();
-        return redirect()->route('admin_prodi.questionnaires.index')
+        return redirect()->route('admin-prodi.questionnaires.index')
             ->with('success', 'Kuesioner berhasil dihapus.');
     }
 

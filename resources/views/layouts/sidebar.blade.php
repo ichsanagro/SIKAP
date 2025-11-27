@@ -99,10 +99,7 @@
           <i class="fas fa-tachometer-alt"></i>
           <span x-show="sidebarExpanded" class="truncate">Dashboard</span>
         </a>
-        <a href="{{ route('admin-prodi.assignments') }}" class="sidebar-link">
-          <i class="fas fa-user-check"></i>
-          <span x-show="sidebarExpanded" class="truncate">Penugasan</span>
-        </a>
+
         <a href="{{ route('admin-prodi.students.index') }}" class="sidebar-link">
           <i class="fas fa-user-graduate"></i>
           <span x-show="sidebarExpanded" class="truncate">Mahasiswa</span>
@@ -336,10 +333,7 @@
           <i class="fas fa-tachometer-alt"></i>
           <span>Dashboard</span>
         </a>
-        <a href="{{ route('admin-prodi.assignments') }}" class="sidebar-link" @click="closeMobile()">
-          <i class="fas fa-user-check"></i>
-          <span>Penugasan</span>
-        </a>
+
         <a href="{{ route('admin-prodi.students.index') }}" class="sidebar-link" @click="closeMobile()">
           <i class="fas fa-user-graduate"></i>
           <span>Mahasiswa</span>

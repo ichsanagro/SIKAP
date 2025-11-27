@@ -278,9 +278,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Add option functionality to existing questions
     document.addEventListener('click', function(e) {
-        if (e.target.classList.contains('add-option')) {
-            const optionsList = e.target.closest('.options-container').querySelector('.options-list');
-            const questionItem = e.target.closest('.question-item');
+        if (e.target.closest('.add-option')) {
+            const addButton = e.target.closest('.add-option');
+            const optionsList = addButton.closest('.options-container').querySelector('.options-list');
+            const questionItem = addButton.closest('.question-item');
             const questionIndex = Array.from(document.querySelectorAll('.question-item')).indexOf(questionItem) + 1;
 
             const optionDiv = document.createElement('div');
@@ -294,8 +295,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 </button>
             `;
             optionsList.appendChild(optionDiv);
-        } else if (e.target.classList.contains('remove-option')) {
-            e.target.closest('.flex').remove();
+        } else if (e.target.closest('.remove-option')) {
+            e.target.closest('.remove-option').closest('.flex').remove();
         }
     });
 });
