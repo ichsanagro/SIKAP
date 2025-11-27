@@ -34,13 +34,21 @@
                 @elseif($log->status === 'REVISION') bg-yellow-100 text-yellow-800
                 @else bg-gray-100 text-gray-800
                 @endif">
-                {{ $log->status }}
+                @if($log->status === 'PENDING')
+                  Menunggu
+                @elseif($log->status === 'APPROVED')
+                  Disetujui
+                @elseif($log->status === 'REVISION')
+                  Revisi
+                @else
+                  {{ $log->status }}
+                @endif
               </span>
               @if($log->status !== 'APPROVED')
                 <form method="POST" action="{{ route('field.activity-logs.approve', $log) }}" class="inline">
                   @csrf
                   <button type="submit" class="px-3 py-1 text-xs bg-green-600 text-white rounded hover:bg-green-700">
-                    Approve
+                    Disetujui
                   </button>
                 </form>
               @endif

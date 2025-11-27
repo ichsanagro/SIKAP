@@ -9,7 +9,7 @@
     </div>
 
     <!-- Quick Actions -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         <!-- Data Mahasiswa KP -->
         <div class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow">
             <div class="flex items-center">
@@ -50,25 +50,7 @@
             </div>
         </div>
 
-        <!-- Evaluasi & Feedback -->
-        <div class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow">
-            <div class="flex items-center">
-                <div class="p-3 bg-purple-100 rounded-lg">
-                    <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-                    </svg>
-                </div>
-                <div class="ml-4">
-                    <h3 class="text-lg font-semibold text-gray-900">Evaluasi & Feedback</h3>
-                    <p class="text-sm text-gray-600">Kuesioner evaluasi kinerja</p>
-                </div>
-            </div>
-            <div class="mt-4">
-                <a href="{{ route('field.evaluations.index') }}" class="text-purple-600 hover:text-purple-800 text-sm font-medium">
-                    Kelola Evaluasi →
-                </a>
-            </div>
-        </div>
+
     </div>
 
     <!-- Statistics Cards -->
@@ -103,7 +85,7 @@
             </div>
         </div>
 
-        <!-- Total Evaluasi -->
+        <!-- Total Aktivitas -->
         <div class="bg-white rounded-lg shadow p-6">
             <div class="flex items-center">
                 <div class="p-3 bg-purple-100 rounded-lg">
@@ -112,8 +94,8 @@
                     </svg>
                 </div>
                 <div class="ml-4">
-                    <p class="text-sm font-medium text-gray-600">Total Evaluasi</p>
-                    <p class="text-2xl font-bold text-gray-900">{{ $stats['evaluations'] ?? 0 }}</p>
+                    <p class="text-sm font-medium text-gray-600">Total Aktivitas</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ $stats['activities'] ?? 0 }}</p>
                 </div>
             </div>
         </div>
@@ -134,7 +116,7 @@
                             </div>
                             <div class="text-right">
                                 <p class="text-sm font-semibold text-gray-900">{{ $score->final_score }}</p>
-                                <p class="text-xs text-gray-500">Final Score</p>
+                                <p class="text-xs text-gray-500">Nilai Akhir</p>
                             </div>
                         </div>
                     @endforeach
@@ -149,31 +131,44 @@
             @endif
         </div>
 
-        <!-- Recent Evaluations -->
+        <!-- Recent Activities -->
         <div class="bg-white rounded-lg shadow p-6">
-            <h3 class="text-lg font-semibold text-gray-900 mb-4">Evaluasi Terbaru</h3>
-            @if(isset($recentEvaluations) && $recentEvaluations->count() > 0)
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Aktivitas Mahasiswa</h3>
+            @if(isset($recentActivities) && $recentActivities->count() > 0)
                 <div class="space-y-3">
-                    @foreach($recentEvaluations->take(5) as $evaluation)
+                    @foreach($recentActivities->take(5) as $activity)
                         <div class="flex items-center justify-between py-2 border-b border-gray-100 last:border-b-0">
                             <div>
-                                <p class="text-sm font-medium text-gray-900">{{ optional($evaluation->application->student)->name ?? '-' }}</p>
-                                <p class="text-xs text-gray-500">{{ optional($evaluation->application->company)->name ?? '-' }}</p>
+                                <p class="text-sm font-medium text-gray-900">{{ optional($activity->kpApplication->student)->name ?? '-' }}</p>
+                                <p class="text-xs text-gray-500">{{ \Carbon\Carbon::parse($activity->date)->format('d M Y') }}</p>
                             </div>
                             <div class="text-right">
-                                <p class="text-sm font-semibold text-gray-900">{{ $evaluation->overall_score ?? 'N/A' }}</p>
-                                <p class="text-xs text-gray-500">Overall Score</p>
+                                <span class="px-2 py-1 text-xs rounded-full
+                                    @if($activity->status === 'APPROVED') bg-green-100 text-green-800
+                                    @elseif($activity->status === 'REVISION') bg-yellow-100 text-yellow-800
+                                    @else bg-gray-100 text-gray-800
+                                    @endif">
+                                    @if($activity->status === 'PENDING')
+                                      Menunggu
+                                    @elseif($activity->status === 'APPROVED')
+                                      Disetujui
+                                    @elseif($activity->status === 'REVISION')
+                                      Revisi
+                                    @else
+                                      {{ $activity->status }}
+                                    @endif
+                                </span>
                             </div>
                         </div>
                     @endforeach
                 </div>
                 <div class="mt-4">
-                    <a href="{{ route('field.evaluations.index') }}" class="text-purple-600 hover:text-purple-800 text-sm font-medium">
-                        Lihat Semua Evaluasi →
+                    <a href="{{ route('field.students.index') }}" class="text-purple-600 hover:text-purple-800 text-sm font-medium">
+                        Lihat Semua Aktivitas →
                     </a>
                 </div>
             @else
-                <p class="text-gray-500 text-sm">Belum ada evaluasi yang dibuat</p>
+                <p class="text-gray-500 text-sm">Belum ada aktivitas yang dicatat</p>
             @endif
         </div>
     </div>

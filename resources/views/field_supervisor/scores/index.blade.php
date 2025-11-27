@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
 <h1 class="text-xl font-semibold mb-4">Nilai KP</h1>
-<a href="{{ route('field.scores.create') }}" class="btn btn-primary mb-3">Tambah Nilai</a>
 
 <div class="overflow-x-auto">
 <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-sm">

@@ -21,7 +21,9 @@ class StudentController extends Controller
             'scores' => \App\Models\KpScore::whereHas('application', function($q) {
                 $q->where('field_supervisor_id', auth()->id());
             })->count(),
-            'evaluations' => \App\Models\FieldEvaluation::where('supervisor_id', auth()->id())->count(),
+            'activities' => \App\Models\ActivityLog::whereHas('kpApplication', function($q) {
+                $q->where('field_supervisor_id', auth()->id());
+            })->count(),
         ];
 
         // Recent data
@@ -33,13 +35,15 @@ class StudentController extends Controller
             ->take(5)
             ->get();
 
-        $recentEvaluations = \App\Models\FieldEvaluation::with(['application.student', 'application.company'])
-            ->where('supervisor_id', auth()->id())
-            ->latest()
+        $recentActivities = \App\Models\ActivityLog::with(['kpApplication.student', 'kpApplication.company'])
+            ->whereHas('kpApplication', function($q) {
+                $q->where('field_supervisor_id', auth()->id());
+            })
+            ->latest('date')
             ->take(5)
             ->get();
 
-        return view('field_supervisor.dashboard', compact('stats', 'recentScores', 'recentEvaluations'));
+        return view('field_supervisor.dashboard', compact('stats', 'recentScores', 'recentActivities'));
     }
 
     public function show(KpApplication $application) {
