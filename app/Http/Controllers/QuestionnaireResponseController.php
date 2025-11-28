@@ -24,35 +24,31 @@ class QuestionnaireResponseController extends Controller
 
     public function show(QuestionnaireTemplate $questionnaire)
     {
+        if (!$questionnaire) {
+            abort(404, 'Kuesioner tidak ditemukan.');
+        }
+
         $user = Auth::user();
-
-        // Skip access check for admins
-        if (in_array($user->role, ['ADMIN_PRODI', 'SUPER_ADMIN'])) {
-            // Check if user has already responded
-            $existingResponse = QuestionnaireResponse::where('questionnaire_template_id', $questionnaire->id)
-                ->where('user_id', $user->id)
-                ->first();
-
-            if ($existingResponse) {
-                return view('questionnaires.show', compact('questionnaire', 'existingResponse'));
-            }
-
-            $questionnaire->load('questions');
-            return view('questionnaires.fill', compact('questionnaire'));
-        }
-
-        // Check if user can access this questionnaire (only check target_role, allow access to inactive questionnaires if role matches)
-        if ($questionnaire->target_role !== $user->role) {
-            abort(403, 'Anda tidak memiliki akses ke kuesioner ini.');
-        }
 
         // Check if user has already responded
         $existingResponse = QuestionnaireResponse::where('questionnaire_template_id', $questionnaire->id)
             ->where('user_id', $user->id)
             ->first();
 
+        // If user has already responded, show the results regardless of role
         if ($existingResponse) {
             return view('questionnaires.show', compact('questionnaire', 'existingResponse'));
+        }
+
+        // Skip access check for admins and supervisors
+        if (in_array($user->role, ['ADMIN_PRODI', 'SUPER_ADMIN', 'DOSEN_SUPERVISOR'])) {
+            $questionnaire->load('questions');
+            return view('questionnaires.fill', compact('questionnaire'));
+        }
+
+        // For non-admins who haven't responded, check target_role
+        if ($questionnaire->target_role !== $user->role) {
+            abort(403, 'Anda tidak memiliki akses ke kuesioner ini.');
         }
 
         $questionnaire->load('questions');
@@ -61,10 +57,14 @@ class QuestionnaireResponseController extends Controller
 
     public function fill(QuestionnaireTemplate $questionnaire)
     {
+        if (!$questionnaire) {
+            abort(404, 'Kuesioner tidak ditemukan.');
+        }
+
         $user = Auth::user();
 
-        // Skip access check for admins
-        if (in_array($user->role, ['ADMIN_PRODI', 'SUPER_ADMIN'])) {
+        // Skip access check for admins and supervisors
+        if (in_array($user->role, ['ADMIN_PRODI', 'SUPER_ADMIN', 'DOSEN_SUPERVISOR'])) {
             // Check if user has already responded
             $existingResponse = QuestionnaireResponse::where('questionnaire_template_id', $questionnaire->id)
                 ->where('user_id', $user->id)
@@ -96,19 +96,26 @@ class QuestionnaireResponseController extends Controller
         return view('questionnaires.fill', compact('questionnaire'));
     }
 
-    public function store(Request $request, QuestionnaireTemplate $questionnaire)
+    public function store(Request $request, QuestionnaireTemplate $questionnaire = null)
     {
         $user = Auth::user();
 
-        // Skip access check for admins
-        if (in_array($user->role, ['ADMIN_PRODI', 'SUPER_ADMIN'])) {
+        // For supervisors, get questionnaire from hidden input since route doesn't pass it
+        if ($user->role === 'DOSEN_SUPERVISOR' && !$questionnaire) {
+            $questionnaireId = $request->input('questionnaire_id');
+            $questionnaire = QuestionnaireTemplate::findOrFail($questionnaireId);
+        }
+
+        // Skip access check for admins and supervisors
+        if (in_array($user->role, ['ADMIN_PRODI', 'SUPER_ADMIN', 'DOSEN_SUPERVISOR'])) {
             // Check if user has already responded
             $existingResponse = QuestionnaireResponse::where('questionnaire_template_id', $questionnaire->id)
                 ->where('user_id', $user->id)
                 ->first();
 
             if ($existingResponse) {
-                return redirect()->back()->with('error', 'Anda sudah mengisi kuesioner ini.');
+                $redirectRoute = $user->role === 'DOSEN_SUPERVISOR' ? 'supervisor.questionnaires.index' : 'questionnaires.index';
+                return redirect()->route($redirectRoute)->with('error', 'Anda sudah mengisi kuesioner ini.');
             }
 
             $questionnaire->load('questions');
@@ -146,7 +153,8 @@ class QuestionnaireResponseController extends Controller
                 'submitted_at' => now(),
             ]);
 
-            return redirect()->route('questionnaires.index')->with('success', 'Kuesioner berhasil disimpan.');
+            $redirectRoute = $user->role === 'DOSEN_SUPERVISOR' ? 'supervisor.questionnaires.index' : 'questionnaires.index';
+            return redirect()->route($redirectRoute)->with('success', 'Kuesioner berhasil disimpan.');
         }
 
         // Check if user can access this questionnaire (only check target_role for non-admins)
@@ -160,7 +168,11 @@ class QuestionnaireResponseController extends Controller
             ->first();
 
         if ($existingResponse) {
-            return redirect()->back()->with('error', 'Anda sudah mengisi kuesioner ini.');
+            // Redirect based on role
+            if ($user->role === 'DOSEN_SUPERVISOR') {
+                return redirect()->route('supervisor.questionnaires.index')->with('error', 'Anda sudah mengisi kuesioner ini.');
+            }
+            return redirect()->route('questionnaires.index')->with('error', 'Anda sudah mengisi kuesioner ini.');
         }
 
         $questionnaire->load('questions');

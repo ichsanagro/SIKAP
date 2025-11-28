@@ -15,8 +15,11 @@
         </div>
     </div>
 
-    <form method="POST" action="{{ request()->routeIs('supervisor.questionnaires.*') ? route('supervisor.questionnaires.store', $questionnaire) : route('questionnaires.store', $questionnaire) }}" class="bg-white rounded-lg shadow p-6">
+    <form method="POST" action="{{ request()->routeIs('supervisor.questionnaires.*') ? route('supervisor.questionnaires.store') : route('questionnaires.store', $questionnaire) }}" class="bg-white rounded-lg shadow p-6">
         @csrf
+        @if (request()->routeIs('supervisor.questionnaires.*'))
+            <input type="hidden" name="questionnaire_id" value="{{ $questionnaire->id }}">
+        @endif
 
         @if($errors->any())
             <div class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">

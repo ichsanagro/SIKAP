@@ -7,6 +7,12 @@
         <p class="text-sm md:text-base text-gray-600 mt-2">{{ $questionnaire->description }}</p>
     </div>
 
+    @if(session('success'))
+        <div class="mb-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+            <span class="block sm:inline">{{ session('success') }}</span>
+        </div>
+    @endif
+
     @if(session('error'))
         <div class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
             <span class="block sm:inline">{{ session('error') }}</span>
@@ -32,13 +38,13 @@
                     </div>
 
                     @if($question->question_type === 'text')
-                        <input type="text" name="question_{{ $question->id }}" value="{{ old('question_' . $question->id) }}"
+                        <input type="text" name="responses[{{ $question->id }}]" value="{{ old('responses.' . $question->id) }}"
                                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                @if($question->is_required) required @endif>
                     @elseif($question->question_type === 'textarea')
-                        <textarea name="question_{{ $question->id }}" rows="4"
+                        <textarea name="responses[{{ $question->id }}]" rows="4"
                                   class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                                  @if($question->is_required) required @endif>{{ old('question_' . $question->id) }}</textarea>
+                                  @if($question->is_required) required @endif>{{ old('responses.' . $question->id) }}</textarea>
                     @elseif($question->question_type === 'radio')
                         @if($question->options)
                             @php
@@ -46,9 +52,9 @@
                             @endphp
                             @foreach($options as $option)
                                 <div class="flex items-center">
-                                    <input type="radio" name="question_{{ $question->id }}" value="{{ trim($option) }}"
+                                    <input type="radio" name="responses[{{ $question->id }}]" value="{{ trim($option) }}"
                                            class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300"
-                                           @if(old('question_' . $question->id) == trim($option)) checked @endif
+                                           @if(old('responses.' . $question->id) == trim($option)) checked @endif
                                            @if($question->is_required) required @endif>
                                     <label class="ml-3 block text-sm font-medium text-gray-700">{{ trim($option) }}</label>
                                 </div>
@@ -61,15 +67,15 @@
                             @endphp
                             @foreach($options as $option)
                                 <div class="flex items-center">
-                                    <input type="checkbox" name="question_{{ $question->id }}[]" value="{{ trim($option) }}"
+                                    <input type="checkbox" name="responses[{{ $question->id }}][]" value="{{ trim($option) }}"
                                            class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
-                                           @if(is_array(old('question_' . $question->id)) && in_array(trim($option), old('question_' . $question->id))) checked @endif>
+                                           @if(is_array(old('responses.' . $question->id)) && in_array(trim($option), old('responses.' . $question->id))) checked @endif>
                                     <label class="ml-3 block text-sm font-medium text-gray-700">{{ trim($option) }}</label>
                                 </div>
                             @endforeach
                         @endif
                     @elseif($question->question_type === 'select')
-                        <select name="question_{{ $question->id }}"
+                        <select name="responses[{{ $question->id }}]"
                                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                 @if($question->is_required) required @endif>
                             <option value="">Pilih jawaban</option>
@@ -78,13 +84,13 @@
                                     $options = is_array($question->options) ? $question->options : explode(',', $question->options);
                                 @endphp
                                 @foreach($options as $option)
-                                    <option value="{{ trim($option) }}" @if(old('question_' . $question->id) == trim($option)) selected @endif>{{ trim($option) }}</option>
+                                    <option value="{{ trim($option) }}" @if(old('responses.' . $question->id) == trim($option)) selected @endif>{{ trim($option) }}</option>
                                 @endforeach
                             @endif
                         </select>
                     @endif
 
-                    @error('question_' . $question->id)
+                    @error('responses.' . $question->id)
                         <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>

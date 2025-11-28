@@ -1,11 +1,13 @@
-# TODO: Remove Kuota Menu and Pages for PENGAWAS_LAPANGAN Role
+# Questionnaire Fix for DOSEN_SUPERVISOR
 
-## Steps to Complete
-- [x] Edit resources/views/layouts/sidebar.blade.php to remove Kuota links for PENGAWAS_LAPANGAN
-- [x] Edit resources/views/field_supervisor/dashboard.blade.php to remove quota management link
-- [x] Delete resources/views/field_supervisor/company_quotas/ directory and all files inside
-- [x] Edit routes/web.php to remove company-quotas routes
-- [x] Delete app/Http/Controllers/FieldSupervisor/CompanyQuotaController.php
-- [x] Delete app/Models/CompanyQuota.php
-- [x] Run php artisan route:clear and view:clear to clear caches
-- [x] Test the changes by logging in as PENGAWAS_LAPANGAN user
+## Completed Tasks
+- [x] Analyze the issue: questionnaire_template_id null for DOSEN_SUPERVISOR submissions
+- [x] Identify root cause: route doesn't pass questionnaire parameter but controller expects it
+- [x] Modify QuestionnaireResponseController::store() to handle questionnaire from hidden input for supervisors
+- [x] Make questionnaire parameter optional and add logic to fetch from request for DOSEN_SUPERVISOR
+
+## Followup Steps
+- [ ] Test questionnaire submission for DOSEN_SUPERVISOR role
+- [ ] Verify responses are saved correctly without errors
+- [ ] Test that MAHASISWA submissions still work
+- [ ] Check that validation and redirects work properly

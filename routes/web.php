@@ -101,8 +101,9 @@ Route::middleware(['auth', 'role:MAHASISWA'])->group(function () {
     Route::post('questionnaire/{kp}', [QuestionnaireController::class, 'store'])->name('questionnaire.store');
 
     // Questionnaire routes for students
-    Route::resource('questionnaires', App\Http\Controllers\QuestionnaireResponseController::class)->only(['index', 'show', 'store']);
+    Route::resource('questionnaires', App\Http\Controllers\QuestionnaireResponseController::class)->only(['index', 'show']);
     Route::get('questionnaires/{questionnaire}/fill', [App\Http\Controllers\QuestionnaireResponseController::class, 'fill'])->name('questionnaires.fill');
+    Route::post('questionnaires/{questionnaire}', [App\Http\Controllers\QuestionnaireResponseController::class, 'store'])->name('questionnaires.store');
 
     // Seminar KP routes
     Route::get('/seminar', [SeminarApplicationController::class, 'index'])->name('seminar.index');
@@ -311,5 +312,7 @@ Route::prefix('field-supervisor')
 
 
         // 5) Questionnaire routes for field supervisors
-        Route::resource('questionnaires', App\Http\Controllers\FieldSupervisor\QuestionnaireController::class)->only(['index', 'show', 'store']);
+        Route::resource('questionnaires', App\Http\Controllers\FieldSupervisor\QuestionnaireController::class)->only(['index', 'show']);
+        Route::post('questionnaires/{questionnaire}', [App\Http\Controllers\FieldSupervisor\QuestionnaireController::class, 'store'])->name('questionnaires.store');
+        Route::get('questionnaires/{questionnaire}/fill', [App\Http\Controllers\FieldSupervisor\QuestionnaireController::class, 'fill'])->name('questionnaires.fill');
     });
