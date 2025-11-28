@@ -50,8 +50,15 @@
                         <td class="p-4">
                             <span class="px-2 py-1 rounded-full text-xs font-medium
                                 @if($log->status === 'APPROVED') bg-green-100 text-green-800
+                                @elseif($log->status === 'REVISION') bg-yellow-100 text-yellow-800
                                 @else bg-gray-100 text-gray-800 @endif">
-                                {{ $log->status === 'APPROVED' ? 'DISETUJUI' : ($log->status ?? 'MENUNGGU') }}
+                                @if($log->status === 'APPROVED')
+                                    DISETUJUI
+                                @elseif($log->status === 'REVISION')
+                                    REVISI
+                                @else
+                                    MENUNGGU
+                                @endif
                             </span>
                         </td>
                         <td class="p-4 text-sm text-gray-600">{{ $log->created_at->format('d M Y') }}</td>

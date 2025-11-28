@@ -72,7 +72,6 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                     <div class="flex flex-col space-y-2">
                                         <a href="{{ route('field.students.show', $app) }}" class="text-blue-600 hover:text-blue-900">Aktivitas Mahasiswa</a>
-                                        <a href="{{ route('field.students.show', $app) }}" class="text-blue-600 hover:text-blue-900">Implementasi Mahasiswa</a>
                                         <form method="POST" action="{{ route('field.students.destroy', $app) }}"
                                               onsubmit="return confirm('Apakah Anda yakin ingin melepaskan mahasiswa ini dari pengawasan Anda?')"
                                               class="inline">

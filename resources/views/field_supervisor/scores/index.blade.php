@@ -48,7 +48,6 @@
         </td>
         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
           <div class="flex space-x-2">
-            <a href="{{ route('field.scores.show',$app->score) }}" class="text-blue-600 hover:text-blue-900">Lihat</a>
             <a href="{{ route('field.scores.edit',$app->score) }}" class="text-amber-600 hover:text-amber-900">Ubah</a>
             <form action="{{ route('field.scores.destroy',$app->score) }}" method="POST" class="inline" onsubmit="return confirm('Hapus nilai?')">
               @csrf @method('DELETE')

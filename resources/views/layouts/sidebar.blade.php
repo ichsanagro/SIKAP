@@ -156,10 +156,6 @@
           <i class="fas fa-star"></i>
           <span x-show="sidebarExpanded" class="truncate">Penilaian</span>
         </a>
-        <a href="{{ route('supervisor.documents.index') }}" class="sidebar-link">
-          <i class="fas fa-file-alt"></i>
-          <span x-show="sidebarExpanded" class="truncate">Dokumen</span>
-        </a>
         <a href="{{ route('supervisor.questionnaires.index') }}" class="sidebar-link">
           <i class="fas fa-poll"></i>
           <span x-show="sidebarExpanded" class="truncate">Kuesioner</span>
@@ -381,10 +377,6 @@
         <a href="{{ route('supervisor.scores.index') }}" class="sidebar-link" @click="closeMobile()">
           <i class="fas fa-star"></i>
           <span>Penilaian</span>
-        </a>
-        <a href="{{ route('supervisor.documents.index') }}" class="sidebar-link" @click="closeMobile()">
-          <i class="fas fa-file-alt"></i>
-          <span>Dokumen</span>
         </a>
         <a href="{{ route('supervisor.questionnaires.index') }}" class="sidebar-link" @click="closeMobile()">
           <i class="fas fa-poll"></i>
