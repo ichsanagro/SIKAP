@@ -30,7 +30,6 @@ class SuperAdminController extends Controller
             'reports' => Report::count(),
             'scores' => KpScore::count(),
             'evaluations' => FieldEvaluation::count(),
-            'quotas' => CompanyQuota::count(),
         ];
 
         return view('super_admin.index', compact('stats'));
