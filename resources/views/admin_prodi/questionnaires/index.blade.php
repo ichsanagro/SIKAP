@@ -58,7 +58,7 @@
                                     <div class="flex space-x-2">
                                         <a href="{{ route('admin-prodi.questionnaires.show', $questionnaire) }}" class="text-blue-600 hover:text-blue-900">Lihat</a>
                                         <a href="{{ route('admin-prodi.questionnaires.responses', $questionnaire) }}" class="text-green-600 hover:text-green-900">Lihat Tanggapan</a>
-                                        <a href="{{ route('admin-prodi.questionnaires.edit', $questionnaire) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                        <a href="{{ route('admin-prodi.questionnaires.edit', $questionnaire) }}" class="text-indigo-600 hover:text-indigo-900">Ubah</a>
                                         <form method="POST" action="{{ route('admin-prodi.questionnaires.toggle-active', $questionnaire) }}" class="inline">
                                             @csrf
                                             @method('PATCH')

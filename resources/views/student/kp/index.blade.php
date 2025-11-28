@@ -66,7 +66,7 @@
             <div class="flex flex-wrap gap-2">
               <a href="{{ route('kp-applications.show', $kp) }}" class="btn-primary px-3 py-1 text-xs">Lihat</a>
               @if($kp->status === 'DRAFT')
-                <a href="{{ route('kp-applications.edit', $kp) }}" class="btn-orange px-3 py-1 text-xs">Edit</a>
+                <a href="{{ route('kp-applications.edit', $kp) }}" class="btn-orange px-3 py-1 text-xs">Ubah</a>
 
                 @if($kp->krs_path)
                   <form method="POST" action="{{ route('kp.submit', $kp) }}" onsubmit="return confirm('Kirim pengajuan ini?');">

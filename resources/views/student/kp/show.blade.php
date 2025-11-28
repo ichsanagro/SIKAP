@@ -107,7 +107,7 @@
               <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793z"/>
               </svg>
-              Edit Draft
+              Ubah Draft
             </a>
 
             @if($kp->krs_path)

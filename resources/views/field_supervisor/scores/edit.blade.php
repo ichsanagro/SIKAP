@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<h1 class="text-xl font-semibold mb-4">Edit Nilai Mahasiswa KP</h1>
+<h1 class="text-xl font-semibold mb-4">Ubah Nilai Mahasiswa KP</h1>
 
 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6">
   <div class="p-6 bg-white border-b border-gray-200">

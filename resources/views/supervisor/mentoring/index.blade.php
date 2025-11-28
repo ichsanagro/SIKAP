@@ -87,7 +87,7 @@
                                         <a href="{{ route('supervisor.mentoring.show', $log) }}"
                                            class="text-blue-600 hover:text-blue-900">Lihat</a>
                                         <a href="{{ route('supervisor.mentoring.edit', $log) }}"
-                                           class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                           class="text-indigo-600 hover:text-indigo-900">Ubah</a>
                                         <form method="POST" action="{{ route('supervisor.mentoring.destroy', $log) }}"
                                               onsubmit="return confirm('Apakah Anda yakin ingin menghapus catatan ini?')"
                                               class="inline">

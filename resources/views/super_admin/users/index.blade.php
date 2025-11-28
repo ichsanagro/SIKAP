@@ -72,7 +72,7 @@
                             <div class="flex space-x-2">
                                 <a href="{{ route('super-admin.users.edit', $user) }}"
                                    class="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition">
-                                    Edit
+                                    Ubah
                                 </a>
                                 <form action="{{ route('super-admin.users.toggle-active', $user) }}" method="POST" class="inline">
                                     @csrf

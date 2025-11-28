@@ -69,7 +69,7 @@
                             <div class="flex space-x-2">
                                 <a href="{{ route('admin-prodi.field-supervisors.edit', $fieldSupervisor) }}"
                                    class="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition">
-                                    Edit
+                                    Ubah
                                 </a>
                                 <form action="{{ route('admin-prodi.field-supervisors.toggle-active', $fieldSupervisor) }}" method="POST" class="inline">
                                     @csrf

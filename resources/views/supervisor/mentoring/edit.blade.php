@@ -5,7 +5,7 @@
     <!-- Header -->
     <div class="flex items-center justify-between mb-6">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900">Edit Catatan Bimbingan</h1>
+            <h1 class="text-3xl font-bold text-gray-900">Ubah Catatan Bimbingan</h1>
             <p class="text-gray-600 mt-2">{{ $mentoringLog->kpApplication->student->name }} - {{ \Carbon\Carbon::parse($mentoringLog->date)->format('d M Y') }}</p>
         </div>
         <div class="flex space-x-3">

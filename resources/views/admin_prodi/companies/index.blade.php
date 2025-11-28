@@ -44,7 +44,7 @@
                             {{ $company->quota }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            <a href="{{ route('admin-prodi.companies.edit', $company) }}" class="text-indigo-600 hover:text-indigo-900 mr-3">Edit</a>
+                            <a href="{{ route('admin-prodi.companies.edit', $company) }}" class="text-indigo-600 hover:text-indigo-900 mr-3">Ubah</a>
                             <form method="POST" action="{{ route('admin-prodi.companies.destroy', $company) }}" onsubmit="return confirm('Yakin hapus instansi ini?')" class="inline">
                                 @csrf
                                 @method('DELETE')

@@ -4,7 +4,7 @@
 <div class="max-w-4xl mx-auto p-6">
     <div class="flex items-center justify-between mb-6">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900">Edit Pengguna</h1>
+            <h1 class="text-3xl font-bold text-gray-900">Ubah Pengguna</h1>
             <p class="text-gray-600 mt-2">Perbarui informasi pengguna</p>
         </div>
         <a href="{{ route('super-admin.users.index') }}" class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition">

@@ -5,7 +5,7 @@
   {{-- Tab navigasi mahasiswa (opsional) --}}
 
   <div class="card">
-    <h2 class="text-2xl font-bold text-unibBlue mb-4">Edit Draft Kerja Praktik</h2>
+    <h2 class="text-2xl font-bold text-unibBlue mb-4">Ubah Draft Kerja Praktik</h2>
 
     {{-- FORM UPDATE (PUT) --}}
     <form method="POST"

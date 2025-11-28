@@ -5,7 +5,7 @@
     <!-- Header -->
     <div class="flex items-center justify-between mb-6">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900">Edit Kuota Instansi</h1>
+            <h1 class="text-3xl font-bold text-gray-900">Ubah Kuota Instansi</h1>
             <p class="text-gray-600 mt-2">Perbarui kuota mahasiswa untuk periode tertentu</p>
         </div>
         <div class="flex space-x-3">
