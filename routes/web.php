@@ -125,6 +125,7 @@ Route::middleware(['auth', 'role:MAHASISWA'])->prefix('mentoring')->name('mentor
 |--------------------------------------------------------------------------
 */
 use App\Http\Controllers\AdminProdi\AdminProdiController;
+use App\Http\Controllers\AdminProdi\AssignmentController;
 use App\Http\Controllers\AdminProdi\SeminarReviewController;
 
 Route::prefix('admin-prodi')

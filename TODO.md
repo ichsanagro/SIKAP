@@ -1,1 +1,2 @@
-- [ ] Remove the "Dokumen" menu item from the DOSEN_SUPERVISOR sidebar in both desktop and mobile versions in resources/views/layouts/sidebar.blade.php
+- [ ] Update main status badge display in resources/views/supervisor/verifications/show.blade.php to translate SUBMITTED -> Diserahkan, APPROVED -> Disetujui, REJECTED -> Ditolak
+- [ ] Update status display in similar applications table in the same file for the same translations

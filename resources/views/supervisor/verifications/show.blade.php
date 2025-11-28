@@ -87,7 +87,11 @@
                                 @elseif($kpApplication->status === 'REJECTED') bg-red-100 text-red-800
                                 @else bg-gray-100 text-gray-800
                                 @endif">
-                                {{ $kpApplication->status }}
+                                @if($kpApplication->status === 'SUBMITTED') Diserahkan
+                                @elseif($kpApplication->status === 'APPROVED') Disetujui
+                                @elseif($kpApplication->status === 'REJECTED') Ditolak
+                                @else {{ $kpApplication->status }}
+                                @endif
                             </span>
                         </div>
                     </div>
@@ -118,7 +122,13 @@
                                     <td class="py-2 px-4 text-sm">{{ $simApp->student->name ?? '-' }}</td>
                                     <td class="py-2 px-4 text-sm">{{ $simApp->student->nim ?? '-' }}</td>
                                     <td class="py-2 px-4 text-sm">{{ $simApp->supervisor->name ?? '-' }}</td>
-                                    <td class="py-2 px-4 text-sm">{{ $simApp->status }}</td>
+                                    <td class="py-2 px-4 text-sm">
+                                        @if($simApp->status === 'SUBMITTED') Diserahkan
+                                        @elseif($simApp->status === 'APPROVED') Disetujui
+                                        @elseif($simApp->status === 'REJECTED') Ditolak
+                                        @else {{ $simApp->status }}
+                                        @endif
+                                    </td>
                                     <td class="py-2 px-4 text-sm break-words">{{ $simApp->title }}</td>
                                     <td class="py-2 px-4 text-sm">
                                         <a href="{{ route('supervisor.verifications.show', $simApp->id) }}" class="text-blue-600 hover:underline">Lihat Detail</a>
