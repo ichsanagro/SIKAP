@@ -3,9 +3,17 @@
 @section('content')
 <div class="max-w-7xl mx-auto p-6">
     <!-- Header -->
-    <div class="mb-6">
-        <h1 class="text-3xl font-bold text-gray-900">Catatan Bimbingan</h1>
-        <p class="text-gray-600 mt-2">Kelola catatan bimbingan mahasiswa</p>
+    <div class="flex items-center justify-between mb-6">
+        <div>
+            <h1 class="text-3xl font-bold text-gray-900">Catatan Bimbingan</h1>
+            <p class="text-gray-600 mt-2">Kelola catatan bimbingan mahasiswa</p>
+        </div>
+        <a href="{{ route('supervisor.dashboard') }}" class="btn-secondary">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Kembali ke Dashboard
+        </a>
     </div>
 
     <!-- Filter by Student -->
