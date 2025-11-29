@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\QuestionnaireTemplate;
 use App\Models\QuestionnaireResponse;
+use App\Models\MentoringLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,6 +19,9 @@ class QuestionnaireResponseController extends Controller
                 $query->where('user_id', $user->id);
             }])
             ->get();
+
+        // Clear the mentoring error flag when returning to index
+        session()->forget('mentoring_error_shown');
 
         return view('questionnaires.index', compact('questionnaires'));
     }
@@ -49,6 +53,19 @@ class QuestionnaireResponseController extends Controller
         // For non-admins who haven't responded, check target_role
         if ($questionnaire->target_role !== $user->role) {
             abort(403, 'Anda tidak memiliki akses ke kuesioner ini.');
+        }
+
+        // For students, check if they have at least 10 mentoring logs
+        if ($user->role === 'MAHASISWA') {
+            $mentoringLogCount = MentoringLog::where('student_id', $user->id)->count();
+            if ($mentoringLogCount < 10) {
+                if (!session('mentoring_error_shown')) {
+                    session(['mentoring_error_shown' => true]);
+                    return redirect()->route('questionnaires.index')->with('error', 'Anda harus memiliki minimal 10 catatan bimbingan sebelum dapat mengisi kuesioner.');
+                } else {
+                    return redirect()->route('questionnaires.index');
+                }
+            }
         }
 
         $questionnaire->load('questions');

@@ -4,6 +4,11 @@
 <div class="card">
   <h2 class="text-2xl font-bold text-unibBlue mb-4">Tambah Aktivitas Lapangan</h2>
 
+  @if($myKps->isEmpty())
+    <div class="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded mb-4">
+      <p>Anda tidak dapat mencatat aktivitas lapangan saat ini. Mohon pastikan judul KP telah disetujui oleh Dosen Pembimbing.</p>
+    </div>
+  @else
   <form method="POST" action="{{ route('activity-logs.store') }}" enctype="multipart/form-data" class="space-y-4">
     @csrf
     <div>
@@ -30,5 +35,6 @@
       <button class="btn-primary">Simpan</button>
     </div>
   </form>
+  @endif
 </div>
 @endsection

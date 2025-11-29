@@ -29,9 +29,10 @@ class ActivityLogController extends Controller
      */
     public function create()
     {
-        // KP yang sudah punya pengawas lapangan
+        // Hanya KP yang sudah approved oleh supervisor dan memiliki dosen pembimbing
         $myKps = Auth::user()->kpApplications()
-            ->whereIn('status', ['ASSIGNED_SUPERVISOR','APPROVED','COMPLETED'])
+            ->where('status', 'APPROVED')
+            ->whereNotNull('assigned_supervisor_id')
             ->whereNotNull('field_supervisor_id')
             ->get(['id','title']);
 

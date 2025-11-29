@@ -6,11 +6,7 @@
 
   @if($myKps->isEmpty())
     <div class="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded mb-4">
-      <p>Anda belum dapat melakukan bimbingan. Pastikan:</p>
-      <ul class="list-disc list-inside mt-2">
-        <li>Judul KP Anda sudah di-approve oleh dosen pembimbing</li>
-        <li>Dosen pembimbing sudah ditetapkan</li>
-      </ul>
+      <p>Anda tidak dapat Bimbingan saat ini. Mohon pastikan judul KP telah disetujui oleh Dosen Pembimbing.</p>
     </div>
   @else
   <form method="POST" action="{{ route('mentoring-logs.store') }}" enctype="multipart/form-data" class="space-y-4" novalidate>
