@@ -18,7 +18,7 @@ return [
     'active_url' => ':attribute bukan URL yang valid.',
     'after' => ':attribute harus berupa tanggal setelah :date.',
     'after_or_equal' => ':attribute harus berupa tanggal setelah atau sama dengan :date.',
-    'alpha' => ':attribute hanya boleh berisi huruf.',
+    'alpha' => 'Nama harus menggunakan huruf.',
     'alpha_dash' => ':attribute hanya boleh berisi huruf, angka, tanda hubung, dan garis bawah.',
     'alpha_num' => ':attribute hanya boleh berisi huruf dan angka.',
     'any_of' => ':attribute tidak valid.',
@@ -199,6 +199,11 @@ return [
         'email' => 'email',
         'nim' => 'NIM',
         'password' => 'kata sandi',
+        'title' => 'Judul',
+        'kp_application_id' => 'KP yang dipilih',
+        'date' => 'Tanggal',
+        'description' => 'Deskripsi',
+        'topic' => 'Topik',
     ],
 
 ];

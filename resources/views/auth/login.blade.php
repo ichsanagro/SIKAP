@@ -43,7 +43,7 @@
         </div>
       @endif
 
-      <form method="POST" action="{{ route('login') }}" class="mt-6 space-y-4">
+      <form method="POST" action="{{ route('login') }}" class="mt-6 space-y-4" novalidate>
         @csrf
 
         {{-- Email --}}
@@ -54,7 +54,6 @@
             name="email"
             value="{{ old('email') }}"
             class="mt-1 w-full rounded-xl border p-3 focus:outline-none focus:ring-2 focus:ring-unibBlue focus:border-unibBlue"
-            required
             autofocus
             autocomplete="username">
           @error('email') <p class="text-red-600 text-sm mt-1">{{ $message }}</p> @enderror
@@ -69,7 +68,6 @@
               type="password"
               name="password"
               class="w-full rounded-xl border p-3 pr-12 focus:outline-none focus:ring-2 focus:ring-unibBlue focus:border-unibBlue"
-              required
               autocomplete="current-password">
             <button type="button" id="togglePw"
               class="absolute inset-y-0 right-3 my-auto text-sm text-gray-500 hover:text-gray-700">
@@ -124,5 +122,20 @@
       btn.textContent = isPw ? 'Sembunyikan' : 'Tampilkan';
     });
   }
+
+  // Custom validation messages in Indonesian
+  const inputs = document.querySelectorAll('input[name="email"], input[name="password"]');
+  inputs.forEach(input => {
+    input.addEventListener('invalid', function(event) {
+      if (input.validity.valueMissing) {
+        input.setCustomValidity('Kolom ini wajib diisi.');
+      } else {
+        input.setCustomValidity('');
+      }
+    });
+    input.addEventListener('input', function() {
+      input.setCustomValidity('');
+    });
+  });
 </script>
 @endsection
