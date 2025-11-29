@@ -1,3 +1,3 @@
-- [x] Add back button to resources/views/supervisor/verifications/index.blade.php
-- [x] Add back button to resources/views/supervisor/mentoring/index.blade.php
-- [x] Add back button to resources/views/supervisor/scores/index.blade.php
+- [x] Update AdminProdiController.php updateFieldSupervisor method to handle single company_id
+- [x] Update resources/views/admin_prodi/field_supervisors/edit.blade.php to use radio buttons instead of checkboxes
+- [x] Test the changes

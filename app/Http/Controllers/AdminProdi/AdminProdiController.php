@@ -206,8 +206,7 @@ class AdminProdiController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $fieldSupervisor->id,
             'password' => 'nullable|string|min:8|confirmed',
-            'company_ids' => 'nullable|array',
-            'company_ids.*' => 'exists:companies,id',
+            'company_id' => 'nullable|exists:companies,id',
         ]);
 
         $updateData = [
@@ -222,7 +221,7 @@ class AdminProdiController extends Controller
         $fieldSupervisor->update($updateData);
 
         // Sync companies
-        $fieldSupervisor->supervisedCompanies()->sync($request->company_ids ?? []);
+        $fieldSupervisor->supervisedCompanies()->sync($request->company_id ? [$request->company_id] : []);
 
         return redirect()->route('admin-prodi.field-supervisors.index')->with('success', 'Data pengawas lapangan berhasil diperbarui.');
     }

@@ -53,14 +53,14 @@
                 <div class="space-y-2 max-h-48 overflow-y-auto border border-gray-300 rounded-md p-3">
                     @foreach($companies as $company)
                         <label class="flex items-center">
-                            <input type="checkbox" name="company_ids[]" value="{{ $company->id }}"
+                            <input type="radio" name="company_id" value="{{ $company->id }}"
                                    {{ $fieldSupervisor->supervisedCompanies->contains($company->id) ? 'checked' : '' }}
                                    class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
                             <span class="ml-2 text-sm">{{ $company->name }}</span>
                         </label>
                     @endforeach
                 </div>
-                @error('company_ids')
+                @error('company_id')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                 @enderror
             </div>
