@@ -80,14 +80,7 @@
       </div>
 
       {{-- Company Management --}}
-      <div class="space-y-2">
-        <h3 x-show="sidebarExpanded" class="text-[11px] uppercase tracking-wider text-white/70 px-3 py-1">Manajemen Perusahaan</h3>
-        <a href="{{ route('super-admin.quotas.index') }}"
-           :class="(sidebarExpanded ? 'sidebar-link' : 'sidebar-link sidebar-link--compact') + ' {{ request()->routeIs('super-admin.quotas.*') ? ' sidebar-link--active' : '' }}'">
-          <i class="fas fa-tags"></i>
-          <span x-show="sidebarExpanded" class="truncate">Kuota</span>
-        </a>
-      </div>
+      {{-- Removed as per user request --}}
     @endif
 
     {{-- ADMIN_PRODI Menu --}}
@@ -311,13 +304,7 @@
       </div>
 
       {{-- Company Management --}}
-      <div class="space-y-2">
-        <h3 class="text-[11px] uppercase tracking-wider text-white/70 px-3 py-1">Manajemen Perusahaan</h3>
-        <a href="{{ route('super-admin.quotas.index') }}" class="sidebar-link" @click="closeMobile()">
-          <i class="fas fa-tags"></i>
-          <span>Kuota</span>
-        </a>
-      </div>
+      {{-- Removed as per user request --}}
     @endif
 
     {{-- ADMIN_PRODI Menu --}}
