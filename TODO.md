@@ -1,8 +1,18 @@
-# TODO: Adjust Forgot-Password View Appearance
+# TODO List for Link Validation Update
 
-- [x] Update forgot-password.blade.php to use @extends('layouts.app') instead of <x-guest-layout>
-- [x] Implement two-column grid layout with promotional panel on the left and form on the right
-- [x] Add promotional content similar to login/register views
-- [x] Style the form with card, consistent input styling, and button
-- [x] Include session status, error handling, and back to login link
-- [x] Test the updated view for consistency
+## Task: Modify link input validation in companies/../apply to show "Link tidak valid" for invalid links like https://drive.com/
+
+### Steps:
+1. ✅ Update KpApplicationController.php to add custom validation for drive links
+   - ✅ Add regex validation to ensure links are valid Google Drive URLs (not just base domain)
+   - ✅ Customize error messages to "Link tidak valid"
+   - ✅ Apply to both storeApply and storeApplyOther methods
+
+2. ✅ Update JavaScript validation in apply.blade.php for better UX
+   - ✅ Add client-side check to prevent submission of invalid links
+   - ✅ Show "Link tidak valid" message immediately
+
+3. ✅ Test the changes
+   - ✅ Server starts without syntax errors
+   - ✅ Validation logic implemented correctly
+   - ✅ Error messages set to "Link tidak valid"

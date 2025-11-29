@@ -236,8 +236,11 @@ if ($kp->placement_option === '3') {
 
         $request->validate([
             'title' => 'required|string|max:255',
-            'krs_drive_link' => 'required|url',
-            'proposal_drive_link' => 'required|url',
+            'krs_drive_link' => 'required|url|regex:/^https:\/\/drive\.google\.com\/.+$/',
+            'proposal_drive_link' => 'required|url|regex:/^https:\/\/drive\.google\.com\/.+$/',
+        ], [
+            'krs_drive_link.regex' => 'Link tidak valid',
+            'proposal_drive_link.regex' => 'Link tidak valid',
         ]);
 
         $data = [
@@ -287,9 +290,13 @@ if ($kp->placement_option === '3') {
         $request->validate([
             'custom_company_name' => 'required|string|max:255',
             'title' => 'required|string|max:255',
-            'approval_drive_link' => 'required|url',
-            'proposal_drive_link' => 'required|url',
-            'krs_drive_link' => 'required|url',
+            'approval_drive_link' => 'required|url|regex:/^https:\/\/drive\.google\.com\/.+$/',
+            'proposal_drive_link' => 'required|url|regex:/^https:\/\/drive\.google\.com\/.+$/',
+            'krs_drive_link' => 'required|url|regex:/^https:\/\/drive\.google\.com\/.+$/',
+        ], [
+            'approval_drive_link.regex' => 'Link tidak valid',
+            'proposal_drive_link.regex' => 'Link tidak valid',
+            'krs_drive_link.regex' => 'Link tidak valid',
         ]);
 
         $data = [

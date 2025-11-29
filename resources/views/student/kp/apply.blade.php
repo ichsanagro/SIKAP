@@ -40,6 +40,8 @@
           input.setCustomValidity('Kolom ini wajib diisi.');
         } else if (input.type === 'url' && input.validity.typeMismatch) {
           input.setCustomValidity('Masukkan URL yang valid (misalnya https://drive.google.com/...).');
+        } else if (input.name.includes('drive_link') && !/^https:\/\/drive\.google\.com\/.+$/.test(input.value)) {
+          input.setCustomValidity('Link tidak valid');
         } else {
           input.setCustomValidity('');
         }
