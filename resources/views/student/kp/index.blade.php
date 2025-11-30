@@ -68,7 +68,7 @@
               @if($kp->status === 'DRAFT')
                 <a href="{{ route('kp-applications.edit', $kp) }}" class="btn-orange px-3 py-1 text-xs">Ubah</a>
 
-                @if($kp->krs_path)
+                @if($kp->krs_path || $kp->krs_drive_link)
                   <form method="POST" action="{{ route('kp.submit', $kp) }}" onsubmit="return confirm('Kirim pengajuan ini?');">
                     @csrf
                     <button class="px-3 py-1 rounded-xl bg-green-600 text-white text-xs hover:opacity-90">Submit</button>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MentoringLog;
 use App\Models\SeminarApplication;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +21,16 @@ class SeminarApplicationController extends Controller
 
     public function store(Request $request)
     {
+        // Check if student has at least 10 approved mentoring logs
+        $approvedMentoringCount = MentoringLog::where('student_id', Auth::id())
+            ->where('status', 'APPROVED')
+            ->count();
+
+        if ($approvedMentoringCount < 10) {
+            return redirect()->route('seminar.index')
+                ->with('error', 'Anda harus menyelesaikan minimal 10 bimbingan yang disetujui sebelum dapat mengajukan seminar.');
+        }
+
         $request->validate([
             'kegiatan_harian_kp' => 'required|url',
             'bimbingan_kp' => 'required|url',

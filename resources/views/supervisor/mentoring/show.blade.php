@@ -108,60 +108,6 @@
                     </div>
                 </div>
             @endif
-        </div>
-
-        <!-- Sidebar -->
-        <div class="space-y-6">
-            <!-- Student Info -->
-            <div class="bg-white rounded-lg shadow p-6">
-                <h3 class="text-lg font-semibold text-gray-900 mb-4">Mahasiswa</h3>
-                <div class="flex items-center mb-4">
-                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                        <span class="text-sm font-medium text-blue-600">{{ substr($mentoringLog->kpApplication->student->name, 0, 2) }}</span>
-                    </div>
-                    <div>
-                        <p class="text-sm font-medium text-gray-900">{{ $mentoringLog->kpApplication->student->name }}</p>
-                        <p class="text-sm text-gray-500">{{ $mentoringLog->kpApplication->student->nim }}</p>
-                    </div>
-                </div>
-                <a href="{{ route('supervisor.students.show', $mentoringLog->kpApplication) }}"
-                   class="text-sm text-blue-600 hover:text-blue-800">Lihat detail mahasiswa →</a>
-            </div>
-
-            <!-- KP Info -->
-            <div class="bg-white rounded-lg shadow p-6">
-                <h3 class="text-lg font-semibold text-gray-900 mb-4">Kerja Praktik</h3>
-                <div class="space-y-2">
-                    <div>
-                        <label class="block text-xs font-medium text-gray-500">Judul</label>
-                        <p class="text-sm text-gray-900">{{ $mentoringLog->kpApplication->title }}</p>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-gray-500">Instansi</label>
-                        <p class="text-sm text-gray-900">{{ $mentoringLog->kpApplication->company->name ?? 'Belum ditentukan' }}</p>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-gray-500">Status KP</label>
-                        @php
-                            $statusConfig = [
-                                'DRAFT' => ['label' => 'Draft', 'color' => 'gray'],
-                                'SUBMITTED' => ['label' => 'Diajukan', 'color' => 'blue'],
-                                'VERIFIED_PRODI' => ['label' => 'Diverifikasi Prodi', 'color' => 'yellow'],
-                                'ASSIGNED_SUPERVISOR' => ['label' => 'Dosen Pembimbing Ditugaskan', 'color' => 'purple'],
-                                'APPROVED' => ['label' => 'Disetujui', 'color' => 'green'],
-                                'COMPLETED' => ['label' => 'Selesai', 'color' => 'green'],
-                                'REJECTED' => ['label' => 'Ditolak', 'color' => 'red'],
-                            ];
-                            $status = $statusConfig[$mentoringLog->kpApplication->status] ?? ['label' => $mentoringLog->kpApplication->status, 'color' => 'gray'];
-                        @endphp
-                        <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-{{ $status['color'] }}-100 text-{{ $status['color'] }}-800">
-                            {{ $status['label'] }}
-                        </span>
-                    </div>
-                </div>
-                <a href="{{ route('supervisor.students.show', $mentoringLog->kpApplication) }}"
-                   class="text-sm text-blue-600 hover:text-blue-800 block mt-3">Lihat detail KP →</a>
-            </div>
 
             <!-- Actions -->
             <div class="bg-white rounded-lg shadow p-6">
@@ -224,7 +170,7 @@
 
                     <!-- Submit Buttons -->
                     <div class="flex justify-end space-x-3 pt-4 border-t border-gray-200">
-                        <a href="{{ route('supervisor.mentoring.edit', $mentoringLog) }}" class="btn-secondary">Ubah Lengkap</a>
+                        {{-- <a href="{{ route('supervisor.mentoring.edit', $mentoringLog) }}" class="btn-secondary">Ubah Lengkap</a> --}}
                         <button type="submit" class="btn-primary">
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
@@ -233,6 +179,60 @@
                         </button>
                     </div>
                 </form>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="space-y-6">
+            <!-- Student Info -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Mahasiswa</h3>
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                        <span class="text-sm font-medium text-blue-600">{{ substr($mentoringLog->kpApplication->student->name, 0, 2) }}</span>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-900">{{ $mentoringLog->kpApplication->student->name }}</p>
+                        <p class="text-sm text-gray-500">{{ $mentoringLog->kpApplication->student->nim }}</p>
+                    </div>
+                </div>
+                <a href="{{ route('supervisor.students.show', $mentoringLog->kpApplication) }}"
+                   class="text-sm text-blue-600 hover:text-blue-800">Lihat detail mahasiswa →</a>
+            </div>
+
+            <!-- KP Info -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Kerja Praktik</h3>
+                <div class="space-y-2">
+                    <div>
+                        <label class="block text-xs font-medium text-gray-500">Judul</label>
+                        <p class="text-sm text-gray-900">{{ $mentoringLog->kpApplication->title }}</p>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-500">Instansi</label>
+                        <p class="text-sm text-gray-900">{{ $mentoringLog->kpApplication->company->name ?? $mentoringLog->kpApplication->custom_company_name ?? 'Belum ditentukan' }}</p>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-500">Status KP</label>
+                        @php
+                            $statusConfig = [
+                                'DRAFT' => ['label' => 'Draft', 'color' => 'gray'],
+                                'SUBMITTED' => ['label' => 'Diajukan', 'color' => 'blue'],
+                                'VERIFIED_PRODI' => ['label' => 'Diverifikasi Prodi', 'color' => 'yellow'],
+                                'ASSIGNED_SUPERVISOR' => ['label' => 'Dosen Pembimbing Ditugaskan', 'color' => 'purple'],
+                                'APPROVED' => ['label' => 'Disetujui', 'color' => 'green'],
+                                'COMPLETED' => ['label' => 'Selesai', 'color' => 'green'],
+                                'REJECTED' => ['label' => 'Ditolak', 'color' => 'red'],
+                            ];
+                            $status = $statusConfig[$mentoringLog->kpApplication->status] ?? ['label' => $mentoringLog->kpApplication->status, 'color' => 'gray'];
+                        @endphp
+                        <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-{{ $status['color'] }}-100 text-{{ $status['color'] }}-800">
+                            {{ $status['label'] }}
+                        </span>
+                    </div>
+                </div>
+                <a href="{{ route('supervisor.students.show', $mentoringLog->kpApplication) }}"
+                   class="text-sm text-blue-600 hover:text-blue-800 block mt-3">Lihat detail KP →</a>
             </div>
         </div>
     </div>

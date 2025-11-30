@@ -49,7 +49,7 @@
             </div>
 
             <div class="mb-6">
-                <label class="block text-sm font-medium text-gray-700 mb-2">Institusi yang Diawasi</label>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Institusi yang Diawasi (Opsional)</label>
                 <div class="space-y-2 max-h-48 overflow-y-auto border border-gray-300 rounded-md p-3">
                     @foreach($companies as $company)
                         <label class="flex items-center">
@@ -64,6 +64,29 @@
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                 @enderror
             </div>
+
+            @if($customCompanies)
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Institusi Custom dari Pengajuan Mahasiswa (Opsional)</label>
+                <div class="space-y-2 max-h-48 overflow-y-auto border border-gray-300 rounded-md p-3">
+                    @foreach($customCompanies as $customName)
+                        @php
+                            $customCompany = \App\Models\Company::where('name', $customName)->first();
+                            $isChecked = $customCompany && $fieldSupervisor->supervisedCompanies->contains($customCompany->id);
+                        @endphp
+                        <label class="flex items-center">
+                            <input type="checkbox" name="custom_company_names[]" value="{{ $customName }}"
+                                   {{ $isChecked ? 'checked' : '' }}
+                                   class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                            <span class="ml-2 text-sm">{{ $customName }} (Custom)</span>
+                        </label>
+                    @endforeach
+                </div>
+                @error('custom_company_names')
+                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                @enderror
+            </div>
+            @endif
 
             <div class="flex justify-end space-x-3">
                 <a href="{{ route('admin-prodi.field-supervisors.index') }}"

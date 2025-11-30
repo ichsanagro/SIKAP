@@ -147,9 +147,9 @@ class KpApplicationController extends Controller
         $this->authorizeOwner($kp);
         if ($kp->status !== 'DRAFT') abort(403);
 
-        // Wajib KRS
-        if (!$kp->krs_path) {
-            return back()->with('error', 'Wajib unggah KRS (PDF/JPG/PNG maks 5MB) sebelum Submit. Silakan Edit draft untuk mengunggah KRS.');
+        // Wajib KRS (file upload atau drive link)
+        if (!$kp->krs_path && !$kp->krs_drive_link) {
+            return back()->with('error', 'Wajib unggah KRS (PDF/JPG/PNG maks 5MB) atau berikan link Google Drive KRS sebelum Submit. Silakan Edit draft untuk mengunggah KRS.');
         }
 
         // Validasi pilihan tempat
@@ -236,8 +236,11 @@ if ($kp->placement_option === '3') {
 
         $request->validate([
             'title' => 'required|string|max:255',
-            'krs_drive_link' => 'required|url',
-            'proposal_drive_link' => 'required|url',
+            'krs_drive_link' => 'required|url|regex:/^https:\/\/drive\.google\.com\/.+$/',
+            'proposal_drive_link' => 'required|url|regex:/^https:\/\/drive\.google\.com\/.+$/',
+        ], [
+            'krs_drive_link.regex' => 'Link tidak valid',
+            'proposal_drive_link.regex' => 'Link tidak valid',
         ]);
 
         $data = [
@@ -287,9 +290,13 @@ if ($kp->placement_option === '3') {
         $request->validate([
             'custom_company_name' => 'required|string|max:255',
             'title' => 'required|string|max:255',
-            'approval' => 'required|file|mimes:pdf|max:5120',
-            'proposal' => 'required|file|mimes:pdf|max:5120',
-            'krs' => 'required|file|mimes:pdf,jpg,jpeg,png|max:5120',
+            'approval_drive_link' => 'required|url|regex:/^https:\/\/drive\.google\.com\/.+$/',
+            'proposal_drive_link' => 'required|url|regex:/^https:\/\/drive\.google\.com\/.+$/',
+            'krs_drive_link' => 'required|url|regex:/^https:\/\/drive\.google\.com\/.+$/',
+        ], [
+            'approval_drive_link.regex' => 'Link tidak valid',
+            'proposal_drive_link.regex' => 'Link tidak valid',
+            'krs_drive_link.regex' => 'Link tidak valid',
         ]);
 
         $data = [
@@ -298,9 +305,9 @@ if ($kp->placement_option === '3') {
             'placement_option' => '3', // Other
             'custom_company_name' => $request->custom_company_name,
             'status' => 'SUBMITTED', // Pending for supervisor
-            'krs_path' => $request->file('krs')->store('krs', 'public'),
-            'proposal_path' => $request->file('proposal')->store('proposals', 'public'),
-            'approval_path' => $request->file('approval')->store('approvals', 'public'),
+            'approval_drive_link' => $request->approval_drive_link,
+            'proposal_drive_link' => $request->proposal_drive_link,
+            'krs_drive_link' => $request->krs_drive_link,
         ];
 
         KpApplication::create($data);

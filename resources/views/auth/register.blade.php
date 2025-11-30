@@ -37,7 +37,7 @@
       <h2 class="text-2xl font-bold text-unibBlue">Daftar Akun</h2>
       <p class="mt-1 text-sm text-gray-600">Silakan isi data diri Anda dengan benar.</p>
 
-      <form method="POST" action="{{ route('register') }}" class="mt-6 space-y-4">
+      <form method="POST" action="{{ route('register') }}" class="mt-6 space-y-4" novalidate>
         @csrf
 
         {{-- Nama --}}
@@ -48,7 +48,6 @@
             name="name"
             value="{{ old('name') }}"
             class="mt-1 w-full rounded-xl border p-3 focus:outline-none focus:ring-2 focus:ring-unibBlue focus:border-unibBlue"
-            required
             autocomplete="name">
           @error('name') <p class="text-red-600 text-sm mt-1">{{ $message }}</p> @enderror
         </div>
@@ -60,8 +59,7 @@
             type="text"
             name="nim"
             value="{{ old('nim') }}"
-            class="mt-1 w-full rounded-xl border p-3 focus:outline-none focus:ring-2 focus:ring-unibBlue focus:border-unibBlue"
-            required>
+            class="mt-1 w-full rounded-xl border p-3 focus:outline-none focus:ring-2 focus:ring-unibBlue focus:border-unibBlue">
           @error('nim') <p class="text-red-600 text-sm mt-1">{{ $message }}</p> @enderror
         </div>
 
@@ -73,7 +71,6 @@
             name="email"
             value="{{ old('email') }}"
             class="mt-1 w-full rounded-xl border p-3 focus:outline-none focus:ring-2 focus:ring-unibBlue focus:border-unibBlue"
-            required
             autocomplete="username">
           @error('email') <p class="text-red-600 text-sm mt-1">{{ $message }}</p> @enderror
         </div>
@@ -87,7 +84,6 @@
               type="password"
               name="password"
               class="w-full rounded-xl border p-3 pr-12 focus:outline-none focus:ring-2 focus:ring-unibBlue focus:border-unibBlue"
-              required
               autocomplete="new-password">
             <button type="button" id="togglePw"
               class="absolute inset-y-0 right-3 my-auto text-sm text-gray-500 hover:text-gray-700">
@@ -106,7 +102,6 @@
               type="password"
               name="password_confirmation"
               class="w-full rounded-xl border p-3 pr-12 focus:outline-none focus:ring-2 focus:ring-unibBlue focus:border-unibBlue"
-              required
               autocomplete="new-password">
             <button type="button" id="togglePw2"
               class="absolute inset-y-0 right-3 my-auto text-sm text-gray-500 hover:text-gray-700">
@@ -150,5 +145,20 @@
       btn2.textContent = isPw ? 'Sembunyikan' : 'Tampilkan';
     });
   }
+
+  // Custom validation messages in Indonesian
+  const inputs = document.querySelectorAll('input[name="name"], input[name="nim"], input[name="email"], input[name="password"], input[name="password_confirmation"]');
+  inputs.forEach(input => {
+    input.addEventListener('invalid', function(event) {
+      if (input.validity.valueMissing) {
+        input.setCustomValidity('Kolom ini wajib diisi.');
+      } else {
+        input.setCustomValidity('');
+      }
+    });
+    input.addEventListener('input', function() {
+      input.setCustomValidity('');
+    });
+  });
 </script>
 @endsection

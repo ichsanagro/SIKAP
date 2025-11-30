@@ -1,6 +1,16 @@
 @extends('layouts.app')
 @section('content')
-<h1 class="text-xl font-semibold mb-4">Nilai KP</h1>
+<div class="flex items-center justify-between mb-6">
+    <div>
+        <h1 class="text-xl font-semibold">Nilai KP</h1>
+    </div>
+    <a href="{{ route('supervisor.dashboard') }}" class="btn-secondary">
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
+        Kembali ke Dashboard
+    </a>
+</div>
 <a href="{{ route('supervisor.scores.create') }}" class="btn btn-primary mb-3">Tambah Nilai</a>
 
 <div class="overflow-x-auto">

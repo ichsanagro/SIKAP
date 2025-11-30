@@ -17,7 +17,7 @@
                     <label for="name" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
                     <input type="text" name="name" id="name" value="{{ old('name') }}"
                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 @error('name') border-red-500 @enderror"
-                           required>
+                           required oninvalid="this.setCustomValidity('Silahkan isi kolom ini.')" oninput="this.setCustomValidity('')">
                     @error('name')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
@@ -28,7 +28,7 @@
                     <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                     <input type="email" name="email" id="email" value="{{ old('email') }}"
                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 @error('email') border-red-500 @enderror"
-                           required>
+                           required oninvalid="if(this.validity.valueMissing){this.setCustomValidity('Silahkan isi kolom ini.');}else if(this.validity.typeMismatch){this.setCustomValidity('Silahkan masukkan \'@\' dalam alamat email. \'' + this.value + '\' tidak memiliki \'@\'.');}else{this.setCustomValidity('');}" oninput="this.setCustomValidity('')">
                     @error('email')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
@@ -39,7 +39,7 @@
                     <label for="nim" class="block text-sm font-medium text-gray-700">NIM</label>
                     <input type="text" name="nim" id="nim" value="{{ old('nim') }}"
                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 @error('nim') border-red-500 @enderror"
-                           required>
+                           required oninvalid="this.setCustomValidity('Silahkan isi kolom ini.')" oninput="this.setCustomValidity('')">
                     @error('nim')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
@@ -69,7 +69,7 @@
                     <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
                     <input type="password" name="password" id="password"
                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 @error('password') border-red-500 @enderror"
-                           required>
+                           required oninvalid="this.setCustomValidity('Silahkan isi kolom ini.')" oninput="this.setCustomValidity('')">
                     @error('password')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
@@ -80,7 +80,7 @@
                     <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Konfirmasi Password</label>
                     <input type="password" name="password_confirmation" id="password_confirmation"
                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                           required>
+                           required oninvalid="if(this.validity.valueMissing){this.setCustomValidity('Silahkan isi kolom ini.');} else if(this.value !== document.getElementById('password').value){this.setCustomValidity('Konfirmasi password tidak cocok.');} else {this.setCustomValidity('');}" oninput="if(this.value !== document.getElementById('password').value){this.setCustomValidity('Konfirmasi password tidak cocok.');} else {this.setCustomValidity('');}">
                     @error('password_confirmation')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror

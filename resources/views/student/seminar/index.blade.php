@@ -8,12 +8,6 @@
         <div class="bg-white rounded-lg shadow-sm p-6">
             <div class="flex justify-between items-center mb-6">
                 <h1 class="text-2xl font-bold text-gray-900">Pengajuan Seminar KP</h1>
-                @if($applications->isEmpty())
-                    <button onclick="document.getElementById('seminar-form').classList.remove('hidden')"
-                            class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
-                        Ajukan Seminar
-                    </button>
-                @endif
             </div>
 
             @if(session('success'))
@@ -66,13 +60,13 @@
                                     @endif
                                 </div>
                                 <div class="text-right">
-                                    <a href="{{ Storage::url($application->kegiatan_harian_path) }}"
+                                    <a href="{{ $application->kegiatan_harian_drive_link }}"
                                        target="_blank"
                                        class="text-blue-600 hover:text-blue-800 text-sm underline">
                                         Lihat Kegiatan Harian
                                     </a>
                                     <br>
-                                    <a href="{{ Storage::url($application->bimbingan_kp_path) }}"
+                                    <a href="{{ $application->bimbingan_kp_drive_link }}"
                                        target="_blank"
                                        class="text-blue-600 hover:text-blue-800 text-sm underline">
                                         Lihat Bimbingan KP
@@ -84,7 +78,7 @@
                 </div>
             @else
                 <!-- Seminar Application Form -->
-                <div id="seminar-form" class="hidden">
+                <div id="seminar-form">
                     <form action="{{ route('seminar.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                         @csrf
 
@@ -115,29 +109,12 @@
                         </div>
 
                         <div class="flex justify-end space-x-3">
-                            <button type="button"
-                                    onclick="document.getElementById('seminar-form').classList.add('hidden')"
-                                    class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-lg">
-                                Batal
-                            </button>
                             <button type="submit"
                                     class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
                                 Ajukan Seminar
                             </button>
                         </div>
                     </form>
-                </div>
-
-                <div class="text-center py-12">
-                    <div class="text-gray-400 mb-4">
-                        <i class="fas fa-graduation-cap text-6xl"></i>
-                    </div>
-                    <h3 class="text-lg font-medium text-gray-900 mb-2">Belum Ada Pengajuan Seminar</h3>
-                    <p class="text-gray-500 mb-4">Ajukan seminar KP Anda untuk melengkapi proses kerja praktik.</p>
-                    <button onclick="document.getElementById('seminar-form').classList.remove('hidden')"
-                            class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg">
-                        Ajukan Seminar Sekarang
-                    </button>
                 </div>
             @endif
         </div>

@@ -36,6 +36,7 @@ class KpApplication extends Model
         // drive links
         'krs_drive_link',
         'proposal_drive_link',
+        'approval_drive_link',
     ];
 
     protected $casts = [

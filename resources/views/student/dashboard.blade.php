@@ -87,24 +87,40 @@
             <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
               <div class="flex-1">
                 <p class="font-medium text-gray-800">{{ Str::limit($kp->title, 40) }}</p>
-                <p class="text-sm text-gray-600">
-                  @if($kp->placement_option === '1') Opsi 1 (Batch 1)
-                  @elseif($kp->placement_option === '2') Opsi 2 (Batch 2)
-                  @else Mandiri
-                  @endif
-                </p>
               </div>
               <span class="px-3 py-1 rounded-full text-xs font-medium
-                @class([
-                  'bg-gray-100 text-gray-700' => $kp->status === 'DRAFT',
-                  'bg-yellow-100 text-yellow-800' => $kp->status === 'SUBMITTED',
-                  'bg-blue-100 text-blue-800' => $kp->status === 'VERIFIED_PRODI',
-                  'bg-green-100 text-green-800' => in_array($kp->status, ['APPROVED','COMPLETED']),
-                  'bg-red-100 text-red-800' => $kp->status === 'REJECTED',
-                ])
-              ">
-                {{ $kp->status }}
-              </span>
+                  @class([
+                      'bg-gray-100 text-gray-700' => $kp->status === 'DRAFT',
+                      'bg-yellow-100 text-yellow-800' => $kp->status === 'SUBMITTED',
+                      'bg-blue-100 text-blue-800' => $kp->status === 'VERIFIED_PRODI',
+                      'bg-green-100 text-green-800' => in_array($kp->status, ['APPROVED','COMPLETED']),
+                      'bg-red-100 text-red-800' => $kp->status === 'REJECTED',
+                  ])
+                ">
+                  @switch($kp->status)
+                      @case('DRAFT')
+                          Draft
+                          @break
+                      @case('SUBMITTED')
+                          Diserahkan
+                          @break
+                      @case('VERIFIED_PRODI')
+                          Diverifikasi Prodi
+                          @break
+                      @case('APPROVED')
+                          Disetujui
+                          @break
+                      @case('COMPLETED')
+                          Selesai
+                          @break
+                      @case('REJECTED')
+                          Ditolak
+                          @break
+                      @default
+                          {{ $kp->status }}
+                  @endswitch
+                </span>
+
             </div>
           @endforeach
         </div>

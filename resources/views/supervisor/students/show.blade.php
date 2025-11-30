@@ -35,11 +35,11 @@
             </div>
             <div>
                 <label class="block text-sm font-medium text-gray-700">Instansi</label>
-                <p class="mt-1 text-sm text-gray-900">{{ $kpApplication->company->name ?? 'Belum ditentukan' }}</p>
+                <p class="mt-1 text-sm text-gray-900">{{ $kpApplication->company_id ? $kpApplication->company->name : ($kpApplication->custom_company_name ?? 'Belum ditentukan') }}</p>
             </div>
             <div>
                 <label class="block text-sm font-medium text-gray-700">Alamat Instansi</label>
-                <p class="mt-1 text-sm text-gray-900">{{ $kpApplication->company->address ?? '-' }}</p>
+                <p class="mt-1 text-sm text-gray-900">{{ $kpApplication->company_id ? $kpApplication->company->address : ($kpApplication->custom_company_address ?? '-') }}</p>
             </div>
         </div>
     </div>

@@ -13,13 +13,13 @@
         </div>
     @endif
 
-    <div class="bg-white rounded-lg shadow overflow-hidden">
+    <div class="bg-white rounded-lg shadow overflow-x-auto">
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
                 <tr>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Instansi</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Alamat</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Batch</th>
+                    {{-- <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Batch</th> --}}
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kuota</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
                 </tr>
@@ -33,13 +33,13 @@
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="text-sm text-gray-500">{{ $company->address ?? '-' }}</div>
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
+                        {{-- <td class="px-6 py-4 whitespace-nowrap">
                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
                                 @if($company->batch == 1) bg-blue-100 text-blue-800
                                 @else bg-green-100 text-green-800 @endif">
                                 Opsi {{ $company->batch }}
                             </span>
-                        </td>
+                        </td> --}}
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             {{ $company->quota }}
                         </td>

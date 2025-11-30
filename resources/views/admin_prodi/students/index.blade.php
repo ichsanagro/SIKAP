@@ -37,7 +37,7 @@
                         <th class="text-left p-4">Email</th>
                         <th class="text-left p-4">NIM</th>
 
-                        <th class="text-left p-4">Supervisor</th>
+                        <th class="text-left p-4">Dosen Pembimbing</th>
                         <th class="text-left p-4">Status</th>
                         <th class="text-left p-4">Pengajuan KP</th>
                         <th class="text-left p-4">Dibuat</th>

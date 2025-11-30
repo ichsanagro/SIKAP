@@ -72,6 +72,28 @@
 
                 </div>
             </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="space-y-6">
+            <!-- KP Info -->
+            <div class="card">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Kerja Praktik</h3>
+                <div class="space-y-2">
+                    <div>
+                        <label class="block text-xs font-medium text-gray-500">Judul</label>
+                        <p class="text-sm text-gray-900">{{ $log->kpApplication->title }}</p>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-500">Instansi</label>
+                        <p class="text-sm text-gray-900">{{ $log->kpApplication->company->name ?? $log->kpApplication->custom_company_name ?? 'Belum ditentukan' }}</p>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-500">Dosen Pembimbing</label>
+                        <p class="text-sm text-gray-900">{{ $log->supervisor->name ?? 'Belum ditentukan' }}</p>
+                    </div>
+                </div>
+            </div>
 
             <!-- Attachment -->
             @if($log->attachment_path)
@@ -103,28 +125,6 @@
                     </div>
                 </div>
             @endif
-        </div>
-
-        <!-- Sidebar -->
-        <div class="space-y-6">
-            <!-- KP Info -->
-            <div class="card">
-                <h3 class="text-lg font-semibold text-gray-900 mb-4">Kerja Praktik</h3>
-                <div class="space-y-2">
-                    <div>
-                        <label class="block text-xs font-medium text-gray-500">Judul</label>
-                        <p class="text-sm text-gray-900">{{ $log->kpApplication->title }}</p>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-gray-500">Instansi</label>
-                        <p class="text-sm text-gray-900">{{ $log->kpApplication->company->name ?? 'Belum ditentukan' }}</p>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-gray-500">Dosen Pembimbing</label>
-                        <p class="text-sm text-gray-900">{{ $log->supervisor->name ?? 'Belum ditentukan' }}</p>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>

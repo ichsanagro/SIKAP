@@ -50,7 +50,7 @@ class LoginRequest extends FormRequest
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'email' => 'Sesi login Anda telah berakhir. Silakan hubungi administrator.',
+                'email' => 'Email tidak terdaftar.',
             ]);
         }
 
