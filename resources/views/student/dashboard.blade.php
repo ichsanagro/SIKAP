@@ -87,12 +87,6 @@
             <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
               <div class="flex-1">
                 <p class="font-medium text-gray-800">{{ Str::limit($kp->title, 40) }}</p>
-                <p class="text-sm text-gray-600">
-                  @if($kp->placement_option === '1') Opsi 1 (Batch 1)
-                  @elseif($kp->placement_option === '2') Opsi 2 (Batch 2)
-                  @else Mandiri
-                  @endif
-                </p>
               </div>
               <span class="px-3 py-1 rounded-full text-xs font-medium
                   @class([

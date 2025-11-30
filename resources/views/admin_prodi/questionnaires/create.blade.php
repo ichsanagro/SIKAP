@@ -72,6 +72,23 @@
 document.addEventListener('DOMContentLoaded', function() {
     let questionCount = 0;
 
+    // Function to set Indonesian validation messages
+    function setIndonesianValidationMessages() {
+        const requiredInputs = document.querySelectorAll('input[required], select[required], textarea[required]');
+        requiredInputs.forEach(input => {
+            input.addEventListener('invalid', function(e) {
+                if (this.validity.valueMissing) {
+                    this.setCustomValidity('Kolom ini wajib diisi.');
+                } else {
+                    this.setCustomValidity('');
+                }
+            });
+            input.addEventListener('input', function() {
+                this.setCustomValidity('');
+            });
+        });
+    }
+
     document.getElementById('add-question').addEventListener('click', function() {
         addQuestion();
     });
@@ -166,6 +183,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 e.target.closest('.flex').remove();
             }
         });
+
+        // Set validation messages for new inputs
+        setIndonesianValidationMessages();
     }
 
     function updateQuestionNumbers() {
@@ -178,6 +198,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Add first question by default
     addQuestion();
+
+    // Set validation messages for initial inputs
+    setIndonesianValidationMessages();
 });
 </script>
 @endsection

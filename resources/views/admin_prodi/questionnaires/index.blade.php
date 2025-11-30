@@ -59,13 +59,13 @@
                                         <a href="{{ route('admin-prodi.questionnaires.show', $questionnaire) }}" class="text-blue-600 hover:text-blue-900">Lihat</a>
                                         <a href="{{ route('admin-prodi.questionnaires.responses', $questionnaire) }}" class="text-green-600 hover:text-green-900">Lihat Tanggapan</a>
                                         <a href="{{ route('admin-prodi.questionnaires.edit', $questionnaire) }}" class="text-indigo-600 hover:text-indigo-900">Ubah</a>
-                                        <form method="POST" action="{{ route('admin-prodi.questionnaires.toggle-active', $questionnaire) }}" class="inline">
+                                        {{-- <form method="POST" action="{{ route('admin-prodi.questionnaires.toggle-active', $questionnaire) }}" class="inline">
                                             @csrf
                                             @method('PATCH')
                                             <button type="submit" class="text-yellow-600 hover:text-yellow-900">
                                                 {{ $questionnaire->is_active ? 'Nonaktifkan' : 'Aktifkan' }}
                                             </button>
-                                        </form>
+                                        </form> --}}
                                         <form method="POST" action="{{ route('admin-prodi.questionnaires.destroy', $questionnaire) }}" class="inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus kuesioner ini?')">
                                             @csrf
                                             @method('DELETE')

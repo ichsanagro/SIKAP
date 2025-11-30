@@ -147,4 +147,28 @@
             attitudeInput.addEventListener('input', calculateScore);
         });
     </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('input[required], select[required], textarea[required]');
+
+            inputs.forEach(input => {
+                input.addEventListener('invalid', function(e) {
+                    if (input.validity.valueMissing) {
+                        input.setCustomValidity('Kolom ini wajib diisi.');
+                    } else if (input.validity.rangeUnderflow) {
+                        input.setCustomValidity('Nilai minimal adalah ' + input.min + '.');
+                    } else if (input.validity.rangeOverflow) {
+                        input.setCustomValidity('Nilai maksimal adalah ' + input.max + '.');
+                    } else {
+                        input.setCustomValidity('');
+                    }
+                });
+
+                input.addEventListener('input', function() {
+                    input.setCustomValidity('');
+                });
+            });
+        });
+    </script>
 </x-app-layout>

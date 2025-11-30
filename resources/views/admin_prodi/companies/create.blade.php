@@ -14,6 +14,7 @@
             <div class="mb-4">
                 <label for="name" class="block text-sm font-medium text-gray-700">Nama Instansi *</label>
                 <input type="text" name="name" id="name" value="{{ old('name') }}" required
+                       oninvalid="this.setCustomValidity('Nama Instansi wajib diisi')" oninput="this.setCustomValidity('')"
                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
                 @error('name')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -30,7 +31,7 @@
             </div>
 
             <div class="mb-4">
-                <label for="contact_person" class="block text-sm font-medium text-gray-700">Contact Person</label>
+                <label for="contact_person" class="block text-sm font-medium text-gray-700">Kontak Layanan</label>
                 <input type="text" name="contact_person" id="contact_person" value="{{ old('contact_person') }}"
                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
                 @error('contact_person')
@@ -47,7 +48,7 @@
                 @enderror
             </div>
 
-            <div class="mb-4">
+            {{-- <div class="mb-4">
                 <label for="batch" class="block text-sm font-medium text-gray-700">Batch *</label>
                 <select name="batch" id="batch" required
                         class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
@@ -58,11 +59,12 @@
                 @error('batch')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                 @enderror
-            </div>
+            </div> --}}
 
             <div class="mb-6">
                 <label for="quota" class="block text-sm font-medium text-gray-700">Kuota *</label>
                 <input type="number" name="quota" id="quota" value="{{ old('quota', 0) }}" min="0" required
+                       oninvalid="this.setCustomValidity('Kuota wajib diisi')" oninput="this.setCustomValidity('')"
                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
                 @error('quota')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>

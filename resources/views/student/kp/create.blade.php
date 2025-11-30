@@ -29,6 +29,11 @@
     @endforelse
   </div>
 
+  {{-- Pagination --}}
+  <div class="mt-4">
+    {{ $companies->links() }}
+  </div>
+
   {{-- Button for Other Company --}}
   <div class="border-t pt-6">
     <p class="text-center text-gray-600 mb-4">Tidak menemukan instansi yang sesuai?</p>

@@ -35,8 +35,17 @@ class CompanyController extends Controller
             'address' => 'nullable|string|max:255',
             'contact_person' => 'nullable|string|max:255',
             'contact_phone' => 'nullable|string|max:20',
-            'batch' => 'required|in:1,2',
-            'quota' => 'required|integer|min:0',
+            'quota' => 'required|integer|min:1',
+        ], [
+            'name.required' => 'Nama Instansi wajib diisi.',
+            'name.unique' => 'Nama Instansi sudah digunakan.',
+            'name.max' => 'Nama Instansi maksimal 255 karakter.',
+            'address.max' => 'Alamat maksimal 255 karakter.',
+            'contact_person.max' => 'Kontak Layanan maksimal 255 karakter.',
+            'contact_phone.max' => 'No. Telepon maksimal 20 karakter.',
+            'quota.required' => 'Kuota wajib diisi.',
+            'quota.integer' => 'Kuota harus berupa angka.',
+            'quota.min' => 'Kuota tidak boleh 0.',
         ]);
 
         Company::create($request->all());
@@ -71,8 +80,17 @@ class CompanyController extends Controller
             'address' => 'nullable|string|max:255',
             'contact_person' => 'nullable|string|max:255',
             'contact_phone' => 'nullable|string|max:20',
-            'batch' => 'required|in:1,2',
-            'quota' => 'required|integer|min:0',
+            'quota' => 'required|integer|min:1',
+        ], [
+            'name.required' => 'Nama Instansi wajib diisi.',
+            'name.unique' => 'Nama Instansi sudah digunakan.',
+            'name.max' => 'Nama Instansi maksimal 255 karakter.',
+            'address.max' => 'Alamat maksimal 255 karakter.',
+            'contact_person.max' => 'Kontak Layanan maksimal 255 karakter.',
+            'contact_phone.max' => 'No. Telepon maksimal 20 karakter.',
+            'quota.required' => 'Kuota wajib diisi.',
+            'quota.integer' => 'Kuota harus berupa angka.',
+            'quota.min' => 'Kuota tidak boleh 0.',
         ]);
 
         $company->update($request->all());
