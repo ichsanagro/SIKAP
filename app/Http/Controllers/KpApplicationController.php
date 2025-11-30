@@ -147,9 +147,9 @@ class KpApplicationController extends Controller
         $this->authorizeOwner($kp);
         if ($kp->status !== 'DRAFT') abort(403);
 
-        // Wajib KRS
-        if (!$kp->krs_path) {
-            return back()->with('error', 'Wajib unggah KRS (PDF/JPG/PNG maks 5MB) sebelum Submit. Silakan Edit draft untuk mengunggah KRS.');
+        // Wajib KRS (file upload atau drive link)
+        if (!$kp->krs_path && !$kp->krs_drive_link) {
+            return back()->with('error', 'Wajib unggah KRS (PDF/JPG/PNG maks 5MB) atau berikan link Google Drive KRS sebelum Submit. Silakan Edit draft untuk mengunggah KRS.');
         }
 
         // Validasi pilihan tempat

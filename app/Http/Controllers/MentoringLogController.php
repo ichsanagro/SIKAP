@@ -64,7 +64,15 @@ class MentoringLogController extends Controller
             'date'              => 'required|date|before_or_equal:today',
             'topic'             => 'required|string|max:1000',
             'notes'             => 'nullable|string|max:5000',
-            'attachment'        => 'nullable|url', // Link Google Drive
+            'attachment'        => [
+                'nullable',
+                'url',
+                function ($attribute, $value, $fail) {
+                    if ($value && !preg_match('/^https:\/\/(drive|docs)\.google\.com\//', $value)) {
+                        $fail('Link tidak valid');
+                    }
+                },
+            ], // Link Google Drive
         ]);
 
         $kp = KpApplication::with('supervisor')

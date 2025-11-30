@@ -178,8 +178,8 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'date' => [
+            'before_or_equal' => 'Tanggal harus berupa tanggal sebelum atau sama dengan hari ini.',
         ],
     ],
 
@@ -204,6 +204,7 @@ return [
         'date' => 'Tanggal',
         'description' => 'Deskripsi',
         'topic' => 'Topik',
+        'today' => 'hari ini',
     ],
 
 ];

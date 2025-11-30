@@ -60,13 +60,13 @@
                                     @endif
                                 </div>
                                 <div class="text-right">
-                                    <a href="{{ Storage::url($application->kegiatan_harian_path) }}"
+                                    <a href="{{ $application->kegiatan_harian_drive_link }}"
                                        target="_blank"
                                        class="text-blue-600 hover:text-blue-800 text-sm underline">
                                         Lihat Kegiatan Harian
                                     </a>
                                     <br>
-                                    <a href="{{ Storage::url($application->bimbingan_kp_path) }}"
+                                    <a href="{{ $application->bimbingan_kp_drive_link }}"
                                        target="_blank"
                                        class="text-blue-600 hover:text-blue-800 text-sm underline">
                                         Lihat Bimbingan KP

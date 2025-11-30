@@ -27,7 +27,7 @@
     </div>
 
     <div class="pt-2 flex gap-3">
-      <button class="btn-primary" type="submit">Submit</button>
+      <button class="btn-primary" type="submit">Kirim</button>
     </div>
   </form>
 

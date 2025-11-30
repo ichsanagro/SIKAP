@@ -81,6 +81,10 @@
                   <a href="{{ route('kp.krs.download', $kp) }}" class="text-blue-600 hover:text-blue-800 underline">
                     Lihat/Unduh KRS
                   </a>
+                @elseif($kp->krs_drive_link)
+                  <a href="{{ $kp->krs_drive_link }}" target="_blank" class="text-blue-600 hover:text-blue-800 underline">
+                    Lihat KRS (Google Drive)
+                  </a>
                 @else
                   <span class="text-gray-500">Belum diunggah</span>
                 @endif
@@ -110,7 +114,7 @@
               Ubah Draft
             </a>
 
-            @if($kp->krs_path)
+            @if($kp->krs_path || $kp->krs_drive_link)
               <form method="POST" action="{{ route('kp.submit', $kp) }}" onsubmit="return confirm('Kirim pengajuan ini?');" class="w-full">
                 @csrf
                 <button class="w-full flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">

@@ -36,7 +36,8 @@
       </div>
       <div>
         <label class="block font-semibold">Lampiran (Link Google Drive, opsional)</label>
-        <input type="url" name="attachment" placeholder="https://drive.google.com/..." class="mt-1 w-full border rounded-xl p-3">
+        <input type="url" name="attachment" id="attachment" placeholder="https://drive.google.com/..." class="mt-1 w-full border rounded-xl p-3">
+        <p id="attachment-error" class="text-red-600 text-sm hidden">Link tidak valid</p>
       </div>
       <div class="pt-2">
         <button class="btn-primary">Simpan</button>
@@ -57,6 +58,20 @@
         input.addEventListener('input', function() {
           input.setCustomValidity('');
         });
+      });
+
+      // Validate Google Drive link
+      const attachmentInput = document.getElementById('attachment');
+      const attachmentError = document.getElementById('attachment-error');
+      attachmentInput.addEventListener('input', function() {
+        const value = this.value;
+        if (value && !/^https:\/\/(drive|docs)\.google\.com\//.test(value)) {
+          attachmentError.classList.remove('hidden');
+          this.setCustomValidity('Link tidak valid');
+        } else {
+          attachmentError.classList.add('hidden');
+          this.setCustomValidity('');
+        }
       });
     </script>
   @endif
