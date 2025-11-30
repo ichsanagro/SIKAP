@@ -86,7 +86,7 @@
                     </div>
                     <div>
                         <label class="block text-xs font-medium text-gray-500">Instansi</label>
-                        <p class="text-sm text-gray-900">{{ $log->kpApplication->company->name ?? 'Belum ditentukan' }}</p>
+                        <p class="text-sm text-gray-900">{{ $log->kpApplication->company->name ?? $log->kpApplication->custom_company_name ?? 'Belum ditentukan' }}</p>
                     </div>
                     <div>
                         <label class="block text-xs font-medium text-gray-500">Dosen Pembimbing</label>
