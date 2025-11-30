@@ -45,7 +45,7 @@
                         <p class="mt-1 text-sm text-gray-900">{{ $kpApplication->title }}</p>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
+                        {{-- <div>
                             <label class="block text-sm font-medium text-gray-700">Pilihan Tempat</label>
                             <p class="mt-1 text-sm text-gray-900">
                                 @if($kpApplication->placement_option === '1') Opsi 1 (Prodi - Batch 1)
@@ -53,7 +53,7 @@
                                 @else Opsi 3 (Cari Sendiri)
                                 @endif
                             </p>
-                        </div>
+                        </div> --}}
                         <div>
                             <label class="block text-sm font-medium text-gray-700">Perusahaan</label>
                             <p class="mt-1 text-sm text-gray-900">
@@ -169,7 +169,7 @@
                         </div>
                     @endif
 
-                    @if($kpApplication->approval_path)
+                    @if($kpApplication->custom_company_name && $kpApplication->approval_drive_link)
                         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                             <div class="flex items-center">
                                 <svg class="w-5 h-5 text-gray-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -177,7 +177,7 @@
                                 </svg>
                                 <span class="text-sm text-gray-900">Surat Persetujuan Instansi</span>
                             </div>
-                            <a href="#" class="text-blue-600 hover:text-blue-800 text-sm">Unduh</a>
+                            <a href="{{ $kpApplication->approval_drive_link }}" target="_blank" class="text-blue-600 hover:text-blue-800 text-sm">Buka Link</a>
                         </div>
                     @endif
                 </div>
@@ -186,24 +186,24 @@
             <!-- Action Buttons -->
             @if($kpApplication->status === 'SUBMITTED')
             <div class="border-t pt-6">
-                <div class="flex justify-end space-x-3">
-                    <form method="POST" action="{{ route('supervisor.verifications.reject', $kpApplication) }}" class="inline">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <form method="POST" action="{{ route('supervisor.verifications.reject', $kpApplication) }}">
                         @csrf
                         <div class="space-y-3">
                             <label class="block text-sm font-medium text-gray-700">Alasan Penolakan</label>
-                            <textarea name="notes" rows="3" class="w-full border border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500" placeholder="Berikan alasan penolakan..." required></textarea>
-                            <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2" onclick="return confirm('Apakah Anda yakin ingin menolak pengajuan ini?')">
+                            <textarea name="notes" rows="3" class="w-full border border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500" placeholder="Berikan alasan penolakan..." required oninvalid="this.setCustomValidity('Silahkan isi kolom ini.')" oninput="this.setCustomValidity('')"></textarea>
+                            <button type="submit" class="w-full px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2" onclick="return confirm('Apakah Anda yakin ingin menolak pengajuan ini?')">
                                 Tolak
                             </button>
                         </div>
                     </form>
 
-                    <form method="POST" action="{{ route('supervisor.verifications.approve', $kpApplication) }}" class="inline">
+                    <form method="POST" action="{{ route('supervisor.verifications.approve', $kpApplication) }}">
                         @csrf
                         <div class="space-y-3">
                             <label class="block text-sm font-medium text-gray-700">Catatan (Opsional)</label>
                             <textarea name="notes" rows="3" class="w-full border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500" placeholder="Berikan catatan jika ada..."></textarea>
-                            <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2" onclick="return confirm('Apakah Anda yakin ingin menyetujui pengajuan ini?')">
+                            <button type="submit" class="w-full px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2" onclick="return confirm('Apakah Anda yakin ingin menyetujui pengajuan ini?')">
                                 Setujui
                             </button>
                         </div>
