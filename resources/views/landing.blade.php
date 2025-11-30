@@ -500,7 +500,8 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4" data-aos="fade-up">Apa itu <span class="text-blue-600">SIKAP</span>?</h2>
             <p class="text-gray-600 max-w-2xl mx-auto mb-16 text-lg" data-aos="fade-up" data-aos-delay="100">
-                Platform lengkap untuk mendukung proses Kerja Praktik Anda.
+                Sistem Informasi Kerja Praktik (SIKAP) adalah platform web yang mengelola seluruh proses Kerja Praktik mahasiswa secara terintegrasi, efisien, dan transparan. Sistem ini mendigitalisasi tahapan KP agar lebih cepat, rapi, dan terdokumentasi dengan baik.
+
             </p>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -513,7 +514,7 @@
                     </div>
                     <h3 class="text-xl font-semibold text-gray-900 mb-3">Terstruktur</h3>
                     <p class="text-gray-600">
-                        Alur terdefinisi, notifikasi, dan log aktivitas membantu menghindari kebingungan administrasi.
+                        Alur terdefinisi, dan log aktivitas membantu menghindari kebingungan administrasi.
                     </p>
                 </div>
 
@@ -537,9 +538,9 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Dokumen Otomatis</h3>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Manajemen Data Terstruktur</h3>
                     <p class="text-gray-600">
-                        Surat pengantar dan dokumen pendukung dapat di-generate otomatis saat disetujui.
+                        Seluruh informasi dan proses Kerja Praktik tercatat rapi dalam sistem, sehingga mudah dipantau dan dikelola.
                     </p>
                 </div>
             </div>
@@ -659,7 +660,7 @@
             <div class="relative" data-aos="fade-up" data-aos-delay="200">
                 <!-- Timeline Bar -->
                 <div class="h-2 bg-gray-200 rounded-full mb-8 relative">
-                    <div class="absolute top-0 left-0 h-full bg-blue-500 rounded-full" style="width: 60%"></div>
+                    <div class="absolute top-0 left-0 h-full bg-blue-500 rounded-full" style="width: 5%"></div>
                     <div class="absolute top-1/2 left-0 w-full flex justify-between transform -translate-y-1/2">
                         <div class="w-4 h-4 bg-blue-500 rounded-full border-4 border-white shadow"></div>
                         <div class="w-4 h-4 bg-blue-500 rounded-full border-4 border-white shadow"></div>
@@ -672,29 +673,29 @@
                 <!-- Timeline Labels -->
                 <div class="grid grid-cols-5 gap-4 text-center">
                     <div>
-                        <div class="font-semibold text-gray-900">1 Jan</div>
+                        <div class="font-semibold text-gray-900">4-20 Des</div>
                         <div class="text-sm text-gray-500">Pengajuan</div>
                     </div>
                     <div>
-                        <div class="font-semibold text-gray-900">15 Jan</div>
+                        <div class="font-semibold text-gray-900">21-27 Des</div>
                         <div class="text-sm text-gray-500">Verifikasi</div>
                     </div>
                     <div>
-                        <div class="font-semibold text-gray-900">1 Feb</div>
+                        <div class="font-semibold text-gray-900">1 Jan</div>
                         <div class="text-sm text-gray-500">Mulai KP</div>
                     </div>
                     <div>
-                        <div class="font-semibold text-gray-900">15 Mar</div>
+                        <div class="font-semibold text-gray-900">1 Feb</div>
                         <div class="text-sm text-gray-500">Laporan</div>
                     </div>
                     <div>
-                        <div class="font-semibold text-gray-900">30 Apr</div>
+                        <div class="font-semibold text-gray-900">28 Feb</div>
                         <div class="text-sm text-gray-500">Selesai</div>
                     </div>
                 </div>
                 
                 <!-- Current Date Marker -->
-                <div class="absolute top-0 left-3/5 transform -translate-x-1/2 -translate-y-1/2" style="left: 60%;">
+                <div class="absolute top-0 left-3/5 transform -translate-x-1/2 -translate-y-1/2" style="left: 5%;">
                     <div class="bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg">
                         Sekarang
                     </div>
@@ -704,15 +705,15 @@
             <!-- Stats Cards -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
                 <div class="bg-blue-50 rounded-2xl p-6 text-center hover-lift transition" data-aos="fade-up" data-aos-delay="300">
-                    <div class="text-3xl font-bold text-blue-600 mb-2">60%</div>
+                    <div class="text-3xl font-bold text-blue-600 mb-2">5%</div>
                     <div class="text-gray-700">Progress Semester Ini</div>
                 </div>
                 <div class="bg-green-50 rounded-2xl p-6 text-center hover-lift transition" data-aos="fade-up" data-aos-delay="400">
-                    <div class="text-3xl font-bold text-green-600 mb-2">42</div>
+                    <div class="text-3xl font-bold text-green-600 mb-2">85</div>
                     <div class="text-gray-700">Hari Tersisa</div>
                 </div>
                 <div class="bg-purple-50 rounded-2xl p-6 text-center hover-lift transition" data-aos="fade-up" data-aos-delay="500">
-                    <div class="text-3xl font-bold text-purple-600 mb-2">128</div>
+                    <div class="text-3xl font-bold text-purple-600 mb-2">65</div>
                     <div class="text-gray-700">Mahasiswa Aktif</div>
                 </div>
             </div>
@@ -729,7 +730,7 @@
             
             <!-- Progress Bar -->
             <div class="progress-bar mb-16" data-aos="fade-up" data-aos-delay="200">
-                <div class="progress-fill" id="roadmap-progress" style="width: 40%"></div>
+                <div class="progress-fill" id="roadmap-progress" style="width: 5%"></div>
             </div>
             
             <!-- Interactive Roadmap -->
@@ -741,8 +742,8 @@
                     <div class="roadmap-dot active tooltip" data-tooltip="Tahap 1: Pengajuan" onclick="showStepDetails(1)"></div>
                     <div class="roadmap-content roadmap-card">
                         <div class="roadmap-step">1</div>
-                        <div class="roadmap-date">Minggu 1-2</div>
-                        <div class="roadmap-status status-completed">Selesai</div>
+                        <div class="roadmap-date">Minggu 1-3</div>
+                        <div class="roadmap-status status-current">Sedang Berjalan</div>
                         <h3 class="text-xl font-bold text-gray-900 mb-3">Pengajuan Judul & Tempat</h3>
                         <p class="text-gray-600 mb-4">
                             Ajukan judul KP dan pilih tempat magang melalui platform SIKAP. 
@@ -752,18 +753,18 @@
                             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
-                            Durasi: 2 minggu
+                            Durasi: 17 hari
                         </div>
                     </div>
                 </div>
                 
                 <!-- Step 2 -->
                 <div class="roadmap-item" data-aos="fade-left" data-aos-delay="400">
-                    <div class="roadmap-dot active tooltip" data-tooltip="Tahap 2: Verifikasi" onclick="showStepDetails(2)"></div>
+                    <div class="roadmap-dot tooltip" data-tooltip="Tahap 2: Verifikasi" onclick="showStepDetails(2)"></div>
                     <div class="roadmap-content roadmap-card">
                         <div class="roadmap-step">2</div>
-                        <div class="roadmap-date">Minggu 3-4</div>
-                        <div class="roadmap-status status-current">Sedang Berjalan</div>
+                        <div class="roadmap-date">Minggu 4</div>
+                        <div class="roadmap-status status-upcoming">Akan Datang</div>
                         <h3 class="text-xl font-bold text-gray-900 mb-3">Verifikasi Prodi</h3>
                         <p class="text-gray-600 mb-4">
                             Prodi memverifikasi kelayakan judul dan tempat, kemudian menetapkan dosen pembimbing.
@@ -773,7 +774,7 @@
                             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
-                            Durasi: 2 minggu
+                            Durasi: 7 hari
                         </div>
                     </div>
                 </div>
@@ -783,7 +784,7 @@
                     <div class="roadmap-dot tooltip" data-tooltip="Tahap 3: Bimbingan" onclick="showStepDetails(3)"></div>
                     <div class="roadmap-content roadmap-card">
                         <div class="roadmap-step">3</div>
-                        <div class="roadmap-date">Minggu 5-12</div>
+                        <div class="roadmap-date">Minggu 5-8</div>
                         <div class="roadmap-status status-upcoming">Akan Datang</div>
                         <h3 class="text-xl font-bold text-gray-900 mb-3">Pelaksanaan & Bimbingan</h3>
                         <p class="text-gray-600 mb-4">
@@ -794,7 +795,7 @@
                             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
-                            Durasi: 8 minggu
+                            Durasi: 30 hari
                         </div>
                     </div>
                 </div>
@@ -804,7 +805,7 @@
                     <div class="roadmap-dot tooltip" data-tooltip="Tahap 4: Laporan" onclick="showStepDetails(4)"></div>
                     <div class="roadmap-content roadmap-card">
                         <div class="roadmap-step">4</div>
-                        <div class="roadmap-date">Minggu 13-14</div>
+                        <div class="roadmap-date">Minggu 9-11</div>
                         <div class="roadmap-status status-upcoming">Akan Datang</div>
                         <h3 class="text-xl font-bold text-gray-900 mb-3">Unggah Laporan</h3>
                         <p class="text-gray-600 mb-4">
@@ -815,7 +816,7 @@
                             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
-                            Durasi: 2 minggu
+                            Durasi: 14 hari
                         </div>
                     </div>
                 </div>
@@ -825,7 +826,7 @@
                     <div class="roadmap-dot tooltip" data-tooltip="Tahap 5: Penilaian" onclick="showStepDetails(5)"></div>
                     <div class="roadmap-content roadmap-card">
                         <div class="roadmap-step">5</div>
-                        <div class="roadmap-date">Minggu 15-16</div>
+                        <div class="roadmap-date">Minggu 11-13</div>
                         <div class="roadmap-status status-upcoming">Akan Datang</div>
                         <h3 class="text-xl font-bold text-gray-900 mb-3">Penilaian & Kuesioner</h3>
                         <p class="text-gray-600 mb-4">
@@ -836,7 +837,7 @@
                             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
-                            Durasi: 2 minggu
+                            Durasi: 14 hari
                         </div>
                     </div>
                 </div>
@@ -948,14 +949,14 @@
                             </div>
                             <div>
                                 <div class="font-medium text-gray-900">Lokasi</div>
-                                <div class="text-sm text-gray-500">Gedung TI, Universitas Bengkulu</div>
+                                <div class="text-sm text-gray-500">Gedung SI, Universitas Bengkulu</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Floating Chat Button -->
-                <a href="https://wa.me/6281234567890" target="_blank"
+                <a href="https://wa.me/6282272425184" target="_blank"
                    class="fixed right-6 bottom-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 pulse-slow"
                    title="Chat Admin" data-aos="zoom-in" data-aos-delay="500">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -987,7 +988,7 @@
             </div>
             
             <p class="mt-8 text-blue-200 text-sm" data-aos="fade-up" data-aos-delay="300">
-                Sudah digunakan oleh 500+ mahasiswa dan 50+ instansi mitra
+                Sudah digunakan oleh 100+ mahasiswa dan 30+ instansi mitra
             </p>
         </div>
     </section>
@@ -1131,7 +1132,7 @@
                             <li>Mengunggah dokumen pendukung yang diperlukan</li>
                             <li>Melakukan konsultasi awal dengan koordinator KP</li>
                         </ul>
-                        <p><strong>Durasi:</strong> 2 minggu</p>
+                        <p><strong>Durasi:</strong> 17 hari</p>
                         <p><strong>Dokumen yang diperlukan:</strong> Form pengajuan, CV, transkrip nilai</p>
                     `
                 },
@@ -1148,10 +1149,10 @@
                         <p class="mb-4">Setelah verifikasi berhasil, sistem akan secara otomatis:</p>
                         <ul class="list-disc list-inside mb-4 space-y-2">
                             <li>Menetapkan dosen pembimbing</li>
-                            <li>Mengirimkan notifikasi ke mahasiswa</li>
+                            <li>Mengirimkan informasi ke mahasiswa</li>
                             <li>Membuat jadwal bimbingan awal</li>
                         </ul>
-                        <p><strong>Durasi:</strong> 2 minggu</p>
+                        <p><strong>Durasi:</strong> 7 hari</p>
                     `
                 },
                 3: {
@@ -1170,9 +1171,8 @@
                             <li>Dashboard aktivitas harian</li>
                             <li>Catatan bimbingan online</li>
                             <li>Progress tracking otomatis</li>
-                            <li>Notifikasi reminder</li>
                         </ul>
-                        <p><strong>Durasi:</strong> 8 minggu</p>
+                        <p><strong>Durasi:</strong> 30 hari</p>
                     `
                 },
                 4: {
@@ -1186,14 +1186,7 @@
                             <li>Mengunggah versi final laporan</li>
                             <li>Mendapatkan persetujuan final dari pembimbing</li>
                         </ul>
-                        <p class="mb-4">Fitur yang mendukung:</p>
-                        <ul class="list-disc list-inside mb-4 space-y-2">
-                            <li>Template laporan standar</li>
-                            <li>Version control untuk revisi</li>
-                            <li>Comment system untuk feedback</li>
-                            <li>Automatic plagiarism check</li>
-                        </ul>
-                        <p><strong>Durasi:</strong> 2 minggu</p>
+                        <p><strong>Durasi:</strong> 14 hari</p>
                     `
                 },
                 5: {
@@ -1214,7 +1207,7 @@
                             <li>Laporan evaluasi dari pembimbing</li>
                             <li>Rekomendasi untuk pengembangan selanjutnya</li>
                         </ul>
-                        <p><strong>Durasi:</strong> 2 minggu</p>
+                        <p><strong>Durasi:</strong> 14 hari</p>
                     `
                 }
             };
