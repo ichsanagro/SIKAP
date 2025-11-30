@@ -155,7 +155,17 @@ class AdminProdiController extends Controller
     public function createFieldSupervisor()
     {
         $companies = Company::all();
-        return view('admin_prodi.field_supervisors.create', compact('companies'));
+
+        $customCompanies = KpApplication::whereNull('company_id')
+            ->whereNotNull('custom_company_name')
+            ->where('custom_company_name', '!=', '')
+            ->distinct()
+            ->pluck('custom_company_name')
+            ->filter()
+            ->values()
+            ->toArray();
+
+        return view('admin_prodi.field_supervisors.create', compact('companies', 'customCompanies'));
     }
 
     public function storeFieldSupervisor(Request $request)
@@ -166,6 +176,8 @@ class AdminProdiController extends Controller
             'password' => 'required|string|min:8|confirmed',
             'company_ids' => 'nullable|array',
             'company_ids.*' => 'exists:companies,id',
+            'custom_company_names' => 'nullable|array',
+            'custom_company_names.*' => 'string|max:255',
         ]);
 
         $fieldSupervisor = User::create([
@@ -176,10 +188,46 @@ class AdminProdiController extends Controller
             'is_active' => true,
         ]);
 
-        // Attach companies if provided
+        // Attach existing companies if provided
         if ($request->company_ids) {
             $fieldSupervisor->supervisedCompanies()->attach($request->company_ids);
         }
+
+        // Handle custom companies
+        $customCompanyIds = [];
+        if ($request->custom_company_names) {
+            foreach ($request->custom_company_names as $customName) {
+                $trimmedName = trim($customName);
+                if (!empty($trimmedName)) {
+                    $company = Company::firstOrCreate(
+                        ['name' => $trimmedName],
+                        ['name' => $trimmedName]
+                    );
+                    $fieldSupervisor->supervisedCompanies()->attach($company->id);
+                    $customCompanyIds[] = $company->id;
+                }
+            }
+        }
+
+        // Auto-assign to relevant KP applications
+        $selectedCompanyIds = array_unique(array_merge($request->company_ids ?? [], $customCompanyIds));
+        $selectedCustomNames = array_map('trim', $request->custom_company_names ?? []);
+        $selectedCustomNames = array_filter($selectedCustomNames); // Remove empty
+
+        KpApplication::whereNull('field_supervisor_id')
+            ->where('status', 'APPROVED')
+            ->where(function ($query) use ($selectedCompanyIds, $selectedCustomNames) {
+                if (!empty($selectedCompanyIds)) {
+                    $query->orWhereIn('company_id', $selectedCompanyIds);
+                }
+                if (!empty($selectedCustomNames)) {
+                    $query->orWhere(function ($subQuery) use ($selectedCustomNames) {
+                        $subQuery->whereNull('company_id')
+                            ->whereIn('custom_company_name', $selectedCustomNames);
+                    });
+                }
+            })
+            ->update(['field_supervisor_id' => $fieldSupervisor->id]);
 
         return redirect()->route('admin-prodi.field-supervisors.index')->with('success', 'Pengawas Lapangan berhasil ditambahkan.');
     }
@@ -192,7 +240,17 @@ class AdminProdiController extends Controller
         }
 
         $companies = Company::all();
-        return view('admin_prodi.field_supervisors.edit', compact('fieldSupervisor', 'companies'));
+
+        $customCompanies = KpApplication::whereNull('company_id')
+            ->whereNotNull('custom_company_name')
+            ->where('custom_company_name', '!=', '')
+            ->distinct()
+            ->pluck('custom_company_name')
+            ->filter()
+            ->values()
+            ->toArray();
+
+        return view('admin_prodi.field_supervisors.edit', compact('fieldSupervisor', 'companies', 'customCompanies'));
     }
 
     public function updateFieldSupervisor(Request $request, User $fieldSupervisor)
@@ -206,7 +264,10 @@ class AdminProdiController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $fieldSupervisor->id,
             'password' => 'nullable|string|min:8|confirmed',
-            'company_id' => 'nullable|exists:companies,id',
+            'company_ids' => 'nullable|array',
+            'company_ids.*' => 'exists:companies,id',
+            'custom_company_names' => 'nullable|array',
+            'custom_company_names.*' => 'string|max:255',
         ]);
 
         $updateData = [
@@ -220,8 +281,21 @@ class AdminProdiController extends Controller
 
         $fieldSupervisor->update($updateData);
 
-        // Sync companies
-        $fieldSupervisor->supervisedCompanies()->sync($request->company_id ? [$request->company_id] : []);
+        // Sync existing companies
+        $companyIds = $request->company_ids ?? [];
+
+        // Handle custom companies
+        if ($request->custom_company_names) {
+            foreach ($request->custom_company_names as $customName) {
+                $company = Company::firstOrCreate(
+                    ['name' => trim($customName)],
+                    ['name' => trim($customName)]
+                );
+                $companyIds[] = $company->id;
+            }
+        }
+
+        $fieldSupervisor->supervisedCompanies()->sync($companyIds);
 
         return redirect()->route('admin-prodi.field-supervisors.index')->with('success', 'Data pengawas lapangan berhasil diperbarui.');
     }

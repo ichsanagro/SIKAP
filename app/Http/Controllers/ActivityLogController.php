@@ -33,7 +33,6 @@ class ActivityLogController extends Controller
         $myKps = Auth::user()->kpApplications()
             ->where('status', 'APPROVED')
             ->whereNotNull('assigned_supervisor_id')
-            ->whereNotNull('field_supervisor_id')
             ->get(['id','title']);
 
         return view('student.activity.create', compact('myKps'));
@@ -60,9 +59,9 @@ class ActivityLogController extends Controller
             abort(403, 'KP ini bukan milik Anda.');
         }
 
-        // Pastikan sudah ada pengawas lapangan
+        // Pastikan sudah ada pengawas lapangan (opsional untuk logging, tapi tetap peringatkan)
         if (!$kp->field_supervisor_id) {
-            return back()->with('error', 'Pengawas lapangan belum ditetapkan.')->withInput();
+            return back()->with('warning', 'Pengawas lapangan belum ditetapkan, namun aktivitas tetap dapat dicatat.')->withInput();
         }
 
         ActivityLog::create([

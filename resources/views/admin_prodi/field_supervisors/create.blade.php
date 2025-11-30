@@ -15,7 +15,7 @@
                 <label for="name" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
                 <input type="text" name="name" id="name" value="{{ old('name') }}"
                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                       required>
+                       required oninvalid="this.setCustomValidity('Silahkan isi kolom ini.')" oninput="this.setCustomValidity('')">
                 @error('name')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                 @enderror
@@ -25,7 +25,7 @@
                 <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                 <input type="email" name="email" id="email" value="{{ old('email') }}"
                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                       required>
+                       required oninvalid="this.setCustomValidity('Silahkan isi kolom ini.')" oninput="this.setCustomValidity('')">
                 @error('email')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                 @enderror
@@ -63,6 +63,24 @@
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                 @enderror
             </div>
+
+            @if($customCompanies)
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Institusi Custom dari Pengajuan Mahasiswa (Opsional)</label>
+                <div class="space-y-2 max-h-48 overflow-y-auto border border-gray-300 rounded-md p-3">
+                    @foreach($customCompanies as $customName)
+                        <label class="flex items-center">
+                            <input type="checkbox" name="custom_company_names[]" value="{{ $customName }}"
+                                   class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                            <span class="ml-2 text-sm">{{ $customName }} (Custom)</span>
+                        </label>
+                    @endforeach
+                </div>
+                @error('custom_company_names')
+                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                @enderror
+            </div>
+            @endif
 
             <div class="flex justify-end space-x-3">
                 <a href="{{ route('admin-prodi.field-supervisors.index') }}"

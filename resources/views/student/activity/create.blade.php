@@ -21,11 +21,11 @@
     </div>
     <div>
       <label class="block font-semibold">Tanggal</label>
-      <input type="date" name="date" class="mt-1 w-full border rounded-xl p-3" required>
+      <input type="date" name="date" class="mt-1 w-full border rounded-xl p-3" required oninvalid="this.setCustomValidity('Tanggal wajib diisi.')" oninput="this.setCustomValidity('')">
     </div>
     <div>
       <label class="block font-semibold">Deskripsi</label>
-      <textarea name="description" class="mt-1 w-full border rounded-xl p-3" rows="4" required></textarea>
+      <textarea name="description" class="mt-1 w-full border rounded-xl p-3" rows="4" required oninvalid="this.setCustomValidity('Silakan isi kolom ini.')" oninput="this.setCustomValidity('')"></textarea>
     </div>
     <div>
       <label class="block font-semibold">Link Drive (opsional)</label>

@@ -199,6 +199,7 @@ class VerificationController extends Controller
 
         $kpApplication->update([
             'status' => 'REJECTED',
+            'verification_status' => 'REJECTED',
             'notes' => $request->notes,
         ]);
 

@@ -1,17 +1,8 @@
-# TODO: Perbaiki Fitur Seminar Mahasiswa
+# TODO: Implement Custom Company Names in Field Supervisor Creation
 
-## Tugas Utama
-Perbaiki fitur seminar pada role mahasiswa. Jika mahasiswa belum melakukan 10 bimbingan pada halaman mentoring-logs maka akan muncul pesan peringatan jika mahasiswa menekan tombol "Ajukan Seminar" di halaman Seminar.
-
-## Langkah-langkah Implementasi
-- [x] Tambahkan validasi di SeminarApplicationController::store untuk memeriksa jumlah bimbingan yang disetujui (status APPROVED) minimal 10.
-- [x] Jika belum mencapai 10, redirect kembali dengan pesan error.
-- [x] Test fungsionalitas dengan mencoba submit seminar tanpa memenuhi syarat.
-
-## File yang Diedit
-- app/Http/Controllers/SeminarApplicationController.php
-
-## Status
-- [x] Analisis selesai
-- [x] Implementasi validasi
-- [x] Testing (syntax check passed)
+## Tasks
+- [ ] Update AdminProdiController.php createFieldSupervisor method to fetch and pass custom companies
+- [ ] Update AdminProdiController.php storeFieldSupervisor method to handle custom company selections
+- [ ] Update create.blade.php view to display custom companies section
+- [ ] Clear caches after changes
+- [ ] Test the implementation
