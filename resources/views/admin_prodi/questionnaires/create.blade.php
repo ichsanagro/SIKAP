@@ -130,6 +130,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 <input type="checkbox" name="questions[${questionCount}][is_required]" value="1" checked class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
             </div>
 
+            <div class="text-input-container hidden mb-4">
+                <label class="block text-sm font-medium text-gray-700">Contoh Input Teks Singkat</label>
+                <input type="text" placeholder="Jawaban teks singkat" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" disabled>
+            </div>
+
+            <div class="textarea-input-container hidden mb-4">
+                <label class="block text-sm font-medium text-gray-700">Contoh Input Teks Panjang</label>
+                <textarea rows="3" placeholder="Jawaban teks panjang" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" disabled></textarea>
+            </div>
+
             <div class="options-container hidden">
                 <label class="block text-sm font-medium text-gray-700 mb-2">Pilihan Jawaban</label>
                 <div class="options-list space-y-2">
@@ -166,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Add option functionality
         questionDiv.addEventListener('click', function(e) {
-            if (e.target.classList.contains('add-option')) {
+            if (e.target.closest('.add-option')) {
                 const optionsList = e.target.closest('.options-container').querySelector('.options-list');
                 const optionDiv = document.createElement('div');
                 optionDiv.className = 'flex items-center space-x-2';
@@ -179,7 +189,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </button>
                 `;
                 optionsList.appendChild(optionDiv);
-            } else if (e.target.classList.contains('remove-option')) {
+            } else if (e.target.closest('.remove-option')) {
                 e.target.closest('.flex').remove();
             }
         });
